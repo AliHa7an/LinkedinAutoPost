@@ -191,6 +191,11 @@ def main() -> int:
         print(f"::error::{e}")
         output(status="token_expired")
         return 1
+    except Exception as e:  # show the real API message in the Actions summary
+        msg = str(e).replace("\n", " ")[:900]
+        print(f"::error title=LinkedIn API::{type(e).__name__}: {msg}")
+        output(status="api_error")
+        return 1
 
     url = f"https://www.linkedin.com/feed/update/{urn}/" if urn else ""
     history.append({"date": day, "category": post["category"], "topic": post["topic"],
