@@ -42,6 +42,13 @@ Pick one category per day from `config.json > rules.categories`, never the same 
 - Anything about a release, tool, statistic, law, price, company or job must be checked on the web
   during this run and listed in `sources` (official docs, company blog, reputable outlet).
 - If a fact cannot be verified, leave it out. Never estimate numbers or dates.
+- No hypothetical or speculative lines presented as fact ("probably this week", "most teams
+  do X", "90% of developers"). Every sentence is either (a) stated in a source you checked, or
+  (b) a well-established engineering principle any senior engineer would agree with. Attribute
+  specifics to their source ("Stripe's docs say…"). Don't strengthen a source's wording
+  ("occasionally" must not become "always").
+- Every post must teach something useful or solve a real problem: the reader should leave with a
+  fact, a technique, a checklist or a decision rule they can use today.
 - Code snippets must be correct and runnable in their language version.
 
 ## Writing the text (`text` field)
@@ -83,6 +90,9 @@ A single self-contained HTML page rendered at 1080×1350 (portrait, best on mobi
   comparison, a roadmap, a stat. Large, readable text (body 28px+ static, 24px+ GIF). Max about
   40 words on the image.
 - Must include the name "Ali Hassan" and "alihexan.com" (small footer or corner signature).
+- Lay text out with normal flow (flex/grid), not absolute `top:` values per line, so a longer
+  title pushes content down instead of overlapping. The renderer rejects any image where text
+  overlaps other text or leaves the canvas.
 - Premium, designed feel; not stock AI art. Inline CSS/SVG only; Google Fonts is the only allowed
   external resource.
 - Animated (use for 1–2 posts a week, for flows: request lifecycles, agent loops, pipelines,

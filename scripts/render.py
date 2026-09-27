@@ -23,6 +23,48 @@ SEEK_JS = """
 """
 
 
+def seek_all(page, t_ms: float) -> None:
+    page.evaluate(SEEK_JS, t_ms)
+
+
+# Finds text that overlaps other text or spills outside the canvas.
+LAYOUT_JS = """
+() => {
+  const W = innerWidth, H = innerHeight, boxes = [], problems = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const n = walker.currentNode, el = n.parentElement;
+    if (!n.textContent.trim() || !el) continue;
+    const cs = getComputedStyle(el);
+    if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.05) continue;
+    const r = document.createRange(); r.selectNodeContents(n);
+    for (const b of r.getClientRects()) {
+      if (b.width < 2 || b.height < 2) continue;
+      boxes.push({t: n.textContent.trim().slice(0, 40), el, l: b.left, r: b.right, top: b.top, bot: b.bottom});
+    }
+  }
+  for (const b of boxes) {
+    if (b.l < 0 || b.top < 0 || b.r > W + 1 || b.bot > H + 1) problems.push(`text off canvas: "${b.t}"`);
+  }
+  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+    const a = boxes[i], b = boxes[j];
+    if (a.el === b.el || a.el.contains(b.el) || b.el.contains(a.el)) continue;
+    const ox = Math.min(a.r, b.r) - Math.max(a.l, b.l), oy = Math.min(a.bot, b.bot) - Math.max(a.top, b.top);
+    if (ox > 4 && oy > 4) problems.push(`text overlaps: "${a.t}" / "${b.t}"`);
+  }
+  return [...new Set(problems)];
+}
+"""
+
+
+def check_layout(page) -> list[str]:
+    return page.evaluate(LAYOUT_JS)
+
+
+class LayoutError(Exception):
+    pass
+
+
 def render(day: str) -> str:
     cfg = load_config()["image"]
     post = load_post(day)
@@ -40,6 +82,10 @@ def render(day: str) -> str:
         page.wait_for_timeout(400)
 
         if not animated:
+            problems = check_layout(page)
+            if problems:
+                browser.close()
+                raise LayoutError("image layout problems:\n  - " + "\n  - ".join(problems))
             out = folder / "image.png"
             page.screenshot(path=str(out), full_page=False)
             browser.close()
@@ -47,12 +93,16 @@ def render(day: str) -> str:
 
         duration = int(img.get("duration_ms", 4000))
         n = int(img.get("frames", cfg["gif_frames"]))
-        frames = []
+        frames, problems = [], set()
         for i in range(n):
-            page.evaluate(SEEK_JS, duration * i / n)
+            seek_all(page, duration * i / n)
             page.wait_for_timeout(30)
+            if i % 4 == 0:
+                problems.update(check_layout(page))
             frames.append(Image.open(io.BytesIO(page.screenshot())).convert("RGB"))
         browser.close()
+        if problems:
+            raise LayoutError("image layout problems:\n  - " + "\n  - ".join(sorted(problems)))
 
     out = folder / "image.gif"
     colors = 256

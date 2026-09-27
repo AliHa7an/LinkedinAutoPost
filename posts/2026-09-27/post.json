@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-27",
+  "category": "architecture",
+  "topic": "Idempotent webhook handlers: handling duplicate and redelivered events (Stripe and GitHub docs)",
+  "theme": "blueprint grid",
+  "text": "Stripe's own docs warn that your webhook endpoint might receive the same event more than once.\n\nThat's not a bug on their side. In live mode, Stripe retries a failed delivery for up to three days, and a timeout counts as a failure. GitHub doesn't retry automatically, but when you redeliver a missed webhook, it arrives with the same X-GitHub-Delivery ID as the original.\n\nIf your handler isn't ready for that, one payment event can turn into two orders, two emails, two invoices.\n\nWhat both providers' docs point to:\n\n1. Track event IDs you've already processed. Stripe explicitly says not to use the created timestamp for this, because different events can share it.\n2. If an ID was already processed, return 2xx and stop.\n3. Respond fast, then do the heavy work in a background queue. GitHub expects a 2xx within 10 seconds; Stripe says to return 2xx before any complex logic that could time out.\n4. Make that background job safe to run twice: \"set status = paid\", not \"add 1 to balance\".\n\nIn Postgres, steps 1 and 2 fit in one statement:\n\nINSERT INTO processed_events (event_id) VALUES ($1)\nON CONFLICT (event_id) DO NOTHING\nRETURNING event_id;\n\nNo row returned means you've seen this event before.\n\nOne detail most people miss: Stripe notes that in some cases two separate Event objects are sent for the same change. For those, dedupe on the object ID plus the event type.\n\nDuplicate deliveries are documented behaviour, not a bug you can hope away.\n\nWhich provider's webhooks gave you the most trouble in production, and what did you change in your handler afterwards?",
+  "hashtags": [
+    "#SoftwareArchitecture",
+    "#Backend",
+    "#Webhooks",
+    "#SystemDesign",
+    "#WebDevelopment"
+  ],
+  "image": {
+    "file": "image.html",
+    "alt": "Animated blueprint-style flow: a webhook provider sends an event to POST /webhooks, the handler checks whether the event ID was already processed; a new event is saved and queued for a worker, a repeated delivery returns 200 and stops. Signed Ali Hassan, alihexan.com.",
+    "animated": true,
+    "duration_ms": 4000,
+    "frames": 32
+  },
+  "sources": [
+    "https://docs.stripe.com/webhooks",
+    "https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks"
+  ]
+}

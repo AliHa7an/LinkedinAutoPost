@@ -21,14 +21,14 @@ import argparse
 import os
 import sys
 import time
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
 
 from common import (build_commentary, load_config, load_history, load_post, post_dir,
                     save_history, today_pkt, validate_post)
-from render import render
+from render import LayoutError, render
 
 API = "https://api.linkedin.com"
 # Characters LinkedIn's "little text" format treats as markup. '#' is left alone so hashtags work.
@@ -159,7 +159,12 @@ def main() -> int:
         return 1
 
     post = load_post(day)
-    image = Path(render(day))
+    try:
+        image = Path(render(day))
+    except LayoutError as e:
+        print(f"::error::{e}")
+        output(status="invalid")
+        return 1
     text = escape_little_text(build_commentary(post))
     print(f"rendered {image.name} ({image.stat().st_size // 1024} KB), text {len(text)} chars")
 
