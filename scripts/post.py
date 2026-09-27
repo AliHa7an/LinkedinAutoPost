@@ -71,7 +71,11 @@ class LinkedIn:
         if r.status_code == 401:
             raise TokenExpired(f"{what}: 401 Unauthorized, the LinkedIn token is expired or revoked")
         if r.status_code >= 400:
-            raise RuntimeError(f"{what} failed: HTTP {r.status_code} {r.text[:500]}")
+            hint = ""
+            if what == "userinfo" and r.status_code == 403:
+                hint = (" | Token is missing the openid/profile scopes. Regenerate it with openid, profile"
+                        " and w_member_social ticked (needs the 'Sign In with LinkedIn using OpenID Connect' product).")
+            raise RuntimeError(f"{what} failed: HTTP {r.status_code} {r.text[:500]}{hint}")
 
     def rest(self, method: str, path: str, **kw) -> requests.Response:
         """Call a versioned /rest endpoint, stepping back a month if LinkedIn retired the version."""
@@ -182,6 +186,9 @@ def main() -> int:
     if os.environ.get("WAIT_FOR_POST_TIME") == "1":
         wait_until(cfg["schedule"]["post_time_utc"])
 
+    import hashlib
+    fp = hashlib.sha256(token.encode()).hexdigest()[:10]
+    print(f"::notice title=Token fingerprint::{fp} (length {len(token)}); changes whenever the secret is replaced")
     li = LinkedIn(token, cfg["linkedin"]["api_version"])
     try:
         me = li.person_urn()
