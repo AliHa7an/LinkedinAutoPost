@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "date": "2026-09-27",
+    "category": "architecture",
+    "topic": "Idempotent webhook handlers: handling duplicate and redelivered events (Stripe and GitHub docs)",
+    "theme": "blueprint grid",
+    "urn": "urn:li:share:7509959093596348416",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7509959093596348416/",
+    "posted_at": "2026-09-27T12:56:16+00:00"
+  }
+]
