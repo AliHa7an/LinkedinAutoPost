@@ -1,0 +1,100 @@
+{
+  "brand": {
+    "name": "Ali Hassan",
+    "site": "alihexan.com",
+    "title": "Senior Full Stack Developer | AI Engineer"
+  },
+  "schedule": {
+    "timezone": "Asia/Karachi",
+    "post_time_utc": "10:00",
+    "note": "10:00 UTC = 3:00 PM PKT. The workflow starts ~20 min early and waits, because GitHub cron is often late."
+  },
+  "linkedin": {
+    "api_version": "202607",
+    "visibility": "PUBLIC"
+  },
+  "token": {
+    "expires_on": "2026-11-26",
+    "note": "Update this date (+60 days) every time you generate a new LinkedIn token."
+  },
+  "image": {
+    "width": 1080,
+    "height": 1350,
+    "gif_width": 800,
+    "gif_height": 1000,
+    "gif_frames": 30,
+    "gif_max_bytes": 5000000
+  },
+  "rules": {
+    "max_posts_per_day": 1,
+    "text_min_chars": 400,
+    "text_max_chars": 2600,
+    "hook_max_chars": 140,
+    "hashtags_min": 3,
+    "hashtags_max": 5,
+    "max_emojis": 5,
+    "topic_repeat_days": 45,
+    "theme_repeat_days": 14,
+    "categories": [
+      "ai-agents",
+      "ai-chatbots",
+      "ai-evolution",
+      "javascript",
+      "typescript",
+      "code-tips",
+      "security",
+      "app-maintenance",
+      "future-tech",
+      "code-with-emotions",
+      "team-management",
+      "career",
+      "roadmap",
+      "architecture",
+      "integrations-automation",
+      "new-tools",
+      "text-to-video",
+      "prompt-writing",
+      "jobs"
+    ],
+    "categories_needing_sources": [
+      "ai-evolution",
+      "future-tech",
+      "new-tools",
+      "text-to-video",
+      "integrations-automation",
+      "security",
+      "jobs"
+    ],
+    "banned_phrases": [
+      "delve",
+      "in today's fast-paced",
+      "in today's digital",
+      "ever-evolving",
+      "game-changer",
+      "game changer",
+      "revolutionize",
+      "unlock the power",
+      "unleash",
+      "tapestry",
+      "embark on",
+      "navigating the",
+      "in the realm of",
+      "it's important to note",
+      "it is important to note",
+      "let's dive in",
+      "dive into",
+      "buckle up",
+      "look no further",
+      "elevate your",
+      "supercharge",
+      "harness the power",
+      "a testament to",
+      "seamlessly",
+      "cutting-edge",
+      "furthermore,",
+      "moreover,",
+      "in conclusion",
+      "as an ai"
+    ]
+  }
+}

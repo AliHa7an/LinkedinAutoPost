@@ -1,0 +1,41 @@
+name: Check new posts
+
+# Runs whenever a post is pushed, so problems show up hours before 3 PM.
+on:
+  push:
+    paths: ["posts/**", "scripts/**", "config.json"]
+  pull_request:
+    paths: ["posts/**"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Validate and render upcoming posts
+        run: |
+          cd scripts
+          TODAY=$(TZ=Asia/Karachi date +%F)
+          status=0
+          for d in ../posts/*/; do
+            day=$(basename "$d")
+            [[ "$day" < "$TODAY" ]] && continue
+            python validate.py "$day" || status=1
+            python render.py "$day" || status=1
+          done
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: previews
+          path: |
+            posts/*/image.png
+            posts/*/image.gif
+          if-no-files-found: ignore

@@ -1,0 +1,5 @@
+posts/*/image.png
+posts/*/image.gif
+__pycache__/
+*.pyc
+.env

@@ -1,0 +1,87 @@
+name: Daily LinkedIn post (3 PM PKT)
+
+on:
+  schedule:
+    # 09:40 UTC; the script then waits until exactly 10:00 UTC = 3:00 PM PKT.
+    # (GitHub cron often starts late, so we start early.)
+    - cron: "40 9 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Post date YYYY-MM-DD (blank = today in PKT)"
+        required: false
+      dry_run:
+        description: "Dry run (validate + render only, do NOT publish)"
+        type: boolean
+        default: true
+
+concurrency:
+  group: linkedin-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Publish
+        id: publish
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          WAIT_FOR_POST_TIME: ${{ github.event_name == 'schedule' && '1' || '0' }}
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.date }}" ]; then ARGS="$ARGS --date ${{ inputs.date }}"; fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          cd scripts && python post.py $ARGS
+
+      - name: Save rendered image
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-image
+          path: |
+            posts/*/image.png
+            posts/*/image.gif
+          if-no-files-found: ignore
+
+      - name: Record history
+        if: steps.publish.outputs.status == 'posted'
+        run: |
+          git config user.name "linkedin-autopost-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/history.json
+          git commit -m "Posted ${{ inputs.date || 'today' }}: ${{ steps.publish.outputs.post_url }}"
+          git pull --rebase origin main && git push
+
+      - name: Alert if something needs attention
+        if: failure() || steps.publish.outputs.status == 'missing'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STATUS: ${{ steps.publish.outputs.status }}
+        run: |
+          case "$STATUS" in
+            token_expired|no_token) TITLE="LinkedIn token expired or missing: renew it";;
+            invalid) TITLE="Today's LinkedIn post failed safety checks (not published)";;
+            missing) TITLE="No LinkedIn post was prepared for today";;
+            *) TITLE="LinkedIn auto-post failed";;
+          esac
+          gh issue create --title "$TITLE" \
+            --body "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          Nothing was posted. Open the run log for details. See README > Troubleshooting."

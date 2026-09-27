@@ -1,0 +1,33 @@
+name: LinkedIn token expiry reminder
+
+on:
+  schedule:
+    - cron: "15 5 * * 1"   # Mondays 10:15 AM PKT
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Open an issue when the token expires within 10 days
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXP=$(python3 -c "import json;print(json.load(open('config.json'))['token']['expires_on'])")
+          DAYS=$(( ( $(date -d "$EXP" +%s) - $(date +%s) ) / 86400 ))
+          echo "Token expires on $EXP ($DAYS days left)"
+          if [ "$DAYS" -le 10 ]; then
+            if gh issue list --state open --search "LinkedIn token renewal in:title" --json number --jq 'length' | grep -qv '^0$'; then
+              echo "Reminder issue already open"; exit 0
+            fi
+            gh issue create --title "LinkedIn token renewal due ($EXP, $DAYS days left)" --body "Posting stops when the token expires. Takes about 2 minutes:
+          1. Open https://www.linkedin.com/developers/tools/oauth/token-generator
+          2. App: Posting Automatically. Scopes: openid, profile, w_member_social. Request access token, Allow.
+          3. GitHub > Settings > Secrets and variables > Actions > LINKEDIN_ACCESS_TOKEN > Update, paste the new token.
+          4. In config.json set token.expires_on to today + 60 days, commit.
+          5. Close this issue."
+          fi
