@@ -16,5 +16,15 @@
     "urn": "urn:li:share:7510310364492976129",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7510310364492976129/",
     "posted_at": "2026-09-28T12:12:07+00:00"
+  },
+  {
+    "date": "2026-09-28",
+    "slot": "2026-09-28-extra",
+    "category": "typescript",
+    "topic": "TypeScript's satisfies operator: validating an object without widening its inferred type",
+    "theme": "Swiss minimal",
+    "urn": "urn:li:share:7510332489455013888",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7510332489455013888/",
+    "posted_at": "2026-09-28T13:40:01+00:00"
   }
 ]
