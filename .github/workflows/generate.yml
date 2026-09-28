@@ -51,12 +51,6 @@ jobs:
           python-version: '3.11'
           cache: pip
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
-          mkdir -p /tmp/work
-
       - name: Work out date and state
         id: when
         env:
@@ -76,6 +70,13 @@ jobs:
           echo "have_post=$HAVE" >> "$GITHUB_OUTPUT"
           { echo 'note<<EOF_NOTE'; echo "$NOTE" | head -c 2000; echo; echo 'EOF_NOTE'; } >> "$GITHUB_OUTPUT"
           echo "Target $DATE (now $NOW PKT) | already posted: $POSTED | valid post ready: $HAVE"
+
+      - name: Install dependencies (skipped when the day is already done)
+        if: steps.when.outputs.posted == 'false'
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+          mkdir -p /tmp/work
 
       - name: Prepare Claude token
         if: steps.when.outputs.posted == 'false' && steps.when.outputs.have_post == 'false'
@@ -105,6 +106,30 @@ jobs:
           claude_args: |
             --max-turns 150
             --allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,TodoWrite"
+
+      - name: Report Claude usage
+        if: always() && steps.claude.outputs.execution_file != ''
+        env:
+          EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          python - <<'EOF'
+          import json, os
+          try:
+              d = json.load(open(os.environ["EXEC_FILE"]))
+          except Exception as e:
+              print("no execution file:", e); raise SystemExit(0)
+          arr = d if isinstance(d, list) else [d]
+          r = next((m for m in reversed(arr) if isinstance(m, dict) and m.get("type") == "result"), {})
+          u = r.get("usage") or {}
+          inp, out = u.get("input_tokens", 0), u.get("output_tokens", 0)
+          cr, cw = u.get("cache_read_input_tokens", 0), u.get("cache_creation_input_tokens", 0)
+          line = (f"turns={r.get('num_turns')} | input={inp:,} | cache_write={cw:,} | cache_read={cr:,} | "
+                  f"output={out:,} | total={inp+cw+cr+out:,} | api_equivalent=${r.get('total_cost_usd', 0):.2f} | "
+                  f"minutes={round((r.get('duration_ms') or 0)/60000, 1)}")
+          print(f"::notice title=Claude usage::{line}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write(f"\n**Claude usage:** {line}\n")
+          EOF
 
       - name: Show Claude error (if any)
         if: failure() && steps.claude.outputs.execution_file != ''

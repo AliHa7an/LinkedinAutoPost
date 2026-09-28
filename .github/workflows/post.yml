@@ -42,13 +42,23 @@ jobs:
           python-version: "3.11"
           cache: pip
 
+      - name: Already posted today?
+        id: pre
+        run: |
+          DAY="${{ inputs.date }}"; [ -z "$DAY" ] && DAY=$(TZ=Asia/Karachi date +%F)
+          if python3 -c "import json,sys;sys.exit(0 if any(h.get('slot',h['date'])=='$DAY' for h in json.load(open('data/history.json'))) else 1)"; then
+            echo "Already posted for $DAY: nothing to do."; echo "done=true" >> "$GITHUB_OUTPUT"
+          else echo "done=false" >> "$GITHUB_OUTPUT"; fi
+
       - name: Install
+        if: steps.pre.outputs.done != 'true'
         run: |
           pip install -r requirements.txt
           python -m playwright install --with-deps chromium
 
       - name: Publish
         id: publish
+        if: steps.pre.outputs.done != 'true'
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           WAIT_FOR_POST_TIME: ${{ github.event_name == 'schedule' && '1' || '0' }}
