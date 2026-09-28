@@ -29,7 +29,9 @@ also differ in topic, category and image theme from any post already published t
    frames from the start, middle and end). Fix anything cut off, overlapping, cramped, misspelled,
    low-contrast or generic-looking, and repeat until both commands pass and the image looks like a
    designer made it.
-6. Re-read the text once as a senior engineer and once as a recruiter: correct, specific, useful,
+6. If `validate.py` prints STYLE notes (length, paragraphs), tighten the text until they're gone
+   (they don't block publishing, but concise posts are the goal).
+7. Re-read the text once as a senior engineer and once as a recruiter: correct, specific, useful,
    human, no hype, ends with a genuine question for readers.
 
 ## Token budget (keep the run lean)

@@ -81,10 +81,11 @@ the last 7 days (`python scripts/recent.py` shows this).
 4. Last paragraph: a specific question that invites real experience ("What's the one check you'd add
    before shipping an agent to production?"), never "Thoughts?".
 
-**Concise:** readable in under a minute. Aim for 600–1,100 characters (hard limits 350–1,300).
+**Concise:** readable in under a minute. Aim for 600–1,100 characters (stay within 350–1,300).
 One idea per post; the image carries the detail. Paragraphs of 1–2 short sentences (max 280
 characters), at most 9 paragraphs, lists of 3–5 items, code blocks of 8 lines or fewer. Cut every
-sentence that doesn't add a fact, a step or the takeaway; the validator enforces these limits.
+sentence that doesn't add a fact, a step or the takeaway. `validate.py` prints STYLE notes when a
+post goes over these targets: fix them. They don't block publishing, but aim to have none.
 
 Voice: plain, confident, human; contractions; varied sentence length; 0–2 emojis (max 5). No hashtags
 or links in the text. Avoid `config.json > rules.banned_phrases` and anything that sounds like a

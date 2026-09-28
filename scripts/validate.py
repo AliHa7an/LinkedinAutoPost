@@ -4,7 +4,7 @@ Usage: python scripts/validate.py 2026-09-28   (exit code 1 if anything fails)
 """
 import sys
 
-from common import build_commentary, load_post, validate_post
+from common import build_commentary, load_config, load_post, style_warnings, validate_post
 
 if __name__ == "__main__":
     day = sys.argv[1]
@@ -14,5 +14,8 @@ if __name__ == "__main__":
         for p in problems:
             print(f"  - {p}")
         sys.exit(1)
-    text = build_commentary(load_post(day))
+    post = load_post(day)
+    for w in style_warnings(post, load_config()["rules"]):
+        print(f"STYLE (not blocking, improve if you can): {w}")
+    text = build_commentary(post)
     print(f"OK posts/{day}  ({len(text)} chars)\n" + "-" * 60 + f"\n{text}\n" + "-" * 60)
