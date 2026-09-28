@@ -99,6 +99,17 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
     if not rules["text_min_chars"] <= n <= rules["text_max_chars"]:
         errors.append(f"text length {n} outside {rules['text_min_chars']}-{rules['text_max_chars']}")
 
+    paras = [x for x in re.split(r"\n\s*\n", text.strip()) if x.strip()]
+    if len(paras) > rules["max_paragraphs"]:
+        errors.append(f"{len(paras)} paragraphs; keep it to {rules['max_paragraphs']} or fewer (concise)")
+    for x in paras:
+        codeish = sum(1 for ln in x.splitlines() if re.search(r"[;{}()=<>]|^\s{2,}", ln)) >= 2
+        if not codeish and len(x) > rules["paragraph_max_chars"]:
+            errors.append(f"paragraph too long ({len(x)} chars, max {rules['paragraph_max_chars']}): "
+                          f"'{x[:50]}...' - split or cut it")
+        if codeish and len(x.splitlines()) > 8:
+            errors.append("code block longer than 8 lines; keep only the lines that make the point")
+
     hook = text.strip().split("\n", 1)[0]
     if len(hook) > rules["hook_max_chars"]:
         errors.append(f"first line (hook) is {len(hook)} chars; keep it <= {rules['hook_max_chars']}")

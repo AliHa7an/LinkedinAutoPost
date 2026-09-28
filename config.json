@@ -29,8 +29,8 @@
   },
   "rules": {
     "max_posts_per_day": 1,
-    "text_min_chars": 400,
-    "text_max_chars": 2600,
+    "text_min_chars": 350,
+    "text_max_chars": 1300,
     "hook_max_chars": 140,
     "hashtags_min": 3,
     "hashtags_max": 5,
@@ -129,6 +129,8 @@
       "stat-chart",
       "roadmap",
       "concept-card"
-    ]
+    ],
+    "paragraph_max_chars": 280,
+    "max_paragraphs": 9
   }
 }
