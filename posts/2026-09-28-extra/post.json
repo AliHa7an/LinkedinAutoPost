@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-28",
+  "category": "typescript",
+  "topic": "TypeScript's satisfies operator: validating an object without widening its inferred type",
+  "theme": "Swiss minimal",
+  "text": "Annotate an object with a type in TypeScript and its precise shape quietly disappears.\n\nSay you're building a color palette and want the compiler to catch a wrong key or a wrong value shape:\n\nconst palette: Record<Colors, string | RGB> = {\n  red: [255, 0, 0],\n  green: \"seagreen\",\n  blue: [0, 0, 255],\n};\n\npalette.green.toUpperCase(); // Error: string | RGB has no toUpperCase\n\nThe Record<...> annotation does its job at the definition line, but it also widens every value to string | RGB. palette.green isn't string anymore, it's the whole union, so code that used to just work now needs an unnecessary type guard.\n\nsatisfies closes that gap. Swap the annotation for a suffix and the checker still catches a wrong key or shape, but each value keeps its specific inferred type:\n\nconst palette = {\n  red: [255, 0, 0],\n  green: \"seagreen\",\n  blue: [0, 0, 255],\n} satisfies Record<Colors, string | RGB>;\n\npalette.green.toUpperCase(); // fine, green is string\n\nas T skips validation entirely. A plain : T annotation validates but widens. satisfies does both: it checks the value against the type and lets inference keep the narrower literal.\n\nMy rule of thumb: reach for satisfies on config objects, route maps or lookup tables like this one, any time you still need the specific value types after the check, not just at the point of definition.\n\nWhat's the last type-widening surprise that cost you a debugging session?",
+  "hashtags": ["#TypeScript", "#JavaScript", "#WebDevelopment", "#CleanCode"],
+  "image": {
+    "file": "image.html",
+    "alt": "Swiss minimal style graphic comparing TypeScript's colon annotation, which widens palette.green to a union type, against the satisfies operator, which keeps palette.green as string, signed Ali Hassan, alihexan.com",
+    "animated": false,
+    "duration_ms": 4000
+  },
+  "sources": ["https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html"]
+}

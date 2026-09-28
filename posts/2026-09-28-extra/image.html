@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1080px;
+    height: 1350px;
+    background: #f4f2ec;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #16171a;
+  }
+
+  .page {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+    padding: 76px 72px 52px;
+  }
+
+  .rule {
+    height: 7px;
+    background: #16171a;
+    width: 96px;
+    margin-bottom: 30px;
+  }
+
+  .kicker {
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 7px;
+    color: #d62828;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-top: 22px;
+    font-size: 58px;
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    max-width: 950px;
+  }
+
+  .accent { color: #d62828; }
+
+  .sub {
+    margin-top: 24px;
+    font-size: 25px;
+    line-height: 1.5;
+    color: #4a4b4f;
+    max-width: 900px;
+  }
+
+  .compare {
+    margin-top: 44px;
+    display: flex;
+    gap: 28px;
+  }
+
+  .card {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 3px solid #16171a;
+    padding: 30px 28px;
+    gap: 22px;
+  }
+
+  .card.good { background: #16171a; color: #f4f2ec; }
+
+  .card-title {
+    font-size: 23px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card.good .card-title { color: #f4f2ec; }
+
+  .code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 19px;
+    line-height: 1.75;
+    background: #f4f2ec;
+    border: 1px solid #16171a33;
+    padding: 20px 20px;
+    color: #16171a;
+    white-space: pre;
+  }
+
+  .card.good .code {
+    background: #1e2024;
+    border-color: #ffffff33;
+    color: #eef0f3;
+  }
+
+  .result-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .mark {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+  }
+
+  .mark.x { background: #d62828; color: #ffffff; }
+  .mark.check { background: #4caf6a; color: #16171a; }
+
+  .result-text {
+    font-size: 19px;
+    line-height: 1.45;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card.good .result-text { color: #eef0f3; }
+
+  .takeaway {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border-top: 3px solid #16171a;
+    padding-top: 30px;
+  }
+
+  .takeaway .num {
+    font-size: 30px;
+    font-weight: 700;
+    color: #d62828;
+    line-height: 1.3;
+  }
+
+  .takeaway .txt {
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: 500;
+    max-width: 850px;
+  }
+
+  .badges {
+    margin-top: 36px;
+    display: flex;
+    gap: 18px;
+  }
+
+  .badge {
+    flex: 1;
+    text-align: center;
+    border: 2px solid #16171a;
+    padding: 18px 10px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: #16171a;
+  }
+
+  .footer {
+    margin-top: auto;
+    padding-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand { font-size: 22px; font-weight: 700; }
+  .site { font-size: 20px; font-family: 'JetBrains Mono', monospace; color: #d62828; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="rule"></div>
+    <div class="kicker">TypeScript</div>
+    <h1><span class="accent">satisfies</span> checks the type.<br>It doesn't widen it.</h1>
+    <div class="sub">A colon annotation validates an object but widens every value to the full union. Swap it for <em>satisfies</em> and the value types stay specific.</div>
+
+    <div class="compare">
+      <div class="card bad">
+        <div class="card-title">: Record&lt;Colors, ...&gt;</div>
+        <div class="code">const palette:
+  Record&lt;Colors,
+  string | RGB&gt; = {
+  red: [255, 0, 0],
+  green: "seagreen",
+  blue: [0, 0, 255],
+};</div>
+        <div class="result-row">
+          <div class="mark x">&times;</div>
+          <div class="result-text">palette.green is<br>string | RGB</div>
+        </div>
+      </div>
+
+      <div class="card good">
+        <div class="card-title">satisfies Record&lt;...&gt;</div>
+        <div class="code">const palette = {
+  red: [255, 0, 0],
+  green: "seagreen",
+  blue: [0, 0, 255],
+} satisfies
+  Record&lt;Colors,
+  string | RGB&gt;;</div>
+        <div class="result-row">
+          <div class="mark check">&#10003;</div>
+          <div class="result-text">palette.green<br>stays string</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <div class="num">&rarr;</div>
+      <div class="txt">Use satisfies on config objects, route maps and lookup tables when you still need the specific value types after the check.</div>
+    </div>
+
+    <div class="badges">
+      <div class="badge">TypeScript 4.9+</div>
+      <div class="badge">Zero runtime cost</div>
+      <div class="badge">Works in strict mode</div>
+    </div>
+
+    <div class="footer">
+      <div class="brand">Ali Hassan</div>
+      <div class="site">alihexan.com</div>
+    </div>
+  </div>
+</body>
+</html>
