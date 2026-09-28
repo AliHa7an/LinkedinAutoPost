@@ -4,12 +4,22 @@ One professional post (text + image) per day on Ali Hassan's personal LinkedIn p
 **3:00 PM PKT**, fully automatic and free.
 
 ```
-Claude scheduled task (daily, ~11 AM PKT)          GitHub Actions (daily, 3:00 PM PKT)
-  researches + verifies facts                          validates the post again
-  writes posts/<date>/post.json                        renders image.html -> PNG / animated GIF
-  designs posts/<date>/image.html        --push-->     publishes to LinkedIn (official API)
-  runs validate.py + render.py                         records it in data/history.json
+"Generate content" (GitHub Actions, ~8:20 AM PKT)   "Daily LinkedIn post" (GitHub Actions, 3:00 PM PKT)
+  Claude Code (CLAUDE_CODE_OAUTH_TOKEN)               validates the post again
+  researches + verifies facts                         renders image.html -> PNG / animated GIF
+  writes posts/<date>/post.json + image.html  ---->   publishes to LinkedIn (official API)
+  validates, renders, looks at the image              records it in data/history.json
+  commits the post
 ```
+
+Everything runs on GitHub: no computer needs to be on and nothing waits for approval. GitHub's
+scheduler can start late, so both workflows have backup run times; every run checks first and
+does nothing if the day's post already exists or is already published. If generation finishes
+after 3 PM, it publishes immediately.
+
+Start a run manually: Actions > Generate content > Run workflow (optional date + note), or push
+`requests/run.json` (see `requests/README.md`). The Claude instructions are in
+`.github/prompts/daily.md` and `CONTENT_GUIDE.md`.
 
 ## Safety
 
@@ -29,7 +39,8 @@ Claude scheduled task (daily, ~11 AM PKT)          GitHub Actions (daily, 3:00 P
 
 1. LinkedIn app "Posting Automatically" with products *Share on LinkedIn* and *Sign In with
    LinkedIn using OpenID Connect*.
-2. Repo secret `LINKEDIN_ACCESS_TOKEN` (scopes `openid profile w_member_social`).
+2. Repo secrets: `LINKEDIN_ACCESS_TOKEN` (scopes `openid profile w_member_social`) and
+   `CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`, same as FBAutoPoster).
 3. Settings > Actions > General > Workflow permissions: **Read and write**.
 
 ## Every 60 days: renew the token (2 minutes)
@@ -67,5 +78,6 @@ python post.py --date 2026-09-28 --dry-run
 | --- | --- | --- |
 | token expired or missing | 401 from LinkedIn | Renew the token (above) |
 | failed safety checks | the prepared post broke a rule | Read the run log, fix or delete the post |
-| No post was prepared | the Claude task didn't push one | Nothing posted today; check the scheduled task |
+| content generation failed | the Claude run errored (often an expired `CLAUDE_CODE_OAUTH_TOKEN`) | Open the run; renew the token with `claude setup-token` if needed; re-run Generate content |
+| No post was prepared | no post existed by 6 PM PKT | Check the Generate content runs |
 | auto-post failed | API or network error | Re-run the workflow with dry run off |

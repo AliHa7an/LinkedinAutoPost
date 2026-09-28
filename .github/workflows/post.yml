@@ -3,8 +3,12 @@ name: Daily LinkedIn post (3 PM PKT)
 on:
   schedule:
     # 09:40 UTC; the script then waits until exactly 10:00 UTC = 3:00 PM PKT.
-    # (GitHub cron often starts late, so we start early.)
-    - cron: "40 9 * * *"
+    # GitHub cron can start hours late, so there are backup runs. Each one does nothing
+    # if today's post is already published (max 1 post per day).
+    - cron: "40 9 * * *"   # 2:40 PM PKT -> waits, posts at 3:00 PM
+    - cron: "20 10 * * *"  # 3:20 PM PKT backup
+    - cron: "15 11 * * *"  # 4:15 PM PKT backup
+    - cron: "0 13 * * *"   # 6:00 PM PKT last backup
   workflow_dispatch:
     inputs:
       date:
@@ -16,7 +20,7 @@ on:
         default: true
 
 concurrency:
-  group: linkedin-post
+  group: linkedin-repo
   cancel-in-progress: false
 
 permissions:
@@ -28,9 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -67,8 +71,12 @@ jobs:
           git config user.name "linkedin-autopost-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/history.json
-          git commit -m "Posted ${{ inputs.date || 'today' }}: ${{ steps.publish.outputs.post_url }}"
-          git pull --rebase origin main && git push
+          git commit -m "Posted ${{ inputs.date || 'today' }}: ${{ steps.publish.outputs.post_url }} [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push; then exit 0; fi
+            sleep $((i * 5))
+          done
+          exit 1
 
       - name: Alert if something needs attention
         if: failure() || steps.publish.outputs.status == 'missing'
@@ -76,12 +84,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           STATUS: ${{ steps.publish.outputs.status }}
         run: |
+          # "missing" only matters after the last backup run; earlier the generator may still be working.
+          if [ "$STATUS" = "missing" ] && [ "$(TZ=Asia/Karachi date +%H)" -lt 18 ]; then
+            echo "No post yet; the generator may still be running. Not alerting before 6 PM PKT."; exit 0
+          fi
           case "$STATUS" in
             token_expired|no_token) TITLE="LinkedIn token expired or missing: renew it";;
             invalid) TITLE="Today's LinkedIn post failed safety checks (not published)";;
             missing) TITLE="No LinkedIn post was prepared for today";;
             *) TITLE="LinkedIn auto-post failed";;
           esac
+          if [ "$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq length)" != "0" ]; then
+            echo "Issue already open"; exit 0
+          fi
           gh issue create --title "$TITLE" \
             --body "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           Nothing was posted. Open the run log for details. See README > Troubleshooting."

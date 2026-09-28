@@ -1,0 +1,30 @@
+name: Request content run
+
+# Pushing a change to requests/run.json starts "Generate content" with that date + note.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'requests/run.json'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Start Generate content
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(python3 -c "import json;print(json.load(open('requests/run.json')).get('date',''))" 2>/dev/null || true)
+          NOTE=$(python3 -c "import json;print(json.load(open('requests/run.json')).get('note',''))" 2>/dev/null || true)
+          gh workflow run generate.yml --repo "${{ github.repository }}" --ref main -f date="$DATE" -f note="$NOTE"
+          echo "Started Generate content for date='${DATE:-today}'"

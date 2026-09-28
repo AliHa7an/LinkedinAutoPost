@@ -124,5 +124,6 @@ A single self-contained HTML page rendered at 1080×1350 (portrait, best on mobi
 and `posts/YYYY-MM-DD/image.html`.
 
 Then run from `scripts/`: `python validate.py YYYY-MM-DD` and `python render.py YYYY-MM-DD`, look
-at the rendered image, fix anything that fails or looks off, and commit only when both pass. Do
-not commit the rendered png/gif (it is gitignored; GitHub renders it again at posting time).
+at the rendered image, and fix anything that fails or looks off until both pass. In the daily
+GitHub run the workflow commits and publishes; the rendered png/gif is never committed (it is
+gitignored and rendered again at posting time).

@@ -120,5 +120,30 @@ def render(day: str) -> str:
     return str(out)
 
 
+def write_previews(image_path: str, out_dir: str) -> list[str]:
+    """Save PNG previews (3 frames for a GIF) so a reviewer can look at them."""
+    from pathlib import Path
+    out = Path(out_dir); out.mkdir(parents=True, exist_ok=True)
+    img = Image.open(image_path)
+    n = getattr(img, "n_frames", 1)
+    picks = sorted({0, n // 2, n - 1}) if n > 1 else [0]
+    paths = []
+    for i in picks:
+        img.seek(i)
+        f = out / f"preview-frame{i:02d}.png"
+        img.convert("RGB").save(f)
+        paths.append(str(f))
+    return paths
+
+
 if __name__ == "__main__":
-    print(render(sys.argv[1]))
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("date")
+    ap.add_argument("--preview", help="also write PNG previews to this folder")
+    a = ap.parse_args()
+    result = render(a.date)
+    print(result)
+    if a.preview:
+        for f in write_previews(result, a.preview):
+            print("preview:", f)
