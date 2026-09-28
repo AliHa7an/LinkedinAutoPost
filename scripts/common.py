@@ -167,6 +167,11 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
             errors.append(f"image must show the name {brand['name']}")
         if re.search(r"<(script|link)[^>]+(src|href)=[\"']https?://", src, re.I) and "fonts.googleapis.com" not in src:
             errors.append("image.html may only load external Google Fonts (keep everything else inline)")
+    vt = img.get("visual_type")
+    if vt not in rules["visual_types"]:
+        errors.append(f"image.visual_type must be one of {', '.join(rules['visual_types'])}")
+    elif (vt == "animated-flow") != bool(img.get("animated")):
+        errors.append("visual_type 'animated-flow' must have \"animated\": true, and only it may be animated")
     if not img.get("alt") or len(img["alt"]) < 20:
         errors.append("image.alt needs a real description (20+ chars) for accessibility")
 

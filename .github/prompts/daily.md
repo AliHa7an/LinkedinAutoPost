@@ -11,8 +11,9 @@ prompt (it can carry a suffix like `2026-09-28-extra` for an extra post: then th
 `posts/2026-09-28-extra/` and the `date` field inside post.json is just `2026-09-28`; the post must
 also differ in topic, category and image theme from any post already published that day), following `CONTENT_GUIDE.md` exactly, together with `config.json` and `data/history.json`.
 
-1. Read `CONTENT_GUIDE.md`, `config.json` and `data/history.json` in full. Also list `posts/` and
-   read the `topic`, `category` and `theme` of every existing post so you don't repeat any of them.
+1. Read `CONTENT_GUIDE.md` once, then run `python scripts/recent.py <target date>`: it lists recent
+   topics, categories and themes, yesterday's (blocked) category and unused categories. Don't open
+   `data/history.json` or old post folders unless something is unclear.
 2. If `posts/<target date>/post.json` already exists, or `data/history.json` already has the target
    date: run `cd scripts && python validate.py <target date>`. If it passes, stop and only write the
    summary. Otherwise fix that post.
@@ -30,6 +31,13 @@ also differ in topic, category and image theme from any post already published t
    designer made it.
 6. Re-read the text once as a senior engineer and once as a recruiter: correct, specific, useful,
    human, no hype, ends with a genuine question for readers.
+
+## Token budget (keep the run lean)
+
+- Decide the topic before searching. At most 4 WebSearch calls and 4 WebFetch calls in total.
+- Write post.json and image.html in one go each; fix with small Edits, never rewrite whole files.
+- At most 3 validate/render/look rounds. Don't re-read files you already read.
+- Keep the summary short.
 
 ## Do NOT
 

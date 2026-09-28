@@ -108,6 +108,9 @@ def render(day: str) -> str:
 
         duration = int(img.get("duration_ms", 4000))
         n = int(img.get("frames", cfg["gif_frames"]))
+        if n > cfg["gif_max_frames"] or n * w * h >= cfg["gif_max_total_pixels"]:
+            browser.close()
+            raise LayoutError(f"GIF too large for LinkedIn: {n} frames x {w}x{h}; reduce frames")
         frames, problems = [], set()
         for i in range(n):
             seek_all(page, duration * i / n)

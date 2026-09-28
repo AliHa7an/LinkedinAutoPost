@@ -104,7 +104,8 @@ jobs:
             Current time: ${{ steps.when.outputs.now }} (Asia/Karachi)
             Extra note for this run: ${{ steps.when.outputs.note }}
           claude_args: |
-            --max-turns 150
+            --max-turns 60
+            --model ${{ vars.CLAUDE_MODEL || 'sonnet' }}
             --allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,TodoWrite"
 
       - name: Report Claude usage

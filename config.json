@@ -23,7 +23,9 @@
     "gif_width": 800,
     "gif_height": 1000,
     "gif_frames": 30,
-    "gif_max_bytes": 5000000
+    "gif_max_bytes": 5000000,
+    "gif_max_frames": 250,
+    "gif_max_total_pixels": 36152320
   },
   "rules": {
     "max_posts_per_day": 1,
@@ -94,7 +96,39 @@
       "furthermore,",
       "moreover,",
       "in conclusion",
-      "as an ai"
+      "as an ai",
+      "like if you",
+      "like this post",
+      "comment yes",
+      "comment \"yes\"",
+      "type yes",
+      "tag someone",
+      "tag a friend",
+      "tag 3",
+      "tag three",
+      "follow me for",
+      "follow for more",
+      "repost if",
+      "share this if",
+      "react with",
+      "only 1% of",
+      "smash that",
+      "if you agree, like",
+      "drop a comment",
+      "drop an emoji",
+      "drop a 🔥",
+      "drop a fire"
+    ],
+    "visual_types": [
+      "animated-flow",
+      "flow-diagram",
+      "code-comparison",
+      "code-snippet",
+      "checklist",
+      "comparison-table",
+      "stat-chart",
+      "roadmap",
+      "concept-card"
     ]
   }
 }
