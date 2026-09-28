@@ -121,9 +121,10 @@ jobs:
           arr = d if isinstance(d, list) else [d]
           r = next((m for m in reversed(arr) if isinstance(m, dict) and m.get("type") == "result"), {})
           u = r.get("usage") or {}
+          sysm = next((m for m in arr if isinstance(m, dict) and m.get("type") == "system"), {})
           inp, out = u.get("input_tokens", 0), u.get("output_tokens", 0)
           cr, cw = u.get("cache_read_input_tokens", 0), u.get("cache_creation_input_tokens", 0)
-          line = (f"turns={r.get('num_turns')} | input={inp:,} | cache_write={cw:,} | cache_read={cr:,} | "
+          line = (f"model={sysm.get('model')} | turns={r.get('num_turns')} | input={inp:,} | cache_write={cw:,} | cache_read={cr:,} | "
                   f"output={out:,} | total={inp+cw+cr+out:,} | api_equivalent=${r.get('total_cost_usd', 0):.2f} | "
                   f"minutes={round((r.get('duration_ms') or 0)/60000, 1)}")
           print(f"::notice title=Claude usage::{line}")
