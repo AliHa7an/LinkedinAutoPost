@@ -7,7 +7,9 @@ no human to answer questions: make reasonable decisions and finish the job.
 ## What to do
 
 Create exactly ONE LinkedIn post (text + image) for the **target date** given at the end of this
-prompt, following `CONTENT_GUIDE.md` exactly, together with `config.json` and `data/history.json`.
+prompt (it can carry a suffix like `2026-09-28-extra` for an extra post: then the folder is
+`posts/2026-09-28-extra/` and the `date` field inside post.json is just `2026-09-28`; the post must
+also differ in topic, category and image theme from any post already published that day), following `CONTENT_GUIDE.md` exactly, together with `config.json` and `data/history.json`.
 
 1. Read `CONTENT_GUIDE.md`, `config.json` and `data/history.json` in full. Also list `posts/` and
    read the `topic`, `category` and `theme` of every existing post so you don't repeat any of them.

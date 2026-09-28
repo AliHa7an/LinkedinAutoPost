@@ -87,7 +87,7 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
     if errors:
         return errors
 
-    if post["date"] != day:
+    if post["date"] != day[:10]:
         errors.append(f"date field {post['date']} does not match folder {day}")
 
     cat = post["category"]
@@ -171,15 +171,15 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
         errors.append("image.alt needs a real description (20+ chars) for accessibility")
 
     # Repetition checks against what was already published.
-    d = date.fromisoformat(day)
+    d = date.fromisoformat(day[:10])
     topic_n, theme_n = _norm(post["topic"]), _norm(post["theme"])
     for h in history:
-        if h.get("date") == day:
+        if h.get("slot", h.get("date")) == day:
             continue
         age = (d - date.fromisoformat(h["date"])).days
-        if 0 < age <= rules["topic_repeat_days"] and _norm(h.get("topic", "")) == topic_n:
+        if 0 <= age <= rules["topic_repeat_days"] and _norm(h.get("topic", "")) == topic_n:
             errors.append(f"same topic already posted on {h['date']}")
-        if 0 < age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
+        if 0 <= age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
             errors.append(f"image theme '{post['theme']}' used on {h['date']}; pick a different look")
         if age == 1 and h.get("category") == cat and cat != "jobs":
             errors.append(f"category '{cat}' was also yesterday's; rotate topics")

@@ -140,12 +140,13 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=today_pkt())
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--at", help="publish at this exact PKT time HH:MM (waits up to 90 min)")
     args = ap.parse_args()
     day = args.date
     cfg = load_config()
     history = load_history()
 
-    if any(h["date"] == day for h in history):
+    if any(h.get("slot", h["date"]) == day for h in history):
         print(f"already posted for {day}; nothing to do (max 1 post per day)")
         output(status="already_posted")
         return 0
@@ -183,7 +184,11 @@ def main() -> int:
         output(status="no_token")
         return 1
 
-    if os.environ.get("WAIT_FOR_POST_TIME") == "1":
+    if args.at:
+        hh, mm = map(int, args.at.split(":"))
+        utc_min = (hh * 60 + mm - 5 * 60) % (24 * 60)
+        wait_until(f"{utc_min // 60:02d}:{utc_min % 60:02d}", max_wait_s=90 * 60)
+    elif os.environ.get("WAIT_FOR_POST_TIME") == "1":
         wait_until(cfg["schedule"]["post_time_utc"])
 
     import hashlib
@@ -205,7 +210,7 @@ def main() -> int:
         return 1
 
     url = f"https://www.linkedin.com/feed/update/{urn}/" if urn else ""
-    history.append({"date": day, "category": post["category"], "topic": post["topic"],
+    history.append({"date": day[:10], "slot": day, "category": post["category"], "topic": post["topic"],
                     "theme": post["theme"], "urn": urn, "url": url,
                     "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
     save_history(history)

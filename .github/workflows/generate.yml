@@ -9,7 +9,6 @@ on:
   schedule:
     - cron: '20 3 * * *'   # 03:20 UTC = 08:20 PKT
     - cron: '50 5 * * *'   # 05:50 UTC = 10:50 PKT (backup; skips if already done)
-    - cron: '20 13 * * *'  # TEMPORARY TEST 18:20 PKT: prepares TOMORROW's post (remove after test)
   workflow_dispatch:
     inputs:
       date:
@@ -18,6 +17,10 @@ on:
         default: ''
       note:
         description: 'Extra instructions for this run (optional)'
+        required: false
+        default: ''
+      publish_at:
+        description: 'Publish at this exact PKT time HH:MM (optional; for tests/extra posts, e.g. 18:40)'
         required: false
         default: ''
 
@@ -62,10 +65,9 @@ jobs:
         run: |
           DATE="$IN_DATE"; NOTE="$IN_NOTE"
           [ -z "$DATE" ] && DATE=$(TZ=Asia/Karachi date +%F)
-          if [ "${{ github.event.schedule }}" = "20 13 * * *" ]; then DATE=$(TZ=Asia/Karachi date -d tomorrow +%F); fi
-          if ! echo "$DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then echo "Bad date: $DATE"; exit 1; fi
+          if ! echo "$DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}(-[a-z0-9]+)?$'; then echo "Bad date: $DATE"; exit 1; fi
           NOW=$(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M')
-          POSTED=$(python -c "import json,sys;print('true' if any(h['date']=='$DATE' for h in json.load(open('data/history.json'))) else 'false')")
+          POSTED=$(python -c "import json,sys;print('true' if any(h.get('slot',h['date'])=='$DATE' for h in json.load(open('data/history.json'))) else 'false')")
           HAVE=false
           if [ -f "posts/$DATE/post.json" ] && (cd scripts && python validate.py "$DATE" >/dev/null); then HAVE=true; fi
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
@@ -162,22 +164,26 @@ jobs:
           done
           exit 1
 
-      - name: Publish now if 3 PM PKT has already passed
+      - name: Publish (at publish_at, or now if 3 PM PKT has passed)
         id: publish
         if: steps.when.outputs.posted == 'false'
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DATE: ${{ steps.when.outputs.date }}
+          AT: ${{ inputs.publish_at }}
         run: |
           TODAY=$(TZ=Asia/Karachi date +%F); HM=$(TZ=Asia/Karachi date +%H%M)
-          if [ "$DATE" != "$TODAY" ] || [ "$HM" -lt 1500 ]; then
+          if [ -n "$AT" ]; then
+            git pull -q --rebase origin main || true
+            (cd scripts && python post.py --date "$DATE" --at "$AT")
+          elif [ "${DATE:0:10}" != "$TODAY" ] || [ "$HM" -lt 1500 ]; then
             echo "Before 3 PM PKT (or not today): the 'Daily LinkedIn post' workflow will publish it."
             echo "status=queued" >> "$GITHUB_OUTPUT"; exit 0
+          else
+            git pull -q --rebase origin main || true
+            (cd scripts && python post.py --date "$DATE")
           fi
-          git pull -q --rebase origin main || true
-          cd scripts && python post.py --date "$DATE"
-          cd ..
           git add data/history.json
           if ! git diff --cached --quiet; then
             git commit -m "Posted $DATE [skip ci]"
