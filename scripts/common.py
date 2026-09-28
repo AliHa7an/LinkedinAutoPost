@@ -14,6 +14,16 @@ PKT = timezone(timedelta(hours=5))
 
 URL_RE = re.compile(r"(https?://|www\.)\S+", re.I)
 HASHTAG_RE = re.compile(r"^#[A-Za-z][A-Za-z0-9]{1,29}$")
+# First-person experience claims we can't verify for Ali (opinions like "I'd" / "I think" stay allowed).
+EXPERIENCE_RE = re.compile(
+    r"\b(I've|I have (?:built|shipped|seen|worked|led|used|hit|run|spent|been)|I had|I built|I shipped|"
+    r"I worked|I spent|I led|I once|I ran into|I hit|I learned|I learnt|my team|our team|we built|"
+    r"we shipped|at my (?:last|previous|current|old) (?:job|company|role|team|employer)|"
+    r"my (?:client|clients|employer|last project))\b",
+    re.I,
+)
+STALE_RE = re.compile(r"\b(currently in (?:public |private )?beta|just (?:launched|released|shipped|announced)|"
+                      r"brand[- ]new|this week|yesterday)\b", re.I)
 EMOJI_RE = re.compile(
     "[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F000-\U0001F02F\U0001F100-\U0001F1FF]"
 )
@@ -107,6 +117,13 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
     for phrase in rules["banned_phrases"]:
         if phrase in low:
             errors.append(f"AI-sounding phrase not allowed: '{phrase}'")
+
+    for m in EXPERIENCE_RE.finditer(text):
+        errors.append(f"unverifiable first-person experience claim: '{m.group(0)}' (use advice/opinion instead)")
+    if post.get("status_verified_today") is not True:
+        for m in STALE_RE.finditer(text):
+            errors.append(f"time-sensitive wording '{m.group(0)}': confirm on current official docs today and set "
+                          f"\"status_verified_today\": true, or reword")
 
     emojis = len(EMOJI_RE.findall(text))
     if emojis > rules["max_emojis"]:

@@ -27,6 +27,7 @@ jobs:
           for d in ../posts/*/; do
             day=$(basename "$d")
             [[ "$day" < "$TODAY" ]] && continue
+            grep -q "\"date\": \"$day\"" ../data/history.json && continue   # already published
             python validate.py "$day" || status=1
             python render.py "$day" || status=1
           done

@@ -34,8 +34,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
+      # ref: main = the latest commit when this job starts (after any queued run finished),
+      # not the commit that triggered it. Prevents a queued run from acting on stale history.
       - uses: actions/checkout@v5
         with:
+          ref: main
           fetch-depth: 1
           persist-credentials: false
 

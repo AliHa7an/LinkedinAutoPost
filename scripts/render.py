@@ -43,8 +43,23 @@ LAYOUT_JS = """
       boxes.push({t: n.textContent.trim().slice(0, 40), el, l: b.left, r: b.right, top: b.top, bot: b.bottom});
     }
   }
+  const filled = (cs) => (cs.backgroundColor !== 'rgba(0, 0, 0, 0)' && cs.backgroundColor !== 'transparent') ||
+    cs.backgroundImage !== 'none';
+  const bw = (cs, side) => parseFloat(cs['border' + side + 'Width']) > 0 && cs['border' + side + 'Style'] !== 'none';
+  const GAP = 6;  // text must keep at least this many px inside any visible box edge around it
   for (const b of boxes) {
     if (b.l < 0 || b.top < 0 || b.r > W + 1 || b.bot > H + 1) problems.push(`text off canvas: "${b.t}"`);
+    for (let a = b.el; a && a !== document.body && a !== document.documentElement; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      const r = a.getBoundingClientRect();
+      if (r.width >= W - 2 && r.height >= H - 2) continue;  // full-canvas backgrounds
+      const f = filled(cs);
+      const hit = ((f || bw(cs, 'Bottom')) && b.bot > r.bottom - GAP) ||
+                  ((f || bw(cs, 'Top')) && b.top < r.top + GAP - 2) ||
+                  ((f || bw(cs, 'Right')) && b.r > r.right - GAP) ||
+                  ((f || bw(cs, 'Left')) && b.l < r.left + GAP - 2);
+      if (hit) { problems.push(`text touches or leaves the edge of its box: "${b.t}"`); break; }
+    }
   }
   for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
     const a = boxes[i], b = boxes[j];
