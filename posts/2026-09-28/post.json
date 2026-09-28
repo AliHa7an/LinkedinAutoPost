@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-28",
+  "category": "ai-agents",
+  "topic": "Anthropic's context editing and memory tool for long-running Claude agents that run out of context",
+  "theme": "code editor window",
+  "text": "The scariest AI agent failures aren't crashes. They're quiet ones.\n\nThe agent runs out of context and keeps going anyway, working off a stale picture of what it already tried.\n\nI've hit this building long agent loops. Every tool call and its result gets appended to the context window. After enough turns you either blow the token limit, or the model starts ignoring decisions it made earlier because they've scrolled out of view.\n\nAnthropic shipped two fixes for this on the Claude Developer Platform, also available on Amazon Bedrock and Google Cloud's Vertex AI, currently in public beta:\n\n1. Context editing: automatically strips stale tool calls and results as the conversation nears the token limit, instead of you writing custom truncation logic.\n2. Memory tool: Claude can create, read, update and delete files in a dedicated memory directory that persists across conversations, so facts survive outside the context window entirely.\n\nThe numbers, from Anthropic's own 100-turn web search evaluation: context editing let agents finish workflows that otherwise failed from context exhaustion, while cutting token consumption by 84%. Context editing alone improved results on complex multi-step tasks by 29%; adding the memory tool on top pushed that to 39% over baseline.\n\nNone of this is magic. It's the same discipline every long-running system needs: decide what state you keep, what you throw away, and where it lives, before you run out of room.\n\nIf you're running agent loops with dozens of tool calls, what's your strategy when context fills up: truncate, summarize, or offload to storage?",
+  "hashtags": ["#AIAgents", "#AI", "#SoftwareEngineering", "#LLM"],
+  "image": {
+    "file": "image.html",
+    "alt": "Code editor window styled graphic showing a memory/ directory of files next to a context window token bar shrinking by 84 percent after context editing, with a checklist of context editing and the memory tool, signed Ali Hassan, alihexan.com",
+    "animated": false,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://claude.com/blog/context-management"
+  ]
+}

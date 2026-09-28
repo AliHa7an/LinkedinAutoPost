@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1080px;
+    height: 1350px;
+    background: #1e1f26;
+    font-family: 'JetBrains Mono', monospace;
+    color: #d8dce6;
+  }
+
+  .page {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+    padding: 56px 64px 44px;
+  }
+
+  .window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #24252e;
+    border-radius: 18px;
+    border: 1px solid #3a3c48;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+    overflow: hidden;
+  }
+
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 20px 26px;
+    background: #2c2d38;
+    border-bottom: 1px solid #3a3c48;
+  }
+
+  .dot { width: 16px; height: 16px; border-radius: 50%; }
+  .dot.r { background: #ff5f56; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #27c93f; }
+
+  .tabs { display: flex; gap: 10px; margin-left: 18px; }
+  .tab {
+    font-size: 17px;
+    padding: 7px 16px;
+    border-radius: 8px 8px 0 0;
+    color: #8a8fa3;
+    background: #23242d;
+  }
+  .tab.active { color: #7ee787; background: #1a1b22; }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 44px 48px 40px;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .kicker {
+    font-size: 22px;
+    color: #7ee787;
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 1.28;
+    color: #f2f4f8;
+    font-weight: 800;
+    max-width: 900px;
+  }
+
+  .accent { color: #7ee787; }
+
+  .stat-row {
+    display: flex;
+    gap: 22px;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: #1a1b22;
+    border: 1px solid #3a3c48;
+    border-radius: 14px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-num {
+    font-size: 46px;
+    font-weight: 800;
+    color: #7ee787;
+  }
+
+  .stat-label {
+    font-size: 18px;
+    color: #aeb3c4;
+    line-height: 1.3;
+  }
+
+  .bars {
+    background: #1a1b22;
+    border: 1px solid #3a3c48;
+    border-radius: 14px;
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bar-row { display: flex; align-items: center; gap: 18px; }
+  .bar-tag { width: 190px; font-size: 19px; color: #d8dce6; }
+  .bar-track { flex: 1; height: 30px; background: #2c2d38; border-radius: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 8px; }
+  .bar-fill.full { width: 100%; background: linear-gradient(90deg,#ff8a8a,#ff5f56); }
+  .bar-fill.edited { width: 16%; background: linear-gradient(90deg,#7ee787,#4fd67a); }
+  .bar-pct { width: 70px; text-align: right; font-size: 19px; color: #aeb3c4; }
+
+  .code {
+    background: #1a1b22;
+    border: 1px solid #3a3c48;
+    border-radius: 14px;
+    padding: 26px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 21px;
+    color: #b6bccb;
+  }
+  .code .line { display: flex; gap: 20px; }
+  .code .ln { color: #565a6b; width: 18px; }
+  .code .kw { color: #ff9d5c; }
+  .code .str { color: #7ee787; }
+  .code .cm { color: #6b7086; }
+
+  .badges {
+    display: flex;
+    gap: 16px;
+  }
+  .badge {
+    flex: 1;
+    text-align: center;
+    background: #1a1b22;
+    border: 1px solid #3a3c48;
+    border-radius: 12px;
+    padding: 18px 12px;
+    font-size: 19px;
+    color: #d8dce6;
+  }
+  .badge .tag { display: block; margin-top: 6px; font-size: 15px; color: #7ee787; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 48px 0;
+    border-top: 1px solid #3a3c48;
+  }
+
+  .brand { font-size: 21px; font-weight: 700; color: #f2f4f8; }
+  .site { font-size: 19px; color: #7ee787; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="window">
+      <div class="titlebar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="tabs">
+          <div class="tab">memory/</div>
+          <div class="tab active">agent.log</div>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="kicker">// AI AGENTS</div>
+        <h1>Your agent didn't crash.<br>It just ran out of <span class="accent">context</span> &mdash; and kept talking anyway.</h1>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-num">-84%</div>
+            <div class="stat-label">tokens used after context editing, 100-turn eval</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">+39%</div>
+            <div class="stat-label">task performance: context editing + memory tool</div>
+          </div>
+        </div>
+
+        <div class="bars">
+          <div class="bar-row">
+            <div class="bar-tag">no editing</div>
+            <div class="bar-track"><div class="bar-fill full"></div></div>
+            <div class="bar-pct">100%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-tag">context edited</div>
+            <div class="bar-track"><div class="bar-fill edited"></div></div>
+            <div class="bar-pct">16%</div>
+          </div>
+        </div>
+
+        <div class="code">
+          <div class="line"><span class="ln">1</span><span><span class="kw">strip</span> stale tool calls <span class="cm">// context editing</span></span></div>
+          <div class="line"><span class="ln">2</span><span><span class="kw">write</span> facts to <span class="str">memory/*.md</span> <span class="cm">// survives new chats</span></span></div>
+          <div class="line"><span class="ln">3</span><span><span class="kw">decide</span> what state you keep <span class="cm">// before you run out</span></span></div>
+        </div>
+
+        <div class="badges">
+          <div class="badge">Claude Developer Platform<span class="tag">public beta</span></div>
+          <div class="badge">Amazon Bedrock<span class="tag">public beta</span></div>
+          <div class="badge">Google Vertex AI<span class="tag">public beta</span></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="brand">Ali Hassan</div>
+        <div class="site">alihexan.com</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
