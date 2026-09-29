@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1350px;background:#22302b;background-image:radial-gradient(circle at 30% 20%,#2e4038,#1c2823);color:#f2f0e6;font-family:'Caveat',cursive;padding:64px;display:flex;flex-direction:column;gap:48px}
+h1{font-size:88px;line-height:1.05}
+h1 span{color:#ffd66b}
+.box{border:4px dashed #f2f0e6;border-radius:18px;padding:28px 32px;display:flex;flex-direction:column;gap:16px}
+.bad{border-color:#ff8a80}.good{border-color:#8fe3a4}
+.tag{font-size:54px}
+.bad .tag{color:#ff8a80}.good .tag{color:#8fe3a4}
+pre{font-family:'JetBrains Mono',monospace;font-size:36px;line-height:1.55;white-space:pre-wrap;background:#141c18;border-radius:12px;padding:24px}
+.note{font-size:64px;text-align:center;color:#ffd66b}
+footer{margin-top:auto;display:flex;justify-content:space-between;font-size:44px;color:#cfd8c8}
+</style></head><body>
+<h1>Your PR title is <span>untrusted input</span></h1>
+<div class="box bad"><div class="tag">✗ Expanded into the script</div>
+<pre>run: echo "${{ github.event
+  .pull_request.title }}"</pre></div>
+<div class="box good"><div class="tag">✓ Env var, then quote it</div>
+<pre>env:
+  TITLE: ${{ github.event
+    .pull_request.title }}
+run: echo "$TITLE"</pre></div>
+<div class="note">Also pin actions to a full commit SHA.</div>
+<footer><span>Ali Hassan</span><span>alihexan.com</span></footer>
+</body></html>
