@@ -26,5 +26,15 @@
     "urn": "urn:li:share:7510332489455013888",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7510332489455013888/",
     "posted_at": "2026-09-28T13:40:01+00:00"
+  },
+  {
+    "date": "2026-09-29",
+    "slot": "2026-09-29",
+    "category": "security",
+    "topic": "GitHub Actions script injection: pass untrusted context through env, and pin actions to a commit SHA",
+    "theme": "chalkboard",
+    "urn": "urn:li:share:7510658747535556609",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7510658747535556609/",
+    "posted_at": "2026-09-29T11:16:27+00:00"
   }
 ]
