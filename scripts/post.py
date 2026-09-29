@@ -150,6 +150,15 @@ def main() -> int:
         print(f"already posted for {day}; nothing to do (max 1 post per day)")
         output(status="already_posted")
         return 0
+    if os.environ.get("WAIT_FOR_POST_TIME") == "1":
+        # Scheduled runs never publish more than 45 min before 3 PM PKT (they wait instead).
+        hh, mm = map(int, cfg["schedule"]["post_time_utc"].split(":"))
+        now = datetime.now(timezone.utc)
+        early = (now.replace(hour=hh, minute=mm, second=0, microsecond=0) - now).total_seconds()
+        if early > 45 * 60:
+            print(f"too early: {int(early // 60)} min before 3 PM PKT; a later run will publish")
+            output(status="too_early")
+            return 0
     if not (post_dir(day) / "post.json").exists():
         print(f"::warning::no post prepared for {day}; skipping today")
         output(status="missing")

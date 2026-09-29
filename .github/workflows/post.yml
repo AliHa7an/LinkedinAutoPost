@@ -2,13 +2,11 @@ name: Daily LinkedIn post (3 PM PKT)
 
 on:
   schedule:
-    # 09:40 UTC; the script then waits until exactly 10:00 UTC = 3:00 PM PKT.
-    # GitHub cron can start hours late, so there are backup runs. Each one does nothing
-    # if today's post is already published (max 1 post per day).
-    - cron: "40 9 * * *"   # 2:40 PM PKT -> waits, posts at 3:00 PM
-    - cron: "20 10 * * *"  # 3:20 PM PKT backup
-    - cron: "15 11 * * *"  # 4:15 PM PKT backup
-    - cron: "0 13 * * *"   # 6:00 PM PKT last backup
+    # GitHub's scheduler can start runs hours late, so this tries many times. Every run first
+    # checks data/history.json and does nothing if today's post is already published, so there is
+    # never more than one post per day. Runs before 2:15 PM PKT exit without posting.
+    - cron: "40 9 * * *"    # 2:40 PM PKT -> waits, posts at 3:00 PM
+    - cron: "5 10-18 * * *" # hourly retries 3:05 PM ... 11:05 PM PKT
   workflow_dispatch:
     inputs:
       date:
@@ -98,8 +96,8 @@ jobs:
           STATUS: ${{ steps.publish.outputs.status }}
         run: |
           # "missing" only matters after the last backup run; earlier the generator may still be working.
-          if [ "$STATUS" = "missing" ] && [ "$(TZ=Asia/Karachi date +%H)" -lt 18 ]; then
-            echo "No post yet; the generator may still be running. Not alerting before 6 PM PKT."; exit 0
+          if [ "$STATUS" = "missing" ] && [ "$(TZ=Asia/Karachi date +%H)" -lt 22 ]; then
+            echo "No post yet; a later run may still publish it. Not alerting before 10 PM PKT."; exit 0
           fi
           case "$STATUS" in
             token_expired|no_token) TITLE="LinkedIn token expired or missing: renew it";;

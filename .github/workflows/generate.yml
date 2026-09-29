@@ -7,8 +7,9 @@ name: Generate content
 
 on:
   schedule:
-    - cron: '20 3 * * *'   # 03:20 UTC = 08:20 PKT
-    - cron: '50 5 * * *'   # 05:50 UTC = 10:50 PKT (backup; skips if already done)
+    # Hourly tries 8:20 AM ... 8:20 PM PKT, because GitHub can start scheduled runs hours late.
+    # A run finishes in seconds without using Claude when today's post already exists or is published.
+    - cron: '20 3-15 * * *'
   workflow_dispatch:
     inputs:
       date:
@@ -62,12 +63,26 @@ jobs:
           if ! echo "$DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}(-[a-z0-9]+)?$'; then echo "Bad date: $DATE"; exit 1; fi
           NOW=$(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M')
           POSTED=$(python -c "import json,sys;print('true' if any(h.get('slot',h['date'])=='$DATE' for h in json.load(open('data/history.json'))) else 'false')")
+          CARRIED=false
+          # Yesterday's post was prepared but never published (e.g. GitHub ran too late)? Reuse it today
+          # instead of spending tokens, unless it is time-sensitive (verified-today status or a job post).
+          if [ "$POSTED" = "false" ] && [ ! -f "posts/$DATE/post.json" ] && [ "${#DATE}" = "10" ]; then
+            Y=$(date -d "$DATE -1 day" +%F)
+            if [ -f "posts/$Y/post.json" ] && ! grep -q "\"$Y\"" data/history.json && \
+               python -c "import json,sys;p=json.load(open('posts/$Y/post.json'));sys.exit(0 if not p.get('status_verified_today') and p.get('category')!='jobs' else 1)"; then
+              git mv "posts/$Y" "posts/$DATE"
+              python -c "import json;f='posts/$DATE/post.json';p=json.load(open(f));p['date']='$DATE';json.dump(p,open(f,'w'),indent=2,ensure_ascii=False)"
+              if (cd scripts && python validate.py "$DATE" >/dev/null); then CARRIED=true; echo "Carried over unpublished post from $Y"
+              else git mv "posts/$DATE" "posts/$Y"; git checkout -- "posts/$Y"; fi
+            fi
+          fi
           HAVE=false
           if [ -f "posts/$DATE/post.json" ] && (cd scripts && python validate.py "$DATE" >/dev/null); then HAVE=true; fi
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "now=$NOW" >> "$GITHUB_OUTPUT"
           echo "posted=$POSTED" >> "$GITHUB_OUTPUT"
           echo "have_post=$HAVE" >> "$GITHUB_OUTPUT"
+          echo "carried=$CARRIED" >> "$GITHUB_OUTPUT"
           { echo 'note<<EOF_NOTE'; echo "$NOTE" | head -c 2000; echo; echo 'EOF_NOTE'; } >> "$GITHUB_OUTPUT"
           echo "Target $DATE (now $NOW PKT) | already posted: $POSTED | valid post ready: $HAVE"
 
@@ -173,7 +188,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit the post
-        if: steps.when.outputs.posted == 'false' && steps.when.outputs.have_post == 'false'
+        if: steps.when.outputs.posted == 'false' && (steps.when.outputs.have_post == 'false' || steps.when.outputs.carried == 'true')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DATE: ${{ steps.when.outputs.date }}
@@ -181,10 +196,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
-          git add "posts/$DATE/post.json" "posts/$DATE/image.html"
+          git add -A posts/
           if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
           TOPIC=$(python -c "import json;print(json.load(open('posts/$DATE/post.json'))['topic'][:80])")
-          git commit -m "Post for $DATE: $TOPIC"
+          git commit -m "Post for $DATE: $TOPIC${{ steps.when.outputs.carried == 'true' && ' (carried over)' || '' }}"
           for i in 1 2 3; do
             if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
             sleep $((i * 5))

@@ -12,10 +12,15 @@ One professional post (text + image) per day on Ali Hassan's personal LinkedIn p
   commits the post
 ```
 
-Everything runs on GitHub: no computer needs to be on and nothing waits for approval. GitHub's
-scheduler can start late, so both workflows have backup run times; every run checks first and
-does nothing if the day's post already exists or is already published. If generation finishes
-after 3 PM, it publishes immediately.
+Everything runs on GitHub: no computer needs to be on and nothing waits for approval.
+
+GitHub's scheduler can start runs hours late, so both workflows try many times a day:
+"Generate content" every hour 8:20 AM–8:20 PM PKT, "Daily LinkedIn post" at 2:40 PM (waits until
+3:00) and every hour 3:05–11:05 PM PKT. Every run checks `data/history.json` first and finishes in
+seconds, without using Claude, if today's post already exists or is already published, so there is
+never more than one post per day. Scheduled runs never publish before 3 PM. If generation finishes
+after 3 PM, it publishes immediately. If a prepared post was never published (GitHub too late), the
+next day's run reuses it instead of writing a new one (not for job posts or time-sensitive news).
 
 Start a run manually: Actions > Generate content > Run workflow (optional date + note), or push
 `requests/run.json` (see `requests/README.md`). The Claude instructions are in
