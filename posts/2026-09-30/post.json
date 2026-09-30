@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-30",
+  "category": "javascript",
+  "topic": "structuredClone vs JSON.parse(JSON.stringify()): what each deep copy silently loses",
+  "theme": "neon synthwave",
+  "text": "JSON.parse(JSON.stringify(obj)) is not a deep copy. It's a lossy serialization that happens to look like one.\n\nWhat comes back:\nconst src = { at: new Date(), tags: new Set([\"a\"]) };\n\nJSON round trip:\n// at → string, tags → {}\n\nstructuredClone(src):\n// at → Date, tags → Set\n\nPer MDN, structuredClone handles Date, Map, Set and circular references, and it's been available across browsers since March 2022. The JSON trick throws on circular references and flattens the rest.\n\nBut structuredClone has limits too:\n\n1. Functions throw a DataCloneError\n2. Class instances lose their prototype chain\n3. Getters, setters and property descriptors aren't copied\n\nMy rule of thumb: structuredClone for plain data, an explicit copy function for class instances.\n\nWhich deep-copy bug has bitten you the hardest?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#Programming", "#CleanCode"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Neon synthwave comparison: JSON round trip turns a Date into a string and a Set into an empty object, while structuredClone keeps both, signed Ali Hassan, alihexan.com",
+    "animated": false,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+  ]
+}
