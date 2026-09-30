@@ -36,5 +36,15 @@
     "urn": "urn:li:share:7510658747535556609",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7510658747535556609/",
     "posted_at": "2026-09-29T11:16:27+00:00"
+  },
+  {
+    "date": "2026-09-30",
+    "slot": "2026-09-30",
+    "category": "javascript",
+    "topic": "structuredClone vs JSON.parse(JSON.stringify()): what each deep copy silently loses",
+    "theme": "neon synthwave",
+    "urn": "urn:li:share:7511094044194680832",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7511094044194680832/",
+    "posted_at": "2026-09-30T16:06:09+00:00"
   }
 ]
