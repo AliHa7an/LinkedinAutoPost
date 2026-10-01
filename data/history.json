@@ -46,5 +46,15 @@
     "urn": "urn:li:share:7511094044194680832",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7511094044194680832/",
     "posted_at": "2026-09-30T16:06:09+00:00"
+  },
+  {
+    "date": "2026-10-01",
+    "slot": "2026-10-01",
+    "category": "prompt-writing",
+    "topic": "Structuring prompts with XML tags: separating instructions, context and input",
+    "theme": "retro poster",
+    "urn": "urn:li:share:7511367196460077056",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7511367196460077056/",
+    "posted_at": "2026-10-01T10:11:34+00:00"
   }
 ]
