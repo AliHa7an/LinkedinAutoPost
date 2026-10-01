@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-01",
+  "category": "prompt-writing",
+  "topic": "Structuring prompts with XML tags: separating instructions, context and input",
+  "theme": "retro poster",
+  "text": "Your prompt isn't unclear because it's short. It's unclear because instructions, data and examples are mixed into one paragraph.\n\nAnthropic's prompting guide says wrapping each type of content in its own tag (<instructions>, <context>, <input>) reduces misinterpretation.\n\nBefore:\nSummarize this ticket politely and keep it short. Ticket: {{ticket}}\n\nAfter:\n<instructions>Summarize in 2 sentences. Polite tone.</instructions>\n<ticket>{{ticket}}</ticket>\n\nThe guide's other tips for the same job:\n\n1. Use consistent, descriptive tag names across prompts\n2. Nest tags when content has a natural hierarchy\n3. With long documents, put them first and the question last\n\nThere's a bonus for app code: user-supplied text sits inside a clearly marked block, so it's easier to tell apart from your instructions.\n\nMy rule: if a prompt has a variable in it, that variable gets its own tag.\n\nHow do you structure prompts that mix instructions with user-supplied text?",
+  "hashtags": ["#PromptEngineering", "#GenerativeAI", "#LLM", "#AI"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Retro poster comparing a one-paragraph prompt with the same prompt split into instructions and ticket XML tags, signed Ali Hassan, alihexan.com",
+    "animated": false,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+  ]
+}
