@@ -56,5 +56,15 @@
     "urn": "urn:li:share:7511367196460077056",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7511367196460077056/",
     "posted_at": "2026-10-01T10:11:34+00:00"
+  },
+  {
+    "date": "2026-10-02",
+    "slot": "2026-10-02",
+    "category": "integrations-automation",
+    "topic": "GitHub Actions concurrency groups: default pending behavior vs cancel-in-progress, and when not to cancel",
+    "theme": "sticky notes",
+    "urn": "urn:li:share:7511816986692194304",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7511816986692194304/",
+    "posted_at": "2026-10-02T15:58:52+00:00"
   }
 ]
