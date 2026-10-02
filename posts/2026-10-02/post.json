@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-02",
+  "category": "integrations-automation",
+  "topic": "GitHub Actions concurrency groups: default pending behavior vs cancel-in-progress, and when not to cancel",
+  "theme": "sticky notes",
+  "text": "Push three commits fast and GitHub Actions may silently skip the middle run. That's the default concurrency behavior, not a bug.\n\nPer GitHub's docs, a concurrency group allows one running and at most one pending run. When a new run is queued, the existing pending one is canceled and replaced.\n\nThe group key decides what counts as \"the same work\":\n\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\nMy rule of thumb:\n\n1. CI and tests: cancel-in-progress. Only the latest commit matters.\n2. Deploys: don't cancel mid-flight. Let the running one finish, the newest waits.\n3. Every run must execute: the docs list queue: max (up to 100 pending, FIFO), but it can't be combined with cancel-in-progress.\n\nCanceling a half-finished deploy can leave an environment in a state nobody designed.\n\nWhich of your workflows would break if a run got canceled halfway?",
+  "hashtags": ["#GitHubActions", "#DevOps", "#CICD", "#Automation"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "comparison-table",
+    "alt": "Sticky notes comparing GitHub Actions concurrency modes for CI, deploys and must-run jobs, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://docs.github.com/en/actions/using-jobs/using-concurrency"]
+}

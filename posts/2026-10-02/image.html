@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1350px;background:#c9a77a;background-image:radial-gradient(#b8956a 2px,transparent 2px);background-size:36px 36px;font-family:Inter,sans-serif;padding:70px 70px 50px;display:flex;flex-direction:column;gap:36px}
+h1{font-family:Caveat,cursive;font-size:84px;line-height:1.2;margin-bottom:8px;color:#2b1d0e}
+.sub{font-size:32px;color:#3d2a14;font-weight:500}
+.notes{display:flex;flex-direction:column;gap:32px;flex:1}
+.n{padding:30px 40px;box-shadow:8px 10px 0 rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px}
+.n h2{font-family:Caveat,cursive;font-size:56px;color:#2b1d0e;line-height:1.2}
+.n p{font-size:32px;color:#2b1d0e;line-height:1.45}
+.n code{font-weight:700;background:rgba(255,255,255,.55);display:inline-block;padding:6px 16px;margin:4px 0;border-radius:8px}
+.a{background:#ffe66d;transform:rotate(-1.2deg)}.b{background:#ff9ec4;transform:rotate(1deg)}.c{background:#8fe3b0;transform:rotate(-.8deg)}
+footer{display:flex;justify-content:space-between;font-size:30px;font-weight:700;color:#2b1d0e}
+</style></head><body>
+<div><h1>Actions concurrency</h1><div class="sub">One running, one pending, per group</div></div>
+<div class="notes">
+<div class="n a"><h2>CI / tests</h2><p><code>cancel-in-progress: true</code><br>Only the latest commit matters.</p></div>
+<div class="n b"><h2>Deploys</h2><p>Don't cancel mid-flight.<br>Running one finishes, newest waits.</p></div>
+<div class="n c"><h2>Every run must execute</h2><p><code>queue: max</code><br>Up to 100 pending, FIFO. Not combinable with cancel.</p></div>
+</div>
+<footer><span>Ali Hassan</span><span>alihexan.com</span></footer>
+</body></html>
