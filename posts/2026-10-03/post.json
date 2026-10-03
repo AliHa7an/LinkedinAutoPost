@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-03",
+  "category": "code-tips",
+  "topic": "git push --force-with-lease vs --force, and why --force-if-includes closes the background-fetch gap",
+  "theme": "terminal",
+  "text": "Stop typing `git push --force` after a rebase. There's a safer default.\n\n--force overwrites the remote branch no matter what is on it. If a teammate pushed a commit while you were rebasing, it's gone.\n\n--force-with-lease only overwrites if the remote branch is still where your remote-tracking ref says it is. Otherwise the push fails.\n\nThe catch, straight from the Git docs: if anything runs `git fetch` in the background (an IDE, a cron job), your tracking ref updates without you ever seeing the new commits, and the lease check passes anyway.\n\nThe fix is one extra flag:\n\ngit push --force-with-lease --force-if-includes\n\nIt also checks that the remote tip is reachable from your local branch's reflog, meaning you've actually integrated it.\n\nTakeaway: --force says \"I don't care what's there.\" The lease says \"only if nothing changed.\"\n\nDo you alias a safe force-push in your team, or ban force-pushing altogether?",
+  "hashtags": ["#Git", "#SoftwareEngineering", "#DevTools", "#CodeTips"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Terminal-style comparison of git push --force versus git push --force-with-lease --force-if-includes, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://git-scm.com/docs/git-push"]
+}
