@@ -66,5 +66,15 @@
     "urn": "urn:li:share:7511816986692194304",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7511816986692194304/",
     "posted_at": "2026-10-02T15:58:52+00:00"
+  },
+  {
+    "date": "2026-10-03",
+    "slot": "2026-10-03",
+    "category": "code-tips",
+    "topic": "git push --force-with-lease vs --force, and why --force-if-includes closes the background-fetch gap",
+    "theme": "terminal",
+    "urn": "urn:li:share:7512155931934326784",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7512155931934326784/",
+    "posted_at": "2026-10-03T14:25:43+00:00"
   }
 ]
