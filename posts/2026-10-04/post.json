@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-04",
+  "category": "app-maintenance",
+  "topic": "Dependabot cooldown: delaying version updates by semver level, and why security updates are exempt",
+  "theme": "hand-drawn notebook",
+  "text": "Should your repo adopt a dependency release the minute it's published? Dependabot has a setting to say \"not yet\".\n\nThe `cooldown` option delays version updates for a set number of days. If a release is still inside its window, Dependabot skips it.\n\nYou can set it per semver level:\n\n```yaml\ncooldown:\n  default-days: 5\n  semver-major-days: 30\n  semver-minor-days: 14\n  semver-patch-days: 7\n```\n\nThe delay buys time for a bad release to be noticed and yanked before it reaches your lockfile.\n\nIt applies to version updates only. Security updates aren't delayed, so a known vulnerability fix still arrives right away.\n\nMy rule of thumb: longer waits for majors, shorter for patches, and use `exclude` for packages you must track closely.\n\nWhat cooldown would you set for major versions on a production app?",
+  "hashtags": ["#DevOps", "#GitHub", "#SoftwareEngineering", "#Dependabot"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-snippet",
+    "alt": "Hand-drawn notebook page showing a Dependabot cooldown YAML config with 30, 14 and 7 day delays, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference"]
+}

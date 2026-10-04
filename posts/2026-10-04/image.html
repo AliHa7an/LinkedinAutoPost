@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1350px;background:#fbf6e6;background-image:repeating-linear-gradient(#fbf6e6 0 51px,#cfe0ef 51px 53px);font-family:'Caveat',cursive;color:#23304a;display:flex;flex-direction:column;padding:70px 80px 50px 120px;border-left:6px double #e58b8b}
+h1{font-size:92px;line-height:1.05;font-weight:700;transform:rotate(-1deg)}
+h1 span{color:#b4442c;text-decoration:underline wavy #e58b8b;text-underline-offset:10px}
+.sub{font-size:44px;margin-top:20px;color:#4a5a7a}
+pre{margin-top:40px;background:#fffdf4;border:4px solid #23304a;border-radius:14px 30px 16px 28px;padding:36px 40px;font-family:'Fira Code',monospace;font-size:36px;line-height:1.6;box-shadow:10px 10px 0 #23304a22}
+.k{color:#b4442c}.n{color:#1f7a5a}
+.row{display:flex;gap:24px;margin-top:44px}
+.card{flex:1;border:4px solid #23304a;border-radius:20px;padding:24px 20px;text-align:center;background:#fff}
+.card b{display:block;font-size:84px;line-height:1.2}
+.card i{display:block;font-style:normal;font-size:40px;line-height:1.3;margin-top:8px}
+.m{background:#ffd6d6}.mi{background:#ffe9b8}.p{background:#d4f0dc}
+.note{margin-top:40px;font-size:46px;transform:rotate(-1deg);border-left:8px solid #e58b8b;padding:10px 24px}
+.foot{margin-top:auto;display:flex;justify-content:space-between;font-size:44px;font-weight:700}
+</style></head><body>
+<h1>Let new releases <span>cool down</span></h1>
+<div class="sub">Dependabot version updates, delayed on purpose</div>
+<pre><span class="k">cooldown:</span>
+  default-days: <span class="n">5</span>
+  semver-major-days: <span class="n">30</span>
+  semver-minor-days: <span class="n">14</span>
+  semver-patch-days: <span class="n">7</span></pre>
+<div class="row">
+<div class="card m"><b>30</b><i>major</i></div>
+<div class="card mi"><b>14</b><i>minor</i></div>
+<div class="card p"><b>7</b><i>patch</i></div>
+</div>
+<div class="note">Security updates skip the wait.</div>
+<div class="foot"><span>Ali Hassan</span><span>alihexan.com</span></div>
+</body></html>
