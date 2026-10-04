@@ -76,5 +76,15 @@
     "urn": "urn:li:share:7512155931934326784",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7512155931934326784/",
     "posted_at": "2026-10-03T14:25:43+00:00"
+  },
+  {
+    "date": "2026-10-04",
+    "slot": "2026-10-04",
+    "category": "app-maintenance",
+    "topic": "Dependabot cooldown: delaying version updates by semver level, and why security updates are exempt",
+    "theme": "hand-drawn notebook",
+    "urn": "urn:li:share:7512526681392422912",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7512526681392422912/",
+    "posted_at": "2026-10-04T14:58:57+00:00"
   }
 ]
