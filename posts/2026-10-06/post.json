@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-06",
+  "category": "typescript",
+  "topic": "TypeScript 5.4 NoInfer: stopping a secondary parameter from widening a generic",
+  "theme": "paper cut-out",
+  "text": "Your generic function accepts a value it should reject, and TypeScript is happy about it.\n\nThe example from the TypeScript 5.4 release notes:\n\nfunction createStreetLight<C extends string>(\n  colors: C[],\n  defaultColor?: C\n) {}\n\ncreateStreetLight([\"red\", \"yellow\", \"green\"], \"blue\"); // allowed\n\nBoth arguments are inference sites, so C widens to include \"blue\".\n\nThe fix is NoInfer<C> (TypeScript 5.4+) on the parameter that shouldn't contribute candidates: defaultColor?: NoInfer<C>\n\nNow \"colors\" is the only source of truth, and \"blue\" is a compile error.\n\nTakeaway: when one argument defines the valid set, wrap the others in NoInfer.\n\nWhere in your codebase would a generic like this be quietly accepting bad input?",
+  "hashtags": ["#TypeScript", "#WebDevelopment", "#SoftwareEngineering", "#CodeTips"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Paper cut-out comparison of a TypeScript generic that accepts blue without NoInfer and rejects it with NoInfer, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-4.html"]
+}
