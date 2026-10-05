@@ -86,5 +86,15 @@
     "urn": "urn:li:share:7512526681392422912",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7512526681392422912/",
     "posted_at": "2026-10-04T14:58:57+00:00"
+  },
+  {
+    "date": "2026-10-05",
+    "slot": "2026-10-05",
+    "category": "architecture",
+    "topic": "Transactional outbox: saving the order and the event in one database transaction, then relaying with SKIP LOCKED",
+    "theme": "glassmorphism dark",
+    "urn": "urn:li:share:7512821647595450368",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7512821647595450368/",
+    "posted_at": "2026-10-05T10:31:03+00:00"
   }
 ]
