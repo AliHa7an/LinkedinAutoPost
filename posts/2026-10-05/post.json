@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-05",
+  "category": "architecture",
+  "topic": "Transactional outbox: saving the order and the event in one database transaction, then relaying with SKIP LOCKED",
+  "theme": "glassmorphism dark",
+  "text": "Saving an order and publishing its event are two writes. A crash between them loses one.\n\nYou get an order with no event, or an event for an order that rolled back.\n\nThe transactional outbox pattern fixes it. As microservices.io describes it, the message is first stored in the database as part of the same transaction that updates the business entities. A separate process then sends it to the broker.\n\nThe flow:\n1. In one transaction: INSERT the order and INSERT the event into an outbox table\n2. A relay polls the table and publishes unsent rows\n3. Mark a row as sent only after the broker confirms\n\nWith several relay workers on Postgres, SELECT ... FOR UPDATE SKIP LOCKED lets each one claim different rows without blocking. The Postgres docs say it suits queue-like tables, but not general-purpose work.\n\nThe catch: delivery is at-least-once. A crash after publish but before marking sent means a duplicate, so consumers must be idempotent.\n\nTakeaway: the outbox gives you atomicity on the producer side, and idempotency covers the consumer side.\n\nWould you poll the outbox table or tail the database log for the relay, and why?",
+  "hashtags": [
+    "#SystemDesign",
+    "#SoftwareArchitecture",
+    "#Backend",
+    "#PostgreSQL"
+  ],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow: one database transaction writes the order and an outbox row, a relay publishes to the broker, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://microservices.io/patterns/data/transactional-outbox.html",
+    "https://www.postgresql.org/docs/current/sql-select.html"
+  ]
+}

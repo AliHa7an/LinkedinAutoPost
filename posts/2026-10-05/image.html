@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:800px;height:1000px;font-family:Inter,sans-serif;color:#fff;background:radial-gradient(circle at 20% 15%,#5b2bd6 0,transparent 45%),radial-gradient(circle at 85% 80%,#0ea5a5 0,transparent 45%),#0b1020;padding:44px 40px;display:flex;flex-direction:column;gap:48px;overflow:hidden}
+h1{font-size:46px;font-weight:800;line-height:1.1}
+h1 span{color:#7dd3fc}
+.sub{font-size:26px;color:#cbd5e1}
+.glass{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.28);border-radius:22px;padding:20px 24px}
+.tx{display:flex;flex-direction:column;gap:14px;animation:glow 4s infinite}
+.tx .lbl{font-size:26px;font-weight:700;color:#7dd3fc}
+.row{display:flex;gap:16px}
+.row div{flex:1;background:rgba(255,255,255,.14);border-radius:14px;padding:16px;font-size:28px;font-weight:700;text-align:center}
+.arrow{font-size:40px;text-align:center;color:#7dd3fc;height:44px;line-height:44px;animation:drop 4s infinite}
+.mid{display:flex;gap:16px;align-items:stretch}
+.mid .glass{flex:1;padding:36px 24px;font-size:32px;font-weight:700;text-align:center}
+.mid .glass small{display:block;font-size:24px;font-weight:500;color:#cbd5e1;margin-top:6px}
+.relay{animation:glow2 4s infinite}
+.broker{animation:glow3 4s infinite}
+.note{font-size:28px;font-weight:700;color:#fde68a;text-align:center}
+.foot{margin-top:auto;display:flex;justify-content:space-between;font-size:26px;font-weight:700;color:#e2e8f0}
+@keyframes glow{0%,5%{box-shadow:0 0 0 rgba(125,211,252,0)}15%,35%{box-shadow:0 0 40px rgba(125,211,252,.9)}50%,100%{box-shadow:0 0 0 rgba(125,211,252,0)}}
+@keyframes glow2{0%,40%{box-shadow:none}55%,70%{box-shadow:0 0 40px rgba(253,230,138,.9)}85%,100%{box-shadow:none}}
+@keyframes glow3{0%,70%{box-shadow:none}82%,95%{box-shadow:0 0 40px rgba(110,231,183,.9)}100%{box-shadow:none}}
+@keyframes drop{0%,100%{opacity:.25}50%{opacity:1}}
+</style></head><body>
+<h1>Transactional <span>outbox</span></h1>
+<div class="sub">Two writes, one commit. No lost events.</div>
+<div class="glass tx"><div class="lbl">1 DB transaction</div>
+<div class="row"><div>orders</div><div>outbox</div></div></div>
+<div class="arrow">↓</div>
+<div class="mid">
+<div class="glass relay">2 Relay<small>SKIP LOCKED</small></div>
+<div class="glass broker">3 Broker<small>then mark sent</small></div></div>
+<div class="note">At-least-once: consumers must be idempotent</div>
+<div class="foot"><span>Ali Hassan</span><span>alihexan.com</span></div>
+</body></html>
