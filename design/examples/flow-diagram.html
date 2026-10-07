@@ -1,15 +1,15 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../brand.css"></head>
-<body class="light">
+<body class="t-blueprint">
   <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Architecture</div></header>
   <div><h1>Saved the order but <em>lost the event?</em></h1><p class="sub">The transactional outbox pattern, in one picture.</p></div>
   <main>
     <svg viewBox="0 0 936 560" width="936" height="560">
-      <rect x="10" y="10" width="916" height="200" rx="14" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="10 8"/>
+      <rect class="frame" x="10" y="10" width="916" height="200" rx="14"/>
       <text x="34" y="50" class="nsmall" style="fill:var(--accent)">ONE DATABASE TRANSACTION</text>
       <rect class="node" x="60" y="80" width="360" height="100" rx="12"/><text class="nlabel" x="240" y="140" text-anchor="middle">INSERT order</text>
       <rect class="node hl" x="516" y="80" width="360" height="100" rx="12"/><text class="nlabel" x="696" y="140" text-anchor="middle">INSERT outbox event</text>
       <path class="edge" d="M696 180 V300"/><path class="edge" d="M684 288 l12 14 l12 -14"/>
-      <rect class="node" x="516" y="300" width="360" height="100" rx="12"/><text class="nlabel" x="696" y="345" text-anchor="middle">Relay reads outbox</text><text class="nsmall" x="696" y="378" text-anchor="middle">publishes, marks sent</text>
+      <rect class="node" x="516" y="300" width="360" height="100" rx="12"/><text class="nlabel" x="696" y="345" text-anchor="middle">Relay reads outbox</text><text class="nsub" x="696" y="378" text-anchor="middle">publishes, marks sent</text>
       <path class="edge" d="M696 400 V470"/><path class="edge" d="M684 458 l12 14 l12 -14"/>
       <rect class="node ok" x="516" y="470" width="360" height="80" rx="12"/><text class="nlabel" x="696" y="520" text-anchor="middle">Message broker</text>
       <text class="nsmall" x="60" y="345">Both rows commit together,</text><text class="nsmall" x="60" y="378">or neither does.</text>

@@ -128,21 +128,32 @@ press release.
 `#CyberSecurity #WebSecurity #DevOps`, `#Automation #NoCode #Zapier`,
 `#CareerGrowth #TechCareers #SoftwareDevelopers`, `#PromptEngineering #GenerativeAI #LLM`.
 
-## The image: brand kit, not a new theme every day
+## The image: elite themes, one signature
 
-Every image uses **`design/brand.css`**, so the feed looks like one recognisable author. Only the
-content changes. Start from the closest file in `design/examples/` (`code-comparison.html`,
-`comparison-table.html`, `flow-diagram.html`) and change the text, code and diagram.
+Every image uses **`design/brand.css`**: the same author header, footer and type system on every post
+(that's the signature), with **8 curated premium themes** for variety. Start from the closest file in
+`design/examples/` and change the content and the theme class.
 
-- `<link rel="stylesheet" href="../../design/brand.css">`, `<body class="light">` or
-  `<body class="dark">` (`"theme"` in post.json is `"light"` or `"dark"`; mostly light, dark for
-  code-heavy posts). For an animated GIF add `gif`: `<body class="light gif">`.
-- Fixed structure: `header.author` (avatar "AH", name, title, one topic tag) → `h1` (6–10 words, one
-  key phrase in `<em>`) → optional `.sub` → `main` (the visual) → optional `.takeaway` → `footer`
+| `theme` | Look | Good for |
+|---|---|---|
+| `paper` | warm editorial magazine, serif headline, burnt orange | career, lessons, opinions, deep dives |
+| `salmon` | Financial-Times pink paper, teal + claret | studies, numbers, industry news, trade-offs |
+| `swiss` | white, thick black rules, red highlight, huge type | bold claims, myths vs facts, comparisons |
+| `blueprint` | engineering drawing on a blue grid, amber accent | architecture, system design, flows |
+| `midnight` | deep navy, gold accent | AI/agents, security, deep dives |
+| `forest` | deep green, cream, brass, serif headline | team/leadership, maintenance, best practices |
+| `terminal` | GitHub-dark editor, green, mono headline | code tips, JS/TS, git, CLI |
+| `klein` | bold cobalt blue, white cards, yellow accent | the strongest hooks, roadmaps, "stop doing X" |
+
+- `"theme": "<name>"` in post.json and `<body class="t-<name>">` (add ` gif` when animated). Don't
+  reuse the theme of either of the previous 2 posts (enforced); rotate through all 8 over time.
+- Fixed structure: `header.author` (avatar "AH", name, title, one topic tag) → `h1` (6–10 words, one key
+  phrase in `<em>`) → optional `.sub` → `main` (the visual) → optional `.takeaway` → `footer`
   (`alihexan.com` + source name).
-- Use only the kit's classes and variables (`.panel`, `.panel.good/.bad`, `pre`, `table`, `.stats`,
-  `ul.check`, SVG `.node/.edge/.nlabel/.nsmall/.dot`, `var(--accent)`). No custom colours, gradients,
-  glows, blur, neon, emoji art, stickers, paper or retro effects: the validator rejects them.
+- Only the kit's classes and variables (`.panel`, `.panel.good/.bad`, `pre`, `table`, `.stats`,
+  `ul.check`, SVG `.node/.edge/.nlabel/.nsub/.nsmall/.dot/.frame`, `var(--accent)`). No custom colours,
+  gradients, glows, blur, neon, emoji art, stickers or "AI-art" effects: the validator rejects them.
+  The themes already carry the colour; your job is clear content.
 - Readable on a phone: max ~40 words on the image, code max 8 lines, 3–4 diagram boxes.
 
 Pick `image.visual_type` for the topic (validator checks it):
@@ -160,7 +171,7 @@ Pick `image.visual_type` for the topic (validator checks it):
 
 **Animate wherever something moves or happens in steps** (aim for most posts): data flowing between
 services, a request's path, an agent loop, a pipeline, before → after, a checklist building up,
-numbers growing. Set `"animated": true` (rendered as a GIF, 800×1000, `<body class="light gif">`) and
+numbers growing. Set `"animated": true` (rendered as a GIF, 800×1000, `<body class="t-<theme> gif">`) and
 use only the kit's helpers, so motion stays in brand colours:
 - `.r0` … `.r4`: elements appear one after another, hold, then reset together (see
   `design/examples/animated-reveal.html`).
@@ -180,7 +191,7 @@ The renderer rejects overlapping text, text off the canvas and text touching a b
   "date": "2026-09-28",
   "category": "architecture",
   "topic": "Why webhook handlers must be idempotent",
-  "theme": "light",
+  "theme": "blueprint",
   "scope": "broad",
   "text": "Hook...\n\nBody...\n\nQuestion for readers?",
   "hashtags": ["#SystemDesign", "#Backend", "#Webhooks"],

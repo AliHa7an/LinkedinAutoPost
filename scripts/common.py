@@ -185,6 +185,8 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
         # Brand kit: one recognisable look, no AI-style colour effects.
         if "design/brand.css" not in src:
             errors.append('image.html must use the brand kit: <link rel="stylesheet" href="../../design/brand.css">')
+        if not re.search(r'<body class="[^"]*\bt-' + re.escape(str(post.get("theme"))) + r'\b', src):
+            errors.append(f'<body> must use the post\'s theme class: class="t-{post.get("theme")}"')
         if 'class="author"' not in src or "<footer" not in src:
             errors.append("image.html must keep the brand header (header.author) and footer, see design/examples/")
         if re.search(r"gradient\(|text-shadow|filter:\s*(drop-shadow|blur)|backdrop-filter|0 0 \d+px", src, re.I):
@@ -192,7 +194,7 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
         if re.search(r"#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\(", src):
             errors.append("no custom colours in image.html; use the brand variables (var(--accent) etc.) and classes")
     if post.get("theme") not in rules["themes"]:
-        errors.append(f"theme must be one of {', '.join(rules['themes'])} (brand kit variants)")
+        errors.append(f"theme must be one of {', '.join(rules['themes'])} (brand kit themes)")
     if post.get("scope") not in ("broad", "niche"):
         errors.append('add "scope": "broad" or "niche" (niche = one flag/option/minor feature)')
     elif post["scope"] == "niche":

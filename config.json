@@ -36,7 +36,7 @@
     "hashtags_max": 5,
     "max_emojis": 5,
     "topic_repeat_days": 45,
-    "theme_repeat_days": 0,
+    "theme_repeat_days": 2,
     "categories": [
       "ai-agents",
       "ai-chatbots",
@@ -133,8 +133,14 @@
     "paragraph_max_chars": 280,
     "max_paragraphs": 9,
     "themes": [
-      "light",
-      "dark"
+      "paper",
+      "salmon",
+      "swiss",
+      "blueprint",
+      "midnight",
+      "forest",
+      "terminal",
+      "klein"
     ],
     "niche_max_per_7_days": 1
   }

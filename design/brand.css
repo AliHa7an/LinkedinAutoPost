@@ -1,94 +1,129 @@
-/* Ali Hassan LinkedIn brand kit. Every post image uses this file, in one of two variants:
-   <body class="light"> (default) or <body class="dark">. Only content changes day to day,
-   so the feed looks like one recognisable author, not a different template every day. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+/* Ali Hassan LinkedIn brand kit.
+   Variety with a signature: 8 curated premium themes (body class "t-<name>"), the same author header,
+   footer and type system on every post. Use ONLY these themes and the classes below. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
 
 :root {
-  --bg: #F6F5F1; --panel: #FFFFFF; --ink: #111418; --muted: #5B636E; --line: #E3E1DA;
-  --accent: #0A66C2; --accent-soft: #E8F0FA; --good: #1F7A4D; --good-soft: #E7F4EC;
-  --bad: #B42318; --bad-soft: #FBEAE8; --code-bg: #F1F0EB; --code-ink: #1D2430;
+  --display: 'Inter', system-ui, sans-serif; --title-weight: 800; --title-case: none; --title-spacing: -0.02em;
+  --border-w: 1.5px; --radius: 14px; --bg-pattern: none; --bg-size: auto;
 }
-body.dark {
-  --bg: #0E1116; --panel: #161B22; --ink: #E8EAED; --muted: #9AA4B2; --line: #2A313C;
-  --accent: #5AA9F5; --accent-soft: #14263B; --good: #4CC38A; --good-soft: #10291D;
-  --bad: #F07167; --bad-soft: #2E1716; --code-bg: #0B0E13; --code-ink: #D6DEEB;
-}
+
+/* 1. Paper: warm editorial magazine, serif headline, burnt-orange accent */
+body.t-paper { --bg:#F6F3EC; --panel:#FFFFFF; --panel-ink:#15171A; --panel-muted:#5E646C; --ink:#15171A; --muted:#5E646C;
+  --line:#E2DDD2; --accent:#C2410C; --accent-soft:#FBE8DD; --good:#2F6B3B; --good-soft:#E8F1E8; --bad:#B42318; --bad-soft:#FBEAE8;
+  --code-bg:#F0ECE3; --code-ink:#1D2430; --display:'Fraunces', Georgia, serif; --title-spacing:-0.01em; }
+/* 2. Salmon: Financial-Times-style pink paper, teal + claret */
+body.t-salmon { --bg:#FFF1E5; --panel:#FFF8F1; --panel-ink:#33302E; --panel-muted:#66605C; --ink:#33302E; --muted:#66605C;
+  --line:#E9D3C0; --accent:#0D7680; --accent-soft:#DCEFEF; --good:#0D7680; --good-soft:#DCEFEF; --bad:#990F3D; --bad-soft:#F6E1E4;
+  --code-bg:#F7E6D6; --code-ink:#33302E; --display:'Source Serif 4', Georgia, serif; --title-weight:700; --title-spacing:-0.01em; }
+/* 3. Swiss: white, black rules, signal red, huge grotesk type */
+body.t-swiss { --bg:#FFFFFF; --panel:#FFFFFF; --panel-ink:#0A0A0A; --panel-muted:#555555; --ink:#0A0A0A; --muted:#555555;
+  --line:#0A0A0A; --accent:#E30613; --accent-soft:#FDE7E8; --good:#0A0A0A; --good-soft:#F2F2F2; --bad:#E30613; --bad-soft:#FDE7E8;
+  --code-bg:#F2F2F2; --code-ink:#0A0A0A; --title-weight:900; --title-spacing:-0.035em; --border-w:3px; --radius:0px; }
+/* 4. Blueprint: engineering drawing, white lines on deep blue grid, amber accent */
+body.t-blueprint { --bg:#0F2A4A; --panel:#12355E; --panel-ink:#F1F5FA; --panel-muted:#A9BCD3; --ink:#F1F5FA; --muted:#A9BCD3;
+  --line:#4A72A3; --accent:#FFD166; --accent-soft:#2A4565; --good:#7FD8A6; --good-soft:#163F49; --bad:#FF8A80; --bad-soft:#3B2A44;
+  --code-bg:#0B2240; --code-ink:#E3ECF7; --radius:6px;
+  --bg-pattern: linear-gradient(#ffffff12 1.5px, transparent 1.5px), linear-gradient(90deg, #ffffff12 1.5px, transparent 1.5px);
+  --bg-size: 40px 40px; }
+/* 5. Midnight gold: deep navy, gold accent, calm and premium */
+body.t-midnight { --bg:#0A1020; --panel:#111A30; --panel-ink:#EEF1F7; --panel-muted:#96A0B5; --ink:#EEF1F7; --muted:#96A0B5;
+  --line:#26324D; --accent:#E9B949; --accent-soft:#2A2618; --good:#6CCB98; --good-soft:#12291F; --bad:#F2857B; --bad-soft:#2E1A1C;
+  --code-bg:#070B16; --code-ink:#DCE3F1; }
+/* 6. Forest: deep green, cream text, brass accent, serif headline */
+body.t-forest { --bg:#0F2A22; --panel:#143329; --panel-ink:#F3EBDD; --panel-muted:#B8B09F; --ink:#F3EBDD; --muted:#B8B09F;
+  --line:#2E4D41; --accent:#D4A24C; --accent-soft:#2F3A26; --good:#9AD1A6; --good-soft:#173D2F; --bad:#E8907E; --bad-soft:#3A2A24;
+  --code-bg:#0B211A; --code-ink:#EDE5D6; --display:'Fraunces', Georgia, serif; --title-spacing:-0.01em; }
+/* 7. Terminal: GitHub-dark editor, green accent, monospace headline (code posts) */
+body.t-terminal { --bg:#0D1117; --panel:#161B22; --panel-ink:#E6EDF3; --panel-muted:#8B949E; --ink:#E6EDF3; --muted:#8B949E;
+  --line:#30363D; --accent:#3FB950; --accent-soft:#12261B; --good:#3FB950; --good-soft:#12261B; --bad:#F85149; --bad-soft:#2D1517;
+  --code-bg:#010409; --code-ink:#E6EDF3; --display:'JetBrains Mono', monospace; --title-weight:800; --title-spacing:-0.03em; --radius:8px; }
+/* 8. Klein: bold cobalt blue, white type, yellow accent, white cards (maximum stop-the-scroll) */
+body.t-klein { --bg:#0A2BA6; --panel:#FFFFFF; --panel-ink:#0A0A0A; --panel-muted:#4B5563; --ink:#FFFFFF; --muted:#C9D4FF;
+  --line:#3D5BC4; --accent:#FFD400; --accent-soft:#1B3CB8; --good:#0F7B3F; --good-soft:#E6F4EC; --bad:#C81E1E; --bad-soft:#FDECEC;
+  --code-bg:#EEF1FB; --code-ink:#0A0A0A; --title-weight:900; --title-spacing:-0.03em; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1350px; overflow: hidden; }
-body.gif, body.gif html { width: 800px; height: 1000px; }
+body.gif { width: 800px; height: 1000px; }
 body {
-  background: var(--bg); color: var(--ink);
-  font-family: 'Inter', system-ui, sans-serif; font-size: 30px; line-height: 1.4;
+  background-color: var(--bg); background-image: var(--bg-pattern); background-size: var(--bg-size);
+  color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 30px; line-height: 1.4;
   display: flex; flex-direction: column; padding: 64px 72px 56px; gap: 36px;
 }
 body.gif { font-size: 24px; padding: 48px 54px 42px; gap: 26px; }
 
-/* Header: same on every post */
+/* Signature header (every post, every theme) */
 .author { display: flex; align-items: center; gap: 18px; }
-.avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff;
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: var(--bg);
   display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; overflow: hidden; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .who b { display: block; font-size: 26px; font-weight: 700; }
 .who span { display: block; font-size: 20px; color: var(--muted); }
-.tag { margin-left: auto; font: 600 18px 'JetBrains Mono', monospace; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
-  padding: 8px 14px; border-radius: 6px; }
+.tag { margin-left: auto; font: 700 18px 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); border: var(--border-w) solid var(--accent); padding: 8px 14px; border-radius: 999px; }
+body.t-swiss .tag { border-radius: 0; }
 
-/* Title block */
-h1 { font-size: 66px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
-body.gif h1 { font-size: 48px; }
+/* Headline */
+h1 { font-family: var(--display); font-size: 68px; line-height: 1.06; font-weight: var(--title-weight);
+  letter-spacing: var(--title-spacing); text-transform: var(--title-case); }
+body.gif h1 { font-size: 50px; }
+body.t-terminal h1 { font-size: 58px; } body.gif.t-terminal h1 { font-size: 42px; }
 h1 em { font-style: normal; color: var(--accent); }
+body.t-swiss h1 { line-height: 1.16; }
+body.t-swiss h1 em { color: var(--bg); background: var(--accent); padding: 0 10px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .sub { font-size: 30px; color: var(--muted); margin-top: 14px; }
 body.gif .sub { font-size: 24px; }
 
-/* Main area grows; components inside */
+/* Content components */
 main { flex: 1; display: flex; flex-direction: column; gap: 24px; justify-content: center; }
-.panel { background: var(--panel); border: 1.5px solid var(--line); border-radius: 14px; padding: 26px 30px; }
+.panel { background: var(--panel); color: var(--panel-ink); border: var(--border-w) solid var(--line);
+  border-radius: var(--radius); padding: 26px 30px; }
 .label { font: 700 19px 'JetBrains Mono', monospace; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  color: var(--panel-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
 .label.bad { color: var(--bad); } .label.good { color: var(--good); }
 .panel.bad { border-color: var(--bad); background: var(--bad-soft); }
 .panel.good { border-color: var(--good); background: var(--good-soft); }
+body.t-klein .panel.bad, body.t-klein .panel.good { background: var(--panel); border-width: 4px; }
 pre, code { font-family: 'JetBrains Mono', monospace; }
-pre { background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 18px 22px;
+pre { background: var(--code-bg); color: var(--code-ink); border-radius: calc(var(--radius) * .7); padding: 18px 22px;
   font-size: 25px; line-height: 1.5; white-space: pre-wrap; }
 body.gif pre { font-size: 20px; }
 td code, th code { white-space: nowrap; }
-code { font-size: .9em; background: var(--code-bg); padding: 2px 8px; border-radius: 6px; }
-.note { font-size: 24px; color: var(--muted); margin-top: 10px; }
+code { font-size: .9em; background: var(--code-bg); color: var(--code-ink); padding: 2px 8px; border-radius: 6px; }
+.note { font-size: 24px; color: var(--panel-muted); margin-top: 10px; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 
-/* Checklist */
 ul.check { list-style: none; display: flex; flex-direction: column; gap: 16px; }
 ul.check li { display: flex; gap: 16px; align-items: flex-start; }
 ul.check li::before { content: "✓"; flex: none; width: 40px; height: 40px; border-radius: 8px;
   background: var(--good-soft); color: var(--good); display: grid; place-items: center; font-weight: 800; }
 
-/* Comparison table */
 table { width: 100%; border-collapse: collapse; font-size: 26px; }
-th, td { text-align: left; padding: 14px 16px; border-bottom: 1.5px solid var(--line); vertical-align: top; }
-th { font: 700 19px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+th, td { text-align: left; padding: 14px 16px; border-bottom: var(--border-w) solid var(--line); vertical-align: top; }
+th { font: 700 19px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--panel-muted); }
 
-/* Big numbers */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-.stat b { display: block; font-size: 72px; font-weight: 800; color: var(--accent); line-height: 1; }
+.stat b { display: block; font-family: var(--display); font-size: 76px; font-weight: var(--title-weight); color: var(--accent); line-height: 1; }
 .stat span { display: block; font-size: 22px; color: var(--muted); margin-top: 10px; }
 
-/* Flow diagrams (static or animated): use inline SVG with these classes */
+/* SVG diagrams */
 .node { fill: var(--panel); stroke: var(--line); stroke-width: 2.5; }
-.node.hl { stroke: var(--accent); }
-.node.ok { stroke: var(--good); } .node.no { stroke: var(--bad); }
-.nlabel { fill: var(--ink); font: 600 24px 'Inter', sans-serif; }
+.node.hl { stroke: var(--accent); stroke-width: 3.5; }
+.node.ok { stroke: var(--good); stroke-width: 3; } .node.no { stroke: var(--bad); stroke-width: 3; }
+.nlabel { fill: var(--panel-ink); font: 600 24px 'Inter', sans-serif; }
+.nsub { fill: var(--panel-muted); font: 500 19px 'JetBrains Mono', monospace; }
 .nsmall { fill: var(--muted); font: 500 19px 'JetBrains Mono', monospace; }
 .edge { stroke: var(--muted); stroke-width: 2.5; fill: none; }
 .dot { fill: var(--accent); }
+.dot.bad { fill: var(--bad); }
+.frame { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 10 8; }
 
-/* Takeaway + footer: same on every post */
+/* Takeaway + signature footer */
 .takeaway { border-left: 6px solid var(--accent); padding: 6px 0 6px 22px; font-size: 30px; font-weight: 600; }
 body.gif .takeaway { font-size: 24px; }
 footer { display: flex; justify-content: space-between; align-items: center; font-size: 22px;
-  color: var(--muted); border-top: 1.5px solid var(--line); padding-top: 22px; }
+  color: var(--muted); border-top: var(--border-w) solid var(--line); padding-top: 22px; }
 footer b { color: var(--ink); font-weight: 700; }
 
 /* ---------- Animation helpers (brand colours only; loop seamlessly over 4s) ----------
