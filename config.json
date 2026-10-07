@@ -133,15 +133,22 @@
     "paragraph_max_chars": 280,
     "max_paragraphs": 9,
     "themes": [
+      "classic",
+      "classic-dark",
+      "sky",
       "paper",
       "salmon",
       "swiss",
       "blueprint",
       "midnight",
       "forest",
-      "terminal",
-      "klein"
+      "terminal"
     ],
-    "niche_max_per_7_days": 1
+    "niche_max_per_7_days": 1,
+    "favourite_themes": [
+      "classic",
+      "classic-dark",
+      "sky"
+    ]
   }
 }

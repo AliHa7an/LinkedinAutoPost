@@ -185,7 +185,7 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
         # Brand kit: one recognisable look, no AI-style colour effects.
         if "design/brand.css" not in src:
             errors.append('image.html must use the brand kit: <link rel="stylesheet" href="../../design/brand.css">')
-        if not re.search(r'<body class="[^"]*\bt-' + re.escape(str(post.get("theme"))) + r'\b', src):
+        if not re.search(r'<body class="(?:[^"]*\s)?t-' + re.escape(str(post.get("theme"))) + r'(?=[\s"])', src):
             errors.append(f'<body> must use the post\'s theme class: class="t-{post.get("theme")}"')
         if 'class="author"' not in src or "<footer" not in src:
             errors.append("image.html must keep the brand header (header.author) and footer, see design/examples/")

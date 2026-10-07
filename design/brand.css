@@ -8,14 +8,30 @@
   --border-w: 1.5px; --radius: 14px; --bg-pattern: none; --bg-size: auto;
 }
 
+/* Ali's favourites (the first approved samples) */
+/* A. Classic: warm off-white, LinkedIn blue */
+body.t-classic { --bg:#F6F5F1; --panel:#FFFFFF; --panel-ink:#111418; --panel-muted:#5B636E; --ink:#111418; --muted:#5B636E;
+  --line:#E3E1DA; --accent:#0A66C2; --accent-soft:#E8F0FA; --good:#1F7A4D; --good-soft:#E7F4EC; --bad:#B42318; --bad-soft:#FBEAE8;
+  --code-bg:#F1F0EB; --code-ink:#1D2430; }
+/* B. Classic dark: near-black, soft blue */
+body.t-classic-dark { --bg:#0E1116; --panel:#161B22; --panel-ink:#E8EAED; --panel-muted:#9AA4B2; --ink:#E8EAED; --muted:#9AA4B2;
+  --line:#2A313C; --accent:#5AA9F5; --accent-soft:#14263B; --good:#4CC38A; --good-soft:#10291D; --bad:#F07167; --bad-soft:#2E1716;
+  --code-bg:#0B0E13; --code-ink:#D6DEEB; }
+/* C. Sky: Ali's light sky grey (#F3F5F6), sky-blue accent */
+body.t-sky { --bg:#F3F5F6; --panel:#FFFFFF; --panel-ink:#0F172A; --panel-muted:#5B6675; --ink:#0F172A; --muted:#5B6675;
+  --line:#DCE3EA; --accent:#0284C7; --accent-soft:#E0F2FE; --good:#15803D; --good-soft:#E8F6EC; --bad:#C2281D; --bad-soft:#FDECEA;
+  --code-bg:#EEF2F5; --code-ink:#0F172A; }
+body.t-classic .tag, body.t-classic-dark .tag, body.t-sky .tag { background: var(--accent-soft); border-color: transparent; border-radius: 6px; }
+body.t-classic .avatar, body.t-classic-dark .avatar, body.t-sky .avatar { color: #FFFFFF; }
+
 /* 1. Paper: warm editorial magazine, serif headline, burnt-orange accent */
 body.t-paper { --bg:#F6F3EC; --panel:#FFFFFF; --panel-ink:#15171A; --panel-muted:#5E646C; --ink:#15171A; --muted:#5E646C;
   --line:#E2DDD2; --accent:#C2410C; --accent-soft:#FBE8DD; --good:#2F6B3B; --good-soft:#E8F1E8; --bad:#B42318; --bad-soft:#FBEAE8;
   --code-bg:#F0ECE3; --code-ink:#1D2430; --display:'Fraunces', Georgia, serif; --title-spacing:-0.01em; }
 /* 2. Salmon: Financial-Times-style pink paper, teal + claret */
-body.t-salmon { --bg:#FFF1E5; --panel:#FFF8F1; --panel-ink:#33302E; --panel-muted:#66605C; --ink:#33302E; --muted:#66605C;
-  --line:#E9D3C0; --accent:#0D7680; --accent-soft:#DCEFEF; --good:#0D7680; --good-soft:#DCEFEF; --bad:#990F3D; --bad-soft:#F6E1E4;
-  --code-bg:#F7E6D6; --code-ink:#33302E; --display:'Source Serif 4', Georgia, serif; --title-weight:700; --title-spacing:-0.01em; }
+body.t-salmon { --bg:#FFF7F0; --panel:#FFFCF9; --panel-ink:#33302E; --panel-muted:#66605C; --ink:#33302E; --muted:#66605C;
+  --line:#EFDDCD; --accent:#0D7680; --accent-soft:#DCEFEF; --good:#0D7680; --good-soft:#DCEFEF; --bad:#990F3D; --bad-soft:#F6E1E4;
+  --code-bg:#FAEDE1; --code-ink:#33302E; --display:'Source Serif 4', Georgia, serif; --title-weight:700; --title-spacing:-0.01em; }
 /* 3. Swiss: white, black rules, signal red, huge grotesk type */
 body.t-swiss { --bg:#FFFFFF; --panel:#FFFFFF; --panel-ink:#0A0A0A; --panel-muted:#555555; --ink:#0A0A0A; --muted:#555555;
   --line:#0A0A0A; --accent:#E30613; --accent-soft:#FDE7E8; --good:#0A0A0A; --good-soft:#F2F2F2; --bad:#E30613; --bad-soft:#FDE7E8;
@@ -38,10 +54,6 @@ body.t-forest { --bg:#0F2A22; --panel:#143329; --panel-ink:#F3EBDD; --panel-mute
 body.t-terminal { --bg:#0D1117; --panel:#161B22; --panel-ink:#E6EDF3; --panel-muted:#8B949E; --ink:#E6EDF3; --muted:#8B949E;
   --line:#30363D; --accent:#3FB950; --accent-soft:#12261B; --good:#3FB950; --good-soft:#12261B; --bad:#F85149; --bad-soft:#2D1517;
   --code-bg:#010409; --code-ink:#E6EDF3; --display:'JetBrains Mono', monospace; --title-weight:800; --title-spacing:-0.03em; --radius:8px; }
-/* 8. Klein: bold cobalt blue, white type, yellow accent, white cards (maximum stop-the-scroll) */
-body.t-klein { --bg:#0A2BA6; --panel:#FFFFFF; --panel-ink:#0A0A0A; --panel-muted:#4B5563; --ink:#FFFFFF; --muted:#C9D4FF;
-  --line:#3D5BC4; --accent:#FFD400; --accent-soft:#1B3CB8; --good:#0F7B3F; --good-soft:#E6F4EC; --bad:#C81E1E; --bad-soft:#FDECEC;
-  --code-bg:#EEF1FB; --code-ink:#0A0A0A; --title-weight:900; --title-spacing:-0.03em; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1350px; overflow: hidden; }
@@ -84,7 +96,6 @@ main { flex: 1; display: flex; flex-direction: column; gap: 24px; justify-conten
 .label.bad { color: var(--bad); } .label.good { color: var(--good); }
 .panel.bad { border-color: var(--bad); background: var(--bad-soft); }
 .panel.good { border-color: var(--good); background: var(--good-soft); }
-body.t-klein .panel.bad, body.t-klein .panel.good { background: var(--panel); border-width: 4px; }
 pre, code { font-family: 'JetBrains Mono', monospace; }
 pre { background: var(--code-bg); color: var(--code-ink); border-radius: calc(var(--radius) * .7); padding: 18px 22px;
   font-size: 25px; line-height: 1.5; white-space: pre-wrap; }

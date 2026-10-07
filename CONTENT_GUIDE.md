@@ -131,22 +131,26 @@ press release.
 ## The image: elite themes, one signature
 
 Every image uses **`design/brand.css`**: the same author header, footer and type system on every post
-(that's the signature), with **8 curated premium themes** for variety. Start from the closest file in
+(that's the signature), with **10 curated premium themes** for variety. Start from the closest file in
 `design/examples/` and change the content and the theme class.
 
 | `theme` | Look | Good for |
 |---|---|---|
+| `classic` ★ | warm off-white, LinkedIn blue, clean sans | anything: code before/after, architecture diagrams |
+| `classic-dark` ★ | near-black, soft blue | tables, code, CI/CD, infra |
+| `sky` ★ | light sky grey (#F3F5F6), sky-blue accent | anything; calm and fresh |
 | `paper` | warm editorial magazine, serif headline, burnt orange | career, lessons, opinions, deep dives |
-| `salmon` | Financial-Times pink paper, teal + claret | studies, numbers, industry news, trade-offs |
-| `swiss` | white, thick black rules, red highlight, huge type | bold claims, myths vs facts, comparisons |
+| `salmon` | light Financial-Times-style pink, teal + claret | studies, numbers, trade-offs |
+| `swiss` | white, thick black rules, red highlight, huge type | bold claims, myths vs facts |
 | `blueprint` | engineering drawing on a blue grid, amber accent | architecture, system design, flows |
 | `midnight` | deep navy, gold accent | AI/agents, security, deep dives |
-| `forest` | deep green, cream, brass, serif headline | team/leadership, maintenance, best practices |
+| `forest` | deep green, cream, brass, serif headline | leadership, maintenance, best practices |
 | `terminal` | GitHub-dark editor, green, mono headline | code tips, JS/TS, git, CLI |
-| `klein` | bold cobalt blue, white cards, yellow accent | the strongest hooks, roadmaps, "stop doing X" |
+
+★ = Ali's favourites: use one of these for about half of all posts.
 
 - `"theme": "<name>"` in post.json and `<body class="t-<name>">` (add ` gif` when animated). Don't
-  reuse the theme of either of the previous 2 posts (enforced); rotate through all 8 over time.
+  reuse the theme of either of the previous 2 posts (enforced); rotate through the others too.
 - Fixed structure: `header.author` (avatar "AH", name, title, one topic tag) → `h1` (6–10 words, one key
   phrase in `<em>`) → optional `.sub` → `main` (the visual) → optional `.takeaway` → `footer`
   (`alihexan.com` + source name).
