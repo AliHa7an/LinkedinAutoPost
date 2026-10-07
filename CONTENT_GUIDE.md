@@ -40,6 +40,17 @@ a public postmortem or official engineering blog.
 - Respect others: credit sources by name, no copied passages, no attacks on people or companies, no
   politics or religion, no confidential or private information.
 
+## What works best (from Ali's own results)
+
+Model post: "Deep copy or lossy copy?" (2026-09-30, structuredClone vs JSON.parse(JSON.stringify())).
+It got far more impressions than the rest because it was:
+1. **An everyday problem** most developers have hit (copying an object), not a rare setting.
+2. **A surprising, verifiable fact** (the common way silently breaks Dates, Sets, circular refs).
+3. **A fix they can use today**, in one line.
+4. **Instantly readable**: a clear before/after visual and a short text.
+Before writing, ask: "Would most of Ali's network meet this problem this month, and will they learn
+something true and useful in 30 seconds?" If not, pick another topic.
+
 ## Reach: pick topics many people care about
 
 Low-reach posts were narrow one-flag tips (a TypeScript utility type, a CI concurrency key, a git
