@@ -106,5 +106,15 @@
     "urn": "urn:li:share:7513271078954242048",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7513271078954242048/",
     "posted_at": "2026-10-06T16:16:55+00:00"
+  },
+  {
+    "date": "2026-10-07",
+    "slot": "2026-10-07",
+    "category": "security",
+    "topic": "Indirect prompt injection: an agent can obey instructions hidden in pages it reads (OWASP LLM01:2025)",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-07T10:19:29+00:00"
   }
 ]
