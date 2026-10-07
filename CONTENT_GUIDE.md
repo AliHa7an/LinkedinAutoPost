@@ -40,6 +40,18 @@ a public postmortem or official engineering blog.
 - Respect others: credit sources by name, no copied passages, no attacks on people or companies, no
   politics or religion, no confidential or private information.
 
+## Reach: pick topics many people care about
+
+Low-reach posts were narrow one-flag tips (a TypeScript utility type, a CI concurrency key, a git
+flag, a Dependabot setting). Set `"scope"` in post.json:
+- `"broad"`: a problem most full-stack developers, tech leads or hiring managers meet: system design
+  decisions, AI agents/LLM apps in production, performance, security fundamentals, debugging and
+  reliability lessons (public postmortems), React/Next.js/Node patterns, code review, careers,
+  interviews, working in teams.
+- `"niche"`: one specific option, flag or minor language feature. At most one per 7 days (enforced).
+Even a niche tip must open with the broad problem it solves ("Two deploys at once can break
+production"), not the feature name ("Actions concurrency").
+
 ## Topic rotation
 
 One category per day from `config.json > rules.categories`: not yesterday's, prefer ones unused in
@@ -98,36 +110,38 @@ press release.
 `#CyberSecurity #WebSecurity #DevOps`, `#Automation #NoCode #Zapier`,
 `#CareerGrowth #TechCareers #SoftwareDevelopers`, `#PromptEngineering #GenerativeAI #LLM`.
 
-## The image: pick the visual that explains the topic best
+## The image: brand kit, not a new theme every day
 
-Set `image.visual_type` to one of these (the validator checks it):
+Every image uses **`design/brand.css`**, so the feed looks like one recognisable author. Only the
+content changes. Start from the closest file in `design/examples/` (`code-comparison.html`,
+`comparison-table.html`, `flow-diagram.html`) and change the text, code and diagram.
 
-| Topic | `visual_type` | Output |
-|---|---|---|
-| A process with moving parts: request lifecycle, agent loop, pipeline, webhook/queue/integration, auth flow | `animated-flow` | animated GIF (`"animated": true`) |
-| Static architecture or system layout | `flow-diagram` | PNG |
-| Code tip or gotcha | `code-comparison` (before/after) or `code-snippet` | PNG |
-| Security or maintenance practice | `checklist` | PNG |
-| X vs Y, trade-offs | `comparison-table` | PNG |
-| Study, report or benchmark numbers | `stat-chart` | PNG |
-| Career path or learning plan | `roadmap` | PNG |
-| One idea or principle | `concept-card` | PNG |
+- `<link rel="stylesheet" href="../../design/brand.css">`, `<body class="light">` or
+  `<body class="dark">` (`"theme"` in post.json is `"light"` or `"dark"`; mostly light, dark for
+  code-heavy posts). For an animated GIF add `gif`: `<body class="light gif">`.
+- Fixed structure: `header.author` (avatar "AH", name, title, one topic tag) → `h1` (6–10 words, one
+  key phrase in `<em>`) → optional `.sub` → `main` (the visual) → optional `.takeaway` → `footer`
+  (`alihexan.com` + source name).
+- Use only the kit's classes and variables (`.panel`, `.panel.good/.bad`, `pre`, `table`, `.stats`,
+  `ul.check`, SVG `.node/.edge/.nlabel/.nsmall/.dot`, `var(--accent)`). No custom colours, gradients,
+  glows, blur, neon, emoji art, stickers, paper or retro effects: the validator rejects them.
+- Readable on a phone: max ~40 words on the image, code max 8 lines, 3–4 diagram boxes.
 
-PNG keeps text and lines sharp (better than JPG for diagrams and code). GIF is for motion: use it
-whenever the topic is a flow, and only then. LinkedIn accepts JPG, PNG and GIF (GIF up to 250 frames).
+Pick `image.visual_type` for the topic (validator checks it):
 
-- Self-contained `image.html`: 1080×1350 for PNG, 800×1000 for GIF. Inline CSS/SVG only; Google Fonts
-  is the only external resource.
-- A clearly different look every day, named in `theme` (e.g. "blueprint grid", "terminal", "hand-drawn
-  notebook", "retro poster", "glassmorphism dark", "newspaper", "pastel isometric", "chalkboard",
-  "Swiss minimal", "neon synthwave", "paper cut-out", "code editor window", "sticky notes", "subway
-  map", "comic panel"). No theme repeats within 14 days.
-- Large readable text (28px+ PNG, 24px+ GIF), max ~40 words, lay out with flex/grid (not per-line
-  absolute positions), keep 16px+ padding inside every box. "Ali Hassan" and "alihexan.com" in a
-  footer or corner. The renderer rejects overlapping text, text off the canvas, and text touching a
-  box edge.
-- Animation: CSS `@keyframes` or SVG `<animate>`, looping cleanly within `duration_ms` (e.g. 4000),
-  no JavaScript timers, a few moving elements (packets along arrows, highlighted steps).
+| Topic | `visual_type` |
+|---|---|
+| A process with moving parts (request, pipeline, agent loop, queue, auth flow) | `animated-flow` (GIF, `"animated": true`; animate a `.dot` along `.edge` with SVG `<animateMotion>`) |
+| Architecture or system layout | `flow-diagram` |
+| Code tip or gotcha | `code-comparison` (before/after) or `code-snippet` |
+| Security or maintenance practice | `checklist` |
+| X vs Y, trade-offs | `comparison-table` |
+| Study, report or benchmark numbers | `stat-chart` |
+| Career path or learning plan | `roadmap` |
+| One idea or principle | `concept-card` |
+
+Use GIF only for real flows, PNG for everything else. LinkedIn accepts JPG, PNG and GIF (≤250 frames).
+The renderer rejects overlapping text, text off the canvas and text touching a box edge.
 
 ## Files to write
 
@@ -138,7 +152,8 @@ whenever the topic is a flow, and only then. LinkedIn accepts JPG, PNG and GIF (
   "date": "2026-09-28",
   "category": "architecture",
   "topic": "Why webhook handlers must be idempotent",
-  "theme": "blueprint grid",
+  "theme": "light",
+  "scope": "broad",
   "text": "Hook...\n\nBody...\n\nQuestion for readers?",
   "hashtags": ["#SystemDesign", "#Backend", "#Webhooks"],
   "image": {

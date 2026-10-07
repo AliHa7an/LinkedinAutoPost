@@ -182,6 +182,25 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
             errors.append(f"image must show the name {brand['name']}")
         if re.search(r"<(script|link)[^>]+(src|href)=[\"']https?://", src, re.I) and "fonts.googleapis.com" not in src:
             errors.append("image.html may only load external Google Fonts (keep everything else inline)")
+        # Brand kit: one recognisable look, no AI-style colour effects.
+        if "design/brand.css" not in src:
+            errors.append('image.html must use the brand kit: <link rel="stylesheet" href="../../design/brand.css">')
+        if 'class="author"' not in src or "<footer" not in src:
+            errors.append("image.html must keep the brand header (header.author) and footer, see design/examples/")
+        if re.search(r"gradient\(|text-shadow|filter:\s*(drop-shadow|blur)|backdrop-filter|0 0 \d+px", src, re.I):
+            errors.append("no gradients, glows, blurs or neon effects in the image (brand kit only)")
+        if re.search(r"#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\(", src):
+            errors.append("no custom colours in image.html; use the brand variables (var(--accent) etc.) and classes")
+    if post.get("theme") not in rules["themes"]:
+        errors.append(f"theme must be one of {', '.join(rules['themes'])} (brand kit variants)")
+    if post.get("scope") not in ("broad", "niche"):
+        errors.append('add "scope": "broad" or "niche" (niche = one flag/option/minor feature)')
+    elif post["scope"] == "niche":
+        d0 = date.fromisoformat(day[:10])
+        recent_niche = [h for h in history if h.get("scope") == "niche" and h.get("slot", h["date"]) != day
+                        and 0 <= (d0 - date.fromisoformat(h["date"])).days <= 7]
+        if len(recent_niche) >= rules["niche_max_per_7_days"]:
+            errors.append("a niche topic was already posted in the last 7 days; pick a broad, widely relevant topic")
     vt = img.get("visual_type")
     if vt not in rules["visual_types"]:
         errors.append(f"image.visual_type must be one of {', '.join(rules['visual_types'])}")
@@ -199,7 +218,7 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
         age = (d - date.fromisoformat(h["date"])).days
         if 0 <= age <= rules["topic_repeat_days"] and _norm(h.get("topic", "")) == topic_n:
             errors.append(f"same topic already posted on {h['date']}")
-        if 0 <= age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
+        if rules["theme_repeat_days"] and 0 <= age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
             errors.append(f"image theme '{post['theme']}' used on {h['date']}; pick a different look")
         if age == 1 and h.get("category") == cat and cat != "jobs":
             errors.append(f"category '{cat}' was also yesterday's; rotate topics")

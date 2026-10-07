@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../brand.css"></head>
+<body class="dark">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">CI / CD</div></header>
+  <div><h1>Two deploys at once can <em>break production</em></h1><p class="sub">GitHub Actions <code>concurrency</code> decides what happens to the second one.</p></div>
+  <main><div class="panel">
+    <table>
+      <tr><th>Setting</th><th>New run arrives</th><th>Use for</th></tr>
+      <tr><td><code>group</code> only</td><td>Waits. Older pending run is cancelled</td><td>Deploys</td></tr>
+      <tr><td><code>cancel-in-progress</code></td><td>Running job is cancelled</td><td>Tests on PRs</td></tr>
+      <tr><td>No group</td><td>Both run in parallel</td><td>Independent jobs</td></tr>
+    </table></div>
+  </main>
+  <p class="takeaway">Never cancel a deploy halfway. Cancel stale test runs freely.</p>
+  <footer><b>alihexan.com</b><span>Source: GitHub Actions docs</span></footer>
+</body></html>

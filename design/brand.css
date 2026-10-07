@@ -1,0 +1,92 @@
+/* Ali Hassan LinkedIn brand kit. Every post image uses this file, in one of two variants:
+   <body class="light"> (default) or <body class="dark">. Only content changes day to day,
+   so the feed looks like one recognisable author, not a different template every day. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #F6F5F1; --panel: #FFFFFF; --ink: #111418; --muted: #5B636E; --line: #E3E1DA;
+  --accent: #0A66C2; --accent-soft: #E8F0FA; --good: #1F7A4D; --good-soft: #E7F4EC;
+  --bad: #B42318; --bad-soft: #FBEAE8; --code-bg: #F1F0EB; --code-ink: #1D2430;
+}
+body.dark {
+  --bg: #0E1116; --panel: #161B22; --ink: #E8EAED; --muted: #9AA4B2; --line: #2A313C;
+  --accent: #5AA9F5; --accent-soft: #14263B; --good: #4CC38A; --good-soft: #10291D;
+  --bad: #F07167; --bad-soft: #2E1716; --code-bg: #0B0E13; --code-ink: #D6DEEB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; }
+body.gif, body.gif html { width: 800px; height: 1000px; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif; font-size: 30px; line-height: 1.4;
+  display: flex; flex-direction: column; padding: 64px 72px 56px; gap: 36px;
+}
+body.gif { font-size: 24px; padding: 48px 54px 42px; gap: 26px; }
+
+/* Header: same on every post */
+.author { display: flex; align-items: center; gap: 18px; }
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff;
+  display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.who b { display: block; font-size: 26px; font-weight: 700; }
+.who span { display: block; font-size: 20px; color: var(--muted); }
+.tag { margin-left: auto; font: 600 18px 'JetBrains Mono', monospace; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+  padding: 8px 14px; border-radius: 6px; }
+
+/* Title block */
+h1 { font-size: 66px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
+body.gif h1 { font-size: 48px; }
+h1 em { font-style: normal; color: var(--accent); }
+.sub { font-size: 30px; color: var(--muted); margin-top: 14px; }
+body.gif .sub { font-size: 24px; }
+
+/* Main area grows; components inside */
+main { flex: 1; display: flex; flex-direction: column; gap: 24px; justify-content: center; }
+.panel { background: var(--panel); border: 1.5px solid var(--line); border-radius: 14px; padding: 26px 30px; }
+.label { font: 700 19px 'JetBrains Mono', monospace; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.label.bad { color: var(--bad); } .label.good { color: var(--good); }
+.panel.bad { border-color: var(--bad); background: var(--bad-soft); }
+.panel.good { border-color: var(--good); background: var(--good-soft); }
+pre, code { font-family: 'JetBrains Mono', monospace; }
+pre { background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 18px 22px;
+  font-size: 25px; line-height: 1.5; white-space: pre-wrap; }
+body.gif pre { font-size: 20px; }
+td code, th code { white-space: nowrap; }
+code { font-size: .9em; background: var(--code-bg); padding: 2px 8px; border-radius: 6px; }
+.note { font-size: 24px; color: var(--muted); margin-top: 10px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+/* Checklist */
+ul.check { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+ul.check li { display: flex; gap: 16px; align-items: flex-start; }
+ul.check li::before { content: "✓"; flex: none; width: 40px; height: 40px; border-radius: 8px;
+  background: var(--good-soft); color: var(--good); display: grid; place-items: center; font-weight: 800; }
+
+/* Comparison table */
+table { width: 100%; border-collapse: collapse; font-size: 26px; }
+th, td { text-align: left; padding: 14px 16px; border-bottom: 1.5px solid var(--line); vertical-align: top; }
+th { font: 700 19px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+
+/* Big numbers */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.stat b { display: block; font-size: 72px; font-weight: 800; color: var(--accent); line-height: 1; }
+.stat span { display: block; font-size: 22px; color: var(--muted); margin-top: 10px; }
+
+/* Flow diagrams (static or animated): use inline SVG with these classes */
+.node { fill: var(--panel); stroke: var(--line); stroke-width: 2.5; }
+.node.hl { stroke: var(--accent); }
+.node.ok { stroke: var(--good); } .node.no { stroke: var(--bad); }
+.nlabel { fill: var(--ink); font: 600 24px 'Inter', sans-serif; }
+.nsmall { fill: var(--muted); font: 500 19px 'JetBrains Mono', monospace; }
+.edge { stroke: var(--muted); stroke-width: 2.5; fill: none; }
+.dot { fill: var(--accent); }
+
+/* Takeaway + footer: same on every post */
+.takeaway { border-left: 6px solid var(--accent); padding: 6px 0 6px 22px; font-size: 30px; font-weight: 600; }
+body.gif .takeaway { font-size: 24px; }
+footer { display: flex; justify-content: space-between; align-items: center; font-size: 22px;
+  color: var(--muted); border-top: 1.5px solid var(--line); padding-top: 22px; }
+footer b { color: var(--ink); font-weight: 700; }

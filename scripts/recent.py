@@ -36,4 +36,7 @@ themes = sorted({v["theme"] for v in items.values()
                  if 0 <= (target - date.fromisoformat(v["date"])).days <= rules["theme_repeat_days"]})
 print(f"\nNot allowed today (yesterday's category): {', '.join(blocked) or 'none'}")
 print(f"Unused in the last 7 days (prefer these): {', '.join(unused)}")
-print(f"Themes you can't use: {', '.join(themes) or 'none'}")
+if rules["theme_repeat_days"]:
+    print(f"Themes you can't use: {', '.join(themes) or 'none'}")
+niche = [v for v in items.values() if v.get("scope") == "niche" and 0 <= (target - date.fromisoformat(v["date"])).days <= 7]
+print(f"Niche posts in the last 7 days: {len(niche)} (max {rules['niche_max_per_7_days']}; otherwise pick a broad topic)")

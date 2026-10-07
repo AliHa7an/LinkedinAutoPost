@@ -227,7 +227,7 @@ def main() -> int:
 
     record = os.environ.get("RECORD_WITH_GIT") == "1"
     entry = {"date": day[:10], "slot": day, "category": post["category"], "topic": post["topic"],
-             "theme": post["theme"], "status": "publishing",
+             "theme": post["theme"], "scope": post.get("scope"), "status": "publishing",
              "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
     if record:
         # Lock first: claim today's slot on GitHub BEFORE publishing. If the claim can't be saved,

@@ -22,8 +22,8 @@ also differ in topic, category and image theme from any post already published t
    opened in this run, and every source URL goes in `sources`. No hypothetical, speculative or
    invented statements, numbers, quotes or stories. If you can't verify a topic, choose another.
    Job posts only for real, currently open roles verified on the company's own careers page.
-4. Write `posts/<target date>/post.json` and `posts/<target date>/image.html` (new visual theme,
-   "Ali Hassan" and "alihexan.com" on the image).
+4. Write `posts/<target date>/post.json` and `posts/<target date>/image.html`. For the image, copy
+   the closest file from `design/examples/` and change only the content (brand kit; see the guide).
 5. From `scripts/` run `python validate.py <target date>` and `python render.py <target date> --preview /tmp/work`.
    Then LOOK at the preview PNGs in `/tmp/work` with the Read tool (for an animated post these are
    frames from the start, middle and end). Fix anything cut off, overlapping, cramped, misspelled,

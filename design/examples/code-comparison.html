@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../brand.css"></head>
+<body class="light">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">TypeScript</div></header>
+  <div><h1>Stop a default value from <em>widening</em> your generic</h1><p class="sub">TypeScript 5.4 added <code>NoInfer&lt;T&gt;</code> for exactly this.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Without</div>
+<pre>function pick&lt;C extends string&gt;(
+  colors: C[], fallback?: C) {}
+
+pick(["red","green"], "blue"); // no error</pre></div>
+    <div class="panel good"><div class="label good">✓ With NoInfer</div>
+<pre>function pick&lt;C extends string&gt;(
+  colors: C[], fallback?: NoInfer&lt;C&gt;) {}
+
+pick(["red","green"], "blue"); // error ✓</pre></div>
+  </main>
+  <p class="takeaway">Let one parameter decide the type. Block the others from changing it.</p>
+  <footer><b>alihexan.com</b><span>Source: TypeScript 5.4 release notes</span></footer>
+</body></html>

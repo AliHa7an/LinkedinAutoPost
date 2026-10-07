@@ -51,6 +51,7 @@ LAYOUT_JS = """
     if (b.l < 0 || b.top < 0 || b.r > W + 1 || b.bot > H + 1) problems.push(`text off canvas: "${b.t}"`);
     for (let a = b.el; a && a !== document.body && a !== document.documentElement; a = a.parentElement) {
       const cs = getComputedStyle(a);
+      if (cs.display.startsWith('inline') && cs.display !== 'inline-block' || a.tagName === 'CODE') continue;  // inline chips sit tight by design
       const r = a.getBoundingClientRect();
       if (r.width >= W - 2 && r.height >= H - 2) continue;  // full-canvas backgrounds
       const f = filled(cs);

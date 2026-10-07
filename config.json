@@ -36,7 +36,7 @@
     "hashtags_max": 5,
     "max_emojis": 5,
     "topic_repeat_days": 45,
-    "theme_repeat_days": 14,
+    "theme_repeat_days": 0,
     "categories": [
       "ai-agents",
       "ai-chatbots",
@@ -131,6 +131,11 @@
       "concept-card"
     ],
     "paragraph_max_chars": 280,
-    "max_paragraphs": 9
+    "max_paragraphs": 9,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "niche_max_per_7_days": 1
   }
 }

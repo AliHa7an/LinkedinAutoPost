@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../brand.css"></head>
+<body class="light gif">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Backend</div></header>
+  <div><h1>Webhooks can arrive <em>twice</em></h1><p class="sub">Dedupe on the event ID, then queue the work.</p></div>
+  <main>
+    <svg viewBox="0 0 692 520" width="692" height="520">
+      <!-- moving dots first, so they pass behind the boxes -->
+      <circle class="dot" r="11"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;0.5;1" keyPoints="0;1;1" calcMode="linear" path="M346 45 V270 H552 V475"/></circle>
+      <circle class="dot" r="11" style="fill:var(--bad)"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;0.5;0.9;1" keyPoints="0;0;1;1" calcMode="linear" path="M346 45 V270 H140 V365"/></circle>
+      <rect class="node" x="196" y="10" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="53" text-anchor="middle">Provider sends event</text>
+      <path class="edge" d="M346 80 V150"/>
+      <rect class="node hl" x="196" y="150" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="193" text-anchor="middle">Event ID seen before?</text>
+      <path class="edge" d="M346 220 V270 H140 V330"/><path class="edge" d="M346 270 H552 V330"/>
+      <text class="nsmall" x="160" y="300">yes</text><text class="nsmall" x="500" y="300">no</text>
+      <rect class="node ok" x="20" y="330" width="240" height="70" rx="12"/><text class="nlabel" x="140" y="373" text-anchor="middle">Return 200, stop</text>
+      <rect class="node" x="432" y="330" width="240" height="70" rx="12"/><text class="nlabel" x="552" y="373" text-anchor="middle">Save + enqueue</text>
+      <path class="edge" d="M552 400 V440"/>
+      <rect class="node" x="432" y="440" width="240" height="70" rx="12"/><text class="nlabel" x="552" y="483" text-anchor="middle">Worker (safe x2)</text>
+    </svg>
+  </main>
+  <footer><b>alihexan.com</b><span>Source: Stripe webhook docs</span></footer>
+</body></html>
