@@ -214,25 +214,17 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DATE: ${{ steps.when.outputs.date }}
           AT: ${{ inputs.publish_at }}
+          RECORD_WITH_GIT: '1'
         run: |
+          # post.py records the post on GitHub BEFORE publishing (no record = no post), so git needs auth here.
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           TODAY=$(TZ=Asia/Karachi date +%F); HM=$(TZ=Asia/Karachi date +%H%M)
           if [ -n "$AT" ]; then
-            git pull -q --rebase origin main || true
             (cd scripts && python post.py --date "$DATE" --at "$AT")
           elif [ "${DATE:0:10}" != "$TODAY" ] || [ "$HM" -lt 1500 ]; then
             echo "Before 3 PM PKT (or not today): the 'Daily LinkedIn post' workflow will publish it."
-            echo "status=queued" >> "$GITHUB_OUTPUT"; exit 0
           else
-            git pull -q --rebase origin main || true
             (cd scripts && python post.py --date "$DATE")
-          fi
-          git add data/history.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Posted $DATE [skip ci]"
-            for i in 1 2 3; do
-              if git pull --rebase origin main && git push origin HEAD:main; then break; fi
-              sleep $((i * 5))
-            done
           fi
 
       - name: Summary

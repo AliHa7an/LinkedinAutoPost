@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -26,7 +27,7 @@ from pathlib import Path
 
 import requests
 
-from common import (build_commentary, load_config, load_history, load_post, post_dir,
+from common import (ROOT, build_commentary, load_config, load_history, load_post, post_dir,
                     save_history, today_pkt, validate_post)
 from render import LayoutError, render
 
@@ -126,6 +127,30 @@ class LinkedIn:
         return r.headers.get("x-restli-id") or r.headers.get("x-linkedin-id") or ""
 
 
+GIT_ID = ["-c", "user.name=linkedin-autopost-bot",
+          "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com"]
+
+
+def git(*args: str) -> bool:
+    r = subprocess.run(["git", *GIT_ID, *args], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"git {' '.join(args)} failed: {(r.stderr or r.stdout).strip()[:300]}")
+    return r.returncode == 0
+
+
+def sync_history(message: str) -> bool:
+    """Commit data/history.json and push it. True only if GitHub really has it."""
+    git("add", "data/history.json")
+    if not git("diff", "--cached", "--quiet"):
+        if not git("commit", "-m", message):
+            return False
+    for i in range(4):
+        if git("pull", "--rebase", "-q", "origin", "main") and git("push", "-q", "origin", "HEAD:main"):
+            return True
+        time.sleep(5 * (i + 1))
+    return False
+
+
 def wait_until(hhmm_utc: str, max_wait_s: int = 45 * 60) -> None:
     hh, mm = map(int, hhmm_utc.split(":"))
     now = datetime.now(timezone.utc)
@@ -200,6 +225,31 @@ def main() -> int:
     elif os.environ.get("WAIT_FOR_POST_TIME") == "1":
         wait_until(cfg["schedule"]["post_time_utc"])
 
+    record = os.environ.get("RECORD_WITH_GIT") == "1"
+    entry = {"date": day[:10], "slot": day, "category": post["category"], "topic": post["topic"],
+             "theme": post["theme"], "status": "publishing",
+             "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    if record:
+        # Lock first: claim today's slot on GitHub BEFORE publishing. If the claim can't be saved,
+        # nothing is published, so another run can never post the same day again.
+        git("pull", "--rebase", "-q", "origin", "main")
+        history = load_history()
+        if any(h.get("slot", h["date"]) == day for h in history):
+            print(f"already posted (or being posted) for {day}; nothing to do")
+            output(status="already_posted")
+            return 0
+        history.append(entry)
+        save_history(history)
+        if not sync_history(f"Publishing {day} [skip ci]"):
+            print("::error::could not record the post on GitHub, so it was NOT published (prevents duplicates)")
+            output(status="lock_failed")
+            return 1
+
+    def release() -> None:
+        if record:
+            save_history([h for h in load_history() if h.get("slot", h["date"]) != day])
+            sync_history(f"Release {day} after failed publish [skip ci]")
+
     import hashlib
     fp = hashlib.sha256(token.encode()).hexdigest()[:10]
     print(f"::notice title=Token fingerprint::{fp} (length {len(token)}); changes whenever the secret is replaced")
@@ -209,21 +259,26 @@ def main() -> int:
         image_urn = li.upload_image(me, image)
         urn = li.create_post(me, text, image_urn, post["image"]["alt"], post["topic"])
     except TokenExpired as e:
+        release()
         print(f"::error::{e}")
         output(status="token_expired")
         return 1
     except Exception as e:  # show the real API message in the Actions summary
+        release()
         msg = str(e).replace("\n", " ")[:900]
         print(f"::error title=LinkedIn API::{type(e).__name__}: {msg}")
         output(status="api_error")
         return 1
 
     url = f"https://www.linkedin.com/feed/update/{urn}/" if urn else ""
-    history.append({"date": day[:10], "slot": day, "category": post["category"], "topic": post["topic"],
-                    "theme": post["theme"], "urn": urn, "url": url,
-                    "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+    history = [h for h in load_history() if h.get("slot", h["date"]) != day]
+    entry.update({"status": "posted", "urn": urn, "url": url,
+                  "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+    history.append(entry)
     save_history(history)
     print(f"published: {url or urn}")
+    if record and not sync_history(f"Posted {day}: {url} [skip ci]"):
+        print("::warning::published, but the final link could not be saved; the 'publishing' lock still prevents a repeat")
     output(status="posted", post_url=url)
     return 0
 

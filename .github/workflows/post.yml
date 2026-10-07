@@ -60,6 +60,7 @@ jobs:
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           WAIT_FOR_POST_TIME: ${{ github.event_name == 'schedule' && '1' || '0' }}
+          RECORD_WITH_GIT: '1'
         run: |
           ARGS=""
           if [ -n "${{ inputs.date }}" ]; then ARGS="$ARGS --date ${{ inputs.date }}"; fi
@@ -75,19 +76,6 @@ jobs:
             posts/*/image.png
             posts/*/image.gif
           if-no-files-found: ignore
-
-      - name: Record history
-        if: steps.publish.outputs.status == 'posted'
-        run: |
-          git config user.name "linkedin-autopost-bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/history.json
-          git commit -m "Posted ${{ inputs.date || 'today' }}: ${{ steps.publish.outputs.post_url }} [skip ci]"
-          for i in 1 2 3; do
-            if git pull --rebase origin main && git push; then exit 0; fi
-            sleep $((i * 5))
-          done
-          exit 1
 
       - name: Alert if something needs attention
         if: failure() || steps.publish.outputs.status == 'missing'
