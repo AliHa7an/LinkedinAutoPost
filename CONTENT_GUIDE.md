@@ -48,8 +48,15 @@ It got far more impressions than the rest because it was:
 2. **A surprising, verifiable fact** (the common way silently breaks Dates, Sets, circular refs).
 3. **A fix they can use today**, in one line.
 4. **Instantly readable**: a clear before/after visual and a short text.
-Before writing, ask: "Would most of Ali's network meet this problem this month, and will they learn
-something true and useful in 30 seconds?" If not, pick another topic.
+Before writing, ask: "Will Ali's network learn something true and useful from this, quickly?"
+
+**Mix depth on purpose.** About 4–5 posts a week like the model above (everyday, quick wins), and 1–2
+**deep dives** a week: how something works under the hood, distributed-systems trade-offs, AI/LLM
+internals, a real public postmortem, a scaling or architecture decision. Deep dives are what show
+senior-level knowledge to hiring managers, so they are welcome, but explain them simply: one core idea,
+a clear diagram, plain words, no jargon without a one-line explanation. Deep is fine; confusing is not.
+(A deep dive is `"scope": "broad"` when the problem matters to many engineers; `"niche"` is only for a
+single flag, option or minor feature.)
 
 ## Reach: pick topics many people care about
 
