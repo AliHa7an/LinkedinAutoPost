@@ -90,3 +90,28 @@ body.gif .takeaway { font-size: 24px; }
 footer { display: flex; justify-content: space-between; align-items: center; font-size: 22px;
   color: var(--muted); border-top: 1.5px solid var(--line); padding-top: 22px; }
 footer b { color: var(--ink); font-weight: 700; }
+
+/* ---------- Animation helpers (brand colours only; loop seamlessly over 4s) ----------
+   .r0 .r1 .r2 .r3 .r4  elements appear one after another (step 0..4), stay, then all reset together
+   .pulse           a box or node gently highlights in the accent colour
+   .grow            a bar (.bar inside .track) fills to its width: style="--w:72%"
+   SVG .dot         move along an edge with <animateMotion dur="4s" repeatCount="indefinite" path="...">
+   .flowline        an SVG .edge with marching dashes showing direction of data */
+@keyframes ah-r0 { 0%, 4% { opacity: 0; transform: translateY(10px); } 12%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.r0 { animation: ah-r0 4s linear infinite both; }
+@keyframes ah-r1 { 0%, 16% { opacity: 0; transform: translateY(10px); } 24%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.r1 { animation: ah-r1 4s linear infinite both; }
+@keyframes ah-r2 { 0%, 28% { opacity: 0; transform: translateY(10px); } 36%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.r2 { animation: ah-r2 4s linear infinite both; }
+@keyframes ah-r3 { 0%, 40% { opacity: 0; transform: translateY(10px); } 48%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.r3 { animation: ah-r3 4s linear infinite both; }
+@keyframes ah-r4 { 0%, 52% { opacity: 0; transform: translateY(10px); } 60%, 90% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.r4 { animation: ah-r4 4s linear infinite both; }
+@keyframes ah-pulse { 0%, 100% { stroke: var(--line); border-color: var(--line); } 40%, 60% { stroke: var(--accent); border-color: var(--accent); } }
+.pulse { animation: ah-pulse 4s ease-in-out infinite; }
+.track { background: var(--code-bg); border-radius: 8px; height: 26px; overflow: hidden; }
+.bar { background: var(--accent); height: 100%; width: var(--w, 50%); border-radius: 8px; }
+@keyframes ah-grow { 0%, 30% { width: 0; } 70%, 90% { width: var(--w, 50%); } 97%, 100% { width: 0; } }
+.grow .bar { animation: ah-grow 4s ease-out infinite; }
+@keyframes ah-march { to { stroke-dashoffset: -40; } }
+.flowline { stroke-dasharray: 10 10; animation: ah-march 1s linear infinite; }

@@ -204,8 +204,8 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
     vt = img.get("visual_type")
     if vt not in rules["visual_types"]:
         errors.append(f"image.visual_type must be one of {', '.join(rules['visual_types'])}")
-    elif (vt == "animated-flow") != bool(img.get("animated")):
-        errors.append("visual_type 'animated-flow' must have \"animated\": true, and only it may be animated")
+    elif vt == "animated-flow" and not img.get("animated"):
+        errors.append("visual_type 'animated-flow' must have \"animated\": true")
     if not img.get("alt") or len(img["alt"]) < 20:
         errors.append("image.alt needs a real description (20+ chars) for accessibility")
 

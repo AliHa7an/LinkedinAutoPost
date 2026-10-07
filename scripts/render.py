@@ -127,8 +127,14 @@ def render(day: str) -> str:
     colors = 256
     while True:
         # One shared palette for all frames: smaller file and no colour flicker.
-        base = frames[0].quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
-        pal = [base] + [f.quantize(palette=base, dither=Image.Dither.NONE) for f in frames[1:]]
+        # Palette from frames across the whole loop, so colours that appear later stay exact.
+        sample = frames[::max(1, len(frames) // 8)]
+        fw, fh = frames[0].size
+        montage = Image.new("RGB", (fw, fh * len(sample)))
+        for k, f in enumerate(sample):
+            montage.paste(f, (0, fh * k))
+        base = montage.quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
+        pal = [f.quantize(palette=base, dither=Image.Dither.NONE) for f in frames]
         buf = io.BytesIO()
         pal[0].save(buf, format="GIF", save_all=True, append_images=pal[1:],
                     duration=max(40, duration // n), loop=0, optimize=True, disposal=1)

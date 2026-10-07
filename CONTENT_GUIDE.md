@@ -149,7 +149,7 @@ Pick `image.visual_type` for the topic (validator checks it):
 
 | Topic | `visual_type` |
 |---|---|
-| A process with moving parts (request, pipeline, agent loop, queue, auth flow) | `animated-flow` (GIF, `"animated": true`; animate a `.dot` along `.edge` with SVG `<animateMotion>`) |
+| A process with moving parts (request, pipeline, agent loop, queue, auth flow) | `animated-flow` (always animated) |
 | Architecture or system layout | `flow-diagram` |
 | Code tip or gotcha | `code-comparison` (before/after) or `code-snippet` |
 | Security or maintenance practice | `checklist` |
@@ -158,7 +158,17 @@ Pick `image.visual_type` for the topic (validator checks it):
 | Career path or learning plan | `roadmap` |
 | One idea or principle | `concept-card` |
 
-Use GIF only for real flows, PNG for everything else. LinkedIn accepts JPG, PNG and GIF (≤250 frames).
+**Animate wherever something moves or happens in steps** (aim for most posts): data flowing between
+services, a request's path, an agent loop, a pipeline, before → after, a checklist building up,
+numbers growing. Set `"animated": true` (rendered as a GIF, 800×1000, `<body class="light gif">`) and
+use only the kit's helpers, so motion stays in brand colours:
+- `.r0` … `.r4`: elements appear one after another, hold, then reset together (see
+  `design/examples/animated-reveal.html`).
+- SVG `.dot` + `<animateMotion>` along an `.edge` to show data moving (see `animated-flow.html`);
+  `.flowline` for marching-dash arrows; `.pulse` to highlight the key box; `.grow .bar` for numbers.
+Keep it calm: 2–4 moving things, one clear direction, everything readable when paused. Stay static
+(PNG) only when nothing moves, e.g. a single comparison table. LinkedIn accepts JPG, PNG and GIF
+(≤250 frames).
 The renderer rejects overlapping text, text off the canvas and text touching a box edge.
 
 ## Files to write
