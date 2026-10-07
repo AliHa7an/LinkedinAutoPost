@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-midnight gif">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">AI Security</div></header>
+  <div><h1>Web pages can <em>instruct</em> your agent</h1><p class="sub">Limit what it can do, then gate risky actions.</p></div>
+  <main>
+    <svg viewBox="0 0 692 520" width="692" height="520">
+      <circle class="dot" r="11"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;0.5;1" keyPoints="0;1;1" calcMode="linear" path="M346 45 V270 H140 V365"/></circle>
+      <circle class="dot bad" r="11"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;0.5;0.9;1" keyPoints="0;0;1;1" calcMode="linear" path="M346 45 V270 H552 V365"/></circle>
+      <rect class="node" x="196" y="10" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="53" text-anchor="middle">Untrusted web page</text>
+      <path class="edge" d="M346 80 V150"/>
+      <rect class="node hl" x="196" y="150" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="193" text-anchor="middle">Agent plans a tool call</text>
+      <path class="edge" d="M346 220 V270 H140 V330"/><path class="edge" d="M346 270 H552 V330"/>
+      <text class="nsmall" x="160" y="300">read-only</text><text class="nsmall" x="538" y="300" text-anchor="end">send, delete, pay</text>
+      <rect class="node ok" x="20" y="330" width="240" height="70" rx="12"/><text class="nlabel" x="140" y="373" text-anchor="middle">Runs</text>
+      <rect class="node" x="432" y="330" width="240" height="70" rx="12"/><text class="nlabel" x="552" y="373" text-anchor="middle">Human approves</text>
+    </svg>
+  </main>
+  <footer><b>alihexan.com</b><span>Source: OWASP LLM01:2025</span></footer>
+</body></html>

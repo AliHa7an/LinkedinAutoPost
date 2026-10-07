@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-07",
+  "category": "security",
+  "topic": "Indirect prompt injection: an agent can obey instructions hidden in pages it reads (OWASP LLM01:2025)",
+  "theme": "midnight",
+  "scope": "broad",
+  "text": "Your AI agent doesn't just read a web page. It can obey it.\n\nOWASP ranks prompt injection first in its 2025 Top 10 for LLM apps. The indirect kind hides instructions in content the model processes: a website, a file, a document.\n\nYou can't filter your way out of it completely. OWASP's mitigations are mostly about limiting damage:\n\n1. Least privilege: give tools only the access the task needs\n2. Human approval for high-risk actions\n3. Segregate and label external content\n4. Validate output formats\n5. Run adversarial tests\n\nMy rule of thumb: reading is cheap, writing is expensive. Let the agent read freely, and put a human in front of anything that sends, deletes or pays.\n\nWhich action in your agent would hurt most if a web page triggered it?",
+  "hashtags": ["#AIAgents", "#CyberSecurity", "#LLM", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow: an untrusted web page feeds an agent; read-only calls run, while send, delete or pay needs human approval. Signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://genai.owasp.org/llmrisk/llm01-prompt-injection/"]
+}
