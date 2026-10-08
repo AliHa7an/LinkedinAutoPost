@@ -118,5 +118,15 @@
     "posted_at": "2026-10-07T10:19:32+00:00",
     "urn": "urn:li:share:7513543527885336577",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7513543527885336577/"
+  },
+  {
+    "date": "2026-10-08",
+    "slot": "2026-10-08",
+    "category": "javascript",
+    "topic": "Array.prototype.toSorted vs sort(): sort() mutates in place, which breaks React state and shared arrays",
+    "theme": "sky",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-08T10:38:46+00:00"
   }
 ]
