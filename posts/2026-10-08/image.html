@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Stop <em>mutating</em> arrays when you sort them</h1><p class="sub">Use <code>toSorted()</code> to get a copy.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ sort()</div>
+<pre>const top = scores
+  .sort((a, b) =&gt; b - a);
+
+// scores changed too</pre></div>
+    <div class="panel good"><div class="label good">✓ toSorted()</div>
+<pre>const top = scores
+  .toSorted((a, b) =&gt; b - a);
+
+// scores is untouched</pre></div>
+  </main>
+  <p class="takeaway">On shared data, copy first. Then sort.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>

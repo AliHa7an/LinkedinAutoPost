@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-08",
+  "category": "javascript",
+  "topic": "Array.prototype.toSorted vs sort(): sort() mutates in place, which breaks React state and shared arrays",
+  "theme": "sky",
+  "scope": "broad",
+  "text": "Your list sorts fine, then another part of the app shows the wrong order. Often the cause: sort() changes the array in place.\n\nBefore:\nconst top = scores.sort((a, b) => b - a);\n// scores is now reordered too\n\nAfter:\nconst top = scores.toSorted((a, b) => b - a);\n// scores is untouched\n\nPer MDN, toSorted() is the copying version of sort(): it returns a new array and leaves the original alone. It has been available across browsers since July 2023.\n\nIt matters most with React state or props, where mutating the array in place can skip a re-render or reorder data other code still reads.\n\nThe same family exists for the other mutating methods: toReversed(), toSpliced() and with().\n\nMy rule of thumb: on shared data, reach for the copying method by default.\n\nHave you ever chased a bug that turned out to be an in-place sort?",
+  "hashtags": ["#JavaScript", "#React", "#WebDevelopment", "#CleanCode"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: sort() reorders the original array, toSorted() returns a new sorted array and leaves it unchanged, signed Ali Hassan, alihexan.com",
+    "animated": false,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+  ]
+}
