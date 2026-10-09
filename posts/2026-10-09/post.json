@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-09",
+  "category": "ai-agents",
+  "topic": "Tool calling: the model only requests a tool call, your code executes it, so validation and permissions belong in your loop (Anthropic tool use docs)",
+  "theme": "classic-dark",
+  "scope": "broad",
+  "text": "An AI agent never actually runs your tools. It asks, and your code decides.\n\nWith client tools, Anthropic's docs describe it like this: Claude replies with stop_reason \"tool_use\" and a tool_use block. Your code executes the operation and sends back a tool_result.\n\nThat gap between \"asked\" and \"executed\" is where production safety lives:\n\n1. Validate the arguments. Per the docs, Claude might infer a value for a missing required parameter. strict: true makes calls match your schema.\n2. Check permissions per call, not per agent.\n3. Add timeouts, and return failures as a tool_result the model can react to.\n\nTreat every tool call like untrusted user input hitting your API.\n\nWhat's the one guard you always put between a model's tool request and the real action?",
+  "hashtags": ["#AIAgents", "#LLM", "#SoftwareEngineering", "#Security"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow: the model returns a tool_use request, your code validates and executes it, then sends back a tool_result. Signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"]
+}
