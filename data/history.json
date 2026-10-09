@@ -138,7 +138,9 @@
     "topic": "Tool calling: the model only requests a tool call, your code executes it, so validation and permissions belong in your loop (Anthropic tool use docs)",
     "theme": "classic-dark",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-09T10:37:49+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-09T10:37:52+00:00",
+    "urn": "urn:li:share:7514272916746821632",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7514272916746821632/"
   }
 ]
