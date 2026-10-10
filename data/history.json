@@ -142,5 +142,15 @@
     "posted_at": "2026-10-09T10:37:52+00:00",
     "urn": "urn:li:share:7514272916746821632",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7514272916746821632/"
+  },
+  {
+    "date": "2026-10-10",
+    "slot": "2026-10-10",
+    "category": "career",
+    "topic": "Stack Overflow 2025 survey: 84% use AI tools but more developers distrust their accuracy than trust it; 'almost right' code is the top frustration",
+    "theme": "salmon",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-10T15:34:33+00:00"
   }
 ]
