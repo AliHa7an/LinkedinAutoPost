@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-10",
+  "category": "career",
+  "topic": "Stack Overflow 2025 survey: 84% use AI tools but more developers distrust their accuracy than trust it; 'almost right' code is the top frustration",
+  "theme": "salmon",
+  "scope": "broad",
+  "text": "84% of developers use or plan to use AI tools. Only about 33% trust the output.\n\nThat's from the 2025 Stack Overflow Developer Survey. About 46% actively distrust AI accuracy, and the top frustration (66%) is \"AI solutions that are almost right, but not quite.\"\n\nThe survey also found 45% say debugging AI-generated code takes longer.\n\nMy takeaway: the skill that gets rated now isn't prompting, it's reviewing. Almost-right code passes a quick glance and fails in production.\n\nA habit I'd build: before accepting generated code, write down what it must do, then test the edge case it was least likely to handle.\n\nHow do you review AI-generated code differently from a teammate's pull request?",
+  "hashtags": ["#SoftwareEngineering", "#AI", "#CareerGrowth", "#CodeReview"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "stat-chart",
+    "alt": "Three stats from the Stack Overflow 2025 survey: 84% use AI tools, 46% distrust accuracy, 66% say almost right but not quite; signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://survey.stackoverflow.co/2025/ai"]
+}
