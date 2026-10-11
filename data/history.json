@@ -154,5 +154,15 @@
     "posted_at": "2026-10-10T15:34:37+00:00",
     "urn": "urn:li:share:7514709983192768515",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7514709983192768515/"
+  },
+  {
+    "date": "2026-10-11",
+    "slot": "2026-10-11",
+    "category": "code-tips",
+    "topic": "Promise.all vs Promise.allSettled: one rejection hides every other result, and the other operations keep running",
+    "theme": "terminal",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-11T10:03:35+00:00"
   }
 ]
