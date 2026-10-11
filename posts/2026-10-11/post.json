@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-11",
+  "category": "code-tips",
+  "topic": "Promise.all vs Promise.allSettled: one rejection hides every other result, and the other operations keep running",
+  "theme": "terminal",
+  "scope": "broad",
+  "text": "One failed request shouldn't hide the nine that worked.\n\nPromise.all rejects on the first rejection and throws away the other results. Per MDN, it also doesn't cancel the remaining operations: they keep running, you just can't see their outcome.\n\nPromise.allSettled waits for every promise and returns { status, value | reason } for each, in input order.\n\nMy rule of thumb:\n• Tasks depend on each other → Promise.all\n• You need every outcome (batch jobs, dashboards, bulk emails) → Promise.allSettled\n\nFail-fast is a feature when the whole result is useless without every part. It's a bug when partial success is still valuable.\n\nWhere do you still reach for Promise.all out of habit when allSettled would be the safer default?",
+  "hashtags": ["#JavaScript", "#NodeJS", "#WebDevelopment", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: Promise.all rejects on first failure, Promise.allSettled returns every result; signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"
+  ]
+}

@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-terminal">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>One failure shouldn't <em>hide</em> nine successes</h1><p class="sub">Promise.all is fail-fast. allSettled keeps every outcome.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Promise.all</div>
+<pre>const r = await Promise.all(jobs);
+// 1 rejects → throws
+// other 9 results: lost</pre></div>
+    <div class="panel good"><div class="label good">✓ Promise.allSettled</div>
+<pre>const r = await Promise.allSettled(jobs);
+// [{ status: "fulfilled", value },
+//  { status: "rejected", reason }]</pre></div>
+  </main>
+  <p class="takeaway">Need every outcome? allSettled. Parts useless alone? all.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>
