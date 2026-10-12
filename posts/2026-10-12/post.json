@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-12",
+  "category": "team-management",
+  "topic": "Small pull requests: why Google's code review guide says to keep changes small and refactor separately",
+  "theme": "forest",
+  "scope": "broad",
+  "text": "A 1,000-line pull request doesn't get reviewed. It gets skimmed.\n\nGoogle's engineering practices guide says small changes are reviewed faster and more thoroughly, are less likely to introduce bugs, and are simpler to roll back.\n\nIts rule of thumb: one self-contained change, with its tests, that a reviewer can understand without extra context. About 100 lines is often reasonable, 1,000 is usually too large. The reviewer makes the call.\n\nOne habit I'd copy: put refactors in their own PR. A rename or file move mixed into a bug fix hides the fix.\n\nSmall PRs also let you keep working while the last one waits for review.\n\nHow big is too big for a PR on your team, and who decides?",
+  "hashtags": ["#CodeReview", "#SoftwareEngineering", "#TeamWork", "#EngineeringCulture"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "comparison-table",
+    "alt": "Table comparing small and large pull requests on review speed, bugs, rollback and refactoring, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://google.github.io/eng-practices/review/developer/small-cls.html"]
+}
