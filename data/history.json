@@ -166,5 +166,15 @@
     "posted_at": "2026-10-11T10:03:39+00:00",
     "urn": "urn:li:share:7514989083950198784",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7514989083950198784/"
+  },
+  {
+    "date": "2026-10-12",
+    "slot": "2026-10-12",
+    "category": "team-management",
+    "topic": "Small pull requests: why Google's code review guide says to keep changes small and refactor separately",
+    "theme": "forest",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-12T10:54:02+00:00"
   }
 ]
