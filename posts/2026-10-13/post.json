@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-13",
+  "category": "architecture",
+  "topic": "Retries amplify outages: backoff with jitter, retry at one layer, and idempotency (AWS Builders' Library)",
+  "theme": "midnight",
+  "scope": "broad",
+  "text": "Retries can turn a small failure into an outage.\n\nAWS's Builders' Library gives an example: 3 retries at each of 5 layers can multiply load on a struggling database by 243x.\n\nWhat the article recommends:\n\n1. Back off between tries, and add jitter so clients don't all retry together.\n2. Retry at one layer, and fail fast above it.\n3. Cap the retry count.\n4. Retry only idempotent operations, or use an idempotency token.\n\nTakeaway: a retry is a request for extra work from a service that's already struggling. Ration it.\n\nWhich layer in your stack owns retries, and is that written down anywhere?",
+  "hashtags": ["#SystemDesign", "#SoftwareArchitecture", "#Backend", "#Reliability"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "comparison-table",
+    "alt": "Retries at every layer versus retries at one layer with jittered backoff, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter"]
+}
