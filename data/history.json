@@ -178,5 +178,15 @@
     "posted_at": "2026-10-12T10:54:05+00:00",
     "urn": "urn:li:share:7515364163397902336",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7515364163397902336/"
+  },
+  {
+    "date": "2026-10-13",
+    "slot": "2026-10-13",
+    "category": "architecture",
+    "topic": "Retries amplify outages: backoff with jitter, retry at one layer, and idempotency (AWS Builders' Library)",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-13T10:38:54+00:00"
   }
 ]
