@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-14",
+  "category": "ai-chatbots",
+  "topic": "Reducing chatbot hallucinations: permission to say I don't know, quote-first grounding, and retracting unsupported claims (Anthropic docs)",
+  "theme": "classic",
+  "scope": "broad",
+  "text": "Your support chatbot doesn't need to know more. It needs permission to say \"I don't know.\"\n\nAnthropic's guide on reducing hallucinations starts with three basic techniques:\n\n1. Explicitly allow the model to admit uncertainty. The docs say this can drastically reduce false information.\n\n2. For long documents (over 20k tokens), ask for word-for-word quotes first, then answer using only those quotes.\n\n3. Make answers auditable: find a supporting quote for each claim, and retract any claim without one.\n\nThe same guide is clear that these techniques reduce hallucinations but don't eliminate them. Validate anything high-stakes.\n\nMy rule of thumb: if the prompt never says what to do when the answer isn't in the context, the model will improvise one.\n\nWhat does your bot do today when the answer isn't in the documents you gave it?",
+  "hashtags": [
+    "#AIChatbots",
+    "#LLM",
+    "#PromptEngineering",
+    "#GenerativeAI"
+  ],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Animated comparison: a bot that guesses versus one that extracts quotes and says so when none exist, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": [
+    "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
+  ]
+}
