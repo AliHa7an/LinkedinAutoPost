@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-15",
+  "category": "security",
+  "topic": "Broken access control (OWASP Top 10:2025 A01): logged in is not the same as allowed; check record ownership on the server",
+  "theme": "sky",
+  "scope": "broad",
+  "text": "Being logged in doesn't mean you're allowed to see that record.\n\nBroken access control is still the top risk in the OWASP Top 10:2025, and OWASP reports that 100% of tested applications had some form of it.\n\nThe classic version: GET /orders/1042 checks the session, then loads the order by ID. Change 1042 to 1043 and you may be reading someone else's order.\n\nWhat OWASP recommends:\n1. Deny by default, except for public resources\n2. Model access around record ownership\n3. Write the check once and reuse it everywhere\n4. Never rely on hiding buttons in the UI\n5. Add tests that call the endpoint as the wrong user\n\nTakeaway: authentication answers \"who are you?\". Every endpoint still has to answer \"is this yours?\".\n\nHow do you test authorization in your API: unit tests, integration tests, or a dedicated security review?",
+  "hashtags": ["#CyberSecurity", "#WebSecurity", "#OWASP", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow of a request for an order: the server checks that the order belongs to the logged-in user, then returns it or answers 403, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://top10.owasp.org/2025/A01_2025-Broken_Access_Control"]
+}
