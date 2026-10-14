@@ -190,5 +190,15 @@
     "posted_at": "2026-10-13T10:38:57+00:00",
     "urn": "urn:li:share:7515722740956483585",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7515722740956483585/"
+  },
+  {
+    "date": "2026-10-14",
+    "slot": "2026-10-14",
+    "category": "ai-chatbots",
+    "topic": "Reducing chatbot hallucinations: permission to say I don't know, quote-first grounding, and retracting unsupported claims (Anthropic docs)",
+    "theme": "classic",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-14T14:32:15+00:00"
   }
 ]
