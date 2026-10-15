@@ -202,5 +202,15 @@
     "posted_at": "2026-10-14T14:32:19+00:00",
     "urn": "urn:li:share:7516143858024509440",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7516143858024509440/"
+  },
+  {
+    "date": "2026-10-15",
+    "slot": "2026-10-15",
+    "category": "security",
+    "topic": "Broken access control (OWASP Top 10:2025 A01): logged in is not the same as allowed; check record ownership on the server",
+    "theme": "sky",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-15T13:32:25+00:00"
   }
 ]
