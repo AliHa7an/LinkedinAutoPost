@@ -214,5 +214,15 @@
     "posted_at": "2026-10-15T13:32:28+00:00",
     "urn": "urn:li:share:7516491184702427137",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7516491184702427137/"
+  },
+  {
+    "date": "2026-10-16",
+    "slot": "2026-10-16",
+    "category": "javascript",
+    "topic": "fetch() resolves on HTTP 404/500: check response.ok, and add a timeout with AbortSignal.timeout (MDN)",
+    "theme": "terminal",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-16T13:16:45+00:00"
   }
 ]
