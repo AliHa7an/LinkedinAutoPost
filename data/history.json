@@ -222,7 +222,9 @@
     "topic": "fetch() resolves on HTTP 404/500: check response.ok, and add a timeout with AbortSignal.timeout (MDN)",
     "theme": "terminal",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-16T13:16:45+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-16T13:16:49+00:00",
+    "urn": "urn:li:share:7516849633957093376",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7516849633957093376/"
   }
 ]
