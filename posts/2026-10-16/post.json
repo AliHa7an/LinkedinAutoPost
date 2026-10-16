@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-16",
+  "category": "javascript",
+  "topic": "fetch() resolves on HTTP 404/500: check response.ok, and add a timeout with AbortSignal.timeout (MDN)",
+  "theme": "terminal",
+  "scope": "broad",
+  "text": "fetch() says \"success\" on a 500. Here's the bug hiding in plenty of try/catch blocks.\n\nPer MDN, a fetch() promise only rejects on a network error or a badly formed request. A 404 or 500 still resolves, so your catch never runs and you parse an error page as data.\n\nThe fix is two lines:\n\n1. Check response.ok before reading the body, and throw if it's false.\n2. Pass signal: AbortSignal.timeout(5000), otherwise a stalled request can wait far too long.\n\nA timeout rejects with a TimeoutError, a manual abort with an AbortError, so you can tell them apart by err.name.\n\nMy rule of thumb: wrap fetch once in a small helper, so no call site can forget the check.\n\nDo you keep a shared fetch wrapper in your projects, or a library like ky or axios?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#NodeJS", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: fetch without a response.ok check versus with a response.ok check and AbortSignal.timeout, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch", "https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static"]
+}

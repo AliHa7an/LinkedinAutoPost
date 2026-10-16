@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-terminal">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>fetch() won't <em>throw</em> on 500</h1><p class="sub">Only network errors reject. HTTP errors resolve.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Catch never runs</div>
+<pre>try {
+  const res = await fetch(url);
+  return await res.json();
+} catch (e) { /* 500 skips this */ }</pre></div>
+    <div class="panel good"><div class="label good">✓ Check ok, add timeout</div>
+<pre>const res = await fetch(url, {
+  signal: AbortSignal.timeout(5000),
+});
+if (!res.ok) throw new Error(res.status);
+return await res.json();</pre></div>
+  </main>
+  <p class="takeaway">Resolved is not the same as successful.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>
