@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-17",
+  "category": "ai-agents",
+  "topic": "Workflow or agent? Anthropic's advice: start with the simplest solution and add agentic complexity only when it demonstrably improves outcomes",
+  "theme": "blueprint",
+  "scope": "broad",
+  "text": "Not every LLM feature needs an agent.\n\nAnthropic's \"Building effective agents\" draws a useful line:\n\n→ Workflows: LLMs and tools orchestrated through predefined code paths.\n→ Agents: LLMs dynamically direct their own processes and tool usage.\n\nTheir advice is to find the simplest solution possible and add complexity only when it demonstrably improves outcomes. Multi-step agentic systems come in when simpler solutions fall short.\n\nThey also suggest starting with LLM APIs directly. Frameworks can add layers of abstraction that obscure the underlying prompts and responses.\n\nMy decision rule: if you can write the steps down in advance, write them as code. Reach for an agent only when the path really can't be known upfront.\n\nA fixed path is easier to test, cheaper to run and simpler to debug.\n\nWhere did you draw the line between a workflow and an agent in your own project?",
+  "hashtags": ["#AIAgents", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow: a task goes first to a single LLM call, then a coded workflow, and only then an agent, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://www.anthropic.com/engineering/building-effective-agents"]
+}
