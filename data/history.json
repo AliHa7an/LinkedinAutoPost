@@ -226,5 +226,15 @@
     "posted_at": "2026-10-16T13:16:49+00:00",
     "urn": "urn:li:share:7516849633957093376",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7516849633957093376/"
+  },
+  {
+    "date": "2026-10-17",
+    "slot": "2026-10-17",
+    "category": "ai-agents",
+    "topic": "Workflow or agent? Anthropic's advice: start with the simplest solution and add agentic complexity only when it demonstrably improves outcomes",
+    "theme": "blueprint",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-17T12:13:12+00:00"
   }
 ]
