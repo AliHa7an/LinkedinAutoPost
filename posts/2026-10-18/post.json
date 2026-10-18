@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-18",
+  "category": "prompt-writing",
+  "topic": "Few-shot prompting: 3-5 relevant, diverse, tagged examples steer format and tone (Anthropic prompting best practices)",
+  "theme": "paper",
+  "scope": "broad",
+  "text": "Your prompt says \"be concise.\" The model still returns an essay. Show it instead.\n\nAnthropic's prompting guide calls examples one of the most reliable ways to steer format, tone and structure. Their advice for good ones:\n\n1. Relevant: mirror your real use case\n2. Diverse: cover edge cases, so the model doesn't pick up accidental patterns\n3. Structured: wrap them in <example> tags, away from your instructions\n\nThe guide suggests 3–5 examples. If all of yours look alike, the model will copy that sameness, including the parts you never meant to teach.\n\nMy rule of thumb: one example is a template, three different ones are a pattern.\n\nWhen did an example fix a prompt that instructions alone couldn't?",
+  "hashtags": ["#PromptEngineering", "#GenerativeAI", "#LLM", "#AI"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Animated comparison of a prompt with instructions only versus a prompt with three tagged, varied examples, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"]
+}
