@@ -238,5 +238,15 @@
     "posted_at": "2026-10-17T12:13:17+00:00",
     "urn": "urn:li:share:7517196029096656896",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7517196029096656896/"
+  },
+  {
+    "date": "2026-10-18",
+    "slot": "2026-10-18",
+    "category": "prompt-writing",
+    "topic": "Few-shot prompting: 3-5 relevant, diverse, tagged examples steer format and tone (Anthropic prompting best practices)",
+    "theme": "paper",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-18T12:37:58+00:00"
   }
 ]
