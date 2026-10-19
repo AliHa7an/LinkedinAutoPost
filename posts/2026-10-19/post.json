@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-19",
+  "category": "code-tips",
+  "topic": "Date.parse: date-only ISO strings are UTC, date-time strings without an offset are local time (MDN)",
+  "theme": "sky",
+  "scope": "broad",
+  "text": "new Date(\"2019-01-01\") and new Date(\"2019-01-01T00:00:00\") look like the same moment. They aren't.\n\nPer MDN, a date-only ISO string is parsed as UTC. A date-time string with no offset is parsed as local time.\n\nSo in a timezone behind UTC, the first one can print as December 31 on your screen.\n\nMy rule of thumb:\n1. Date-only value (birthday, due date)? Keep it as a string, don't turn it into a Date.\n2. A real moment in time? Send it with an explicit offset, like 2019-01-01T00:00:00Z.\n3. Never rely on the bare date-time form.\n\nMDN also names Date.parse() inconsistencies as one motivation for the Temporal API.\n\nWhich date bug has cost you the most debugging time?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#SoftwareEngineering", "#Debugging"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Comparison of Date.parse for a date-only string, parsed as UTC, and a date-time string without offset, parsed as local time, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse"]
+}

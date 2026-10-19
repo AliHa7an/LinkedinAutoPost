@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Same date, <em>two different</em> moments</h1><p class="sub">Per MDN, the format decides UTC or local time.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Local time</div>
+<pre>new Date("2019-01-01T00:00:00")
+// parsed in YOUR timezone</pre></div>
+    <div class="panel good"><div class="label good">✓ UTC</div>
+<pre>new Date("2019-01-01")
+// date-only: parsed as UTC
+new Date("2019-01-01T00:00:00Z")
+// explicit offset: same moment</pre></div>
+  </main>
+  <p class="takeaway">Always send an explicit offset for real moments.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Date.parse()</span></footer>
+</body></html>
