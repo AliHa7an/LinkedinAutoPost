@@ -250,5 +250,15 @@
     "posted_at": "2026-10-18T12:38:01+00:00",
     "urn": "urn:li:share:7517564645692387328",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7517564645692387328/"
+  },
+  {
+    "date": "2026-10-19",
+    "slot": "2026-10-19",
+    "category": "code-tips",
+    "topic": "Date.parse: date-only ISO strings are UTC, date-time strings without an offset are local time (MDN)",
+    "theme": "sky",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-19T16:29:37+00:00"
   }
 ]
