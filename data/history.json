@@ -258,7 +258,9 @@
     "topic": "Date.parse: date-only ISO strings are UTC, date-time strings without an offset are local time (MDN)",
     "theme": "sky",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-19T16:38:36+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-19T16:38:40+00:00",
+    "urn": "urn:li:share:7517987592940994560",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7517987592940994560/"
   }
 ]
