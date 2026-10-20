@@ -262,5 +262,15 @@
     "posted_at": "2026-10-19T16:38:40+00:00",
     "urn": "urn:li:share:7517987592940994560",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7517987592940994560/"
+  },
+  {
+    "date": "2026-10-20",
+    "slot": "2026-10-20",
+    "category": "app-maintenance",
+    "topic": "Node.js release status: production apps should run Active or Maintenance LTS, and an even version number alone doesn't mean LTS",
+    "theme": "classic-dark",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-20T14:19:59+00:00"
   }
 ]
