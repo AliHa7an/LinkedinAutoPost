@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-20",
+  "category": "app-maintenance",
+  "topic": "Node.js release status: production apps should run Active or Maintenance LTS, and an even version number alone doesn't mean LTS",
+  "theme": "classic-dark",
+  "scope": "broad",
+  "status_verified_today": true,
+  "text": "\"Even-numbered Node.js versions are the stable ones.\" That rule of thumb is half right.\n\nThe Node.js release page says production applications should only use Active LTS or Maintenance LTS releases.\n\nA new major version starts as Current for six months, which gives library authors time to add support. Only after that does it move to LTS.\n\nOn the release page today, Node.js 26 is listed as Current, while 24 and 22 are listed as LTS. The page also says the cycle changes starting with Node.js 27, so the old odd/even shortcut will stop working.\n\nWhat I'd do: read the status on nodejs.org, and put the major version in .nvmrc, the Dockerfile and CI so they can't drift apart.\n\nHow do you track Node.js end-of-life dates across your services?",
+  "hashtags": ["#NodeJS", "#SoftwareEngineering", "#DevOps", "#WebDevelopment"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "comparison-table",
+    "alt": "Table of Node.js release statuses Current, Active LTS and Maintenance LTS and whether each is for production, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://nodejs.org/en/about/previous-releases"]
+}
