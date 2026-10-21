@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-blueprint gif">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Architecture</div></header>
+  <div><h1>One expired key, <em>one</em> database call</h1><p class="sub">Coalesce requests for the same missing key.</p></div>
+  <main>
+    <svg viewBox="0 0 692 520" width="692" height="520">
+      <circle class="dot" r="11"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;0.5;1" keyPoints="0;1;1" calcMode="linear" path="M346 45 V475"/></circle>
+      <rect class="node" x="196" y="10" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="53" text-anchor="middle">Many requests, same key</text>
+      <path class="edge" d="M346 80 V150"/>
+      <rect class="node hl" x="196" y="150" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="193" text-anchor="middle">Cache: expired</text>
+      <path class="edge" d="M346 220 V290"/>
+      <rect class="node ok" x="196" y="290" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="333" text-anchor="middle">One fetch, others wait</text>
+      <path class="edge" d="M346 360 V440"/>
+      <rect class="node" x="196" y="440" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="483" text-anchor="middle">Database</text>
+    </svg>
+  </main>
+  <footer><b>alihexan.com</b><span>Source: AWS Builders' Library</span></footer>
+</body></html>

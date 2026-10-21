@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-21",
+  "category": "architecture",
+  "topic": "Thundering herd: coalescing requests for an uncached key so one fetch serves everyone (AWS Builders' Library)",
+  "theme": "blueprint",
+  "scope": "broad",
+  "text": "A cache doesn't only make things faster. It can also decide whether your database survives a bad minute.\n\nThe AWS Builders' Library calls one failure the \"thundering herd\": many clients request the same uncached resource at once. It can also happen when a server joins the fleet with an empty local cache.\n\nThe fix AWS describes: make sure only one pending request is out for an uncached resource. Everyone else waits for that result.\n\nHow I'd apply it:\n1. Coalesce concurrent misses per key (many caching libraries and proxies like Nginx or Varnish support this).\n2. Use a soft and a hard TTL, so stale data keeps serving while one request refreshes it.\n3. Test your service with a cold cache, not just a warm one.\n\nTakeaway: design for the cache being empty, because one day it will be.\n\nHave you ever load-tested your system with a completely cold cache?",
+  "hashtags": ["#SystemDesign", "#SoftwareArchitecture", "#Backend", "#Caching"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "alt": "Animated flow: many requests for an expired cache key become one fetch to the database, signed Ali Hassan, alihexan.com",
+    "animated": true,
+    "duration_ms": 4000
+  },
+  "sources": ["https://builder.aws.com/content/3K9TeXp6strMiJ4vhakpRD7BQWO/caching-challenges-and-strategies"]
+}
