@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-22",
+  "category": "typescript",
+  "topic": "Type assertions (as) are erased at compile time: validate API data at runtime with a schema instead of casting",
+  "theme": "swiss",
+  "scope": "broad",
+  "text": "`as User` doesn't check anything. It just tells the compiler to trust you.\n\nThe TypeScript handbook is explicit: type assertions are removed at compile time, so there's no runtime check and no exception if the assertion is wrong.\n\nSo this compiles, then fails later:\nconst user = (await res.json()) as User;\n\nIf the API returns a different shape, user.name is undefined three files away from the cause.\n\nA schema library like Zod fixes it at the boundary:\nconst r = User.safeParse(await res.json());\nif (!r.success) throw r.error;\n\nAfter the check, r.data is really a User, and z.infer gives you the type from the same schema.\n\nRule of thumb: use `as` for what you know, parse what you receive.\n\nWhere do you validate data in your apps: at the edge, or deeper in?",
+  "hashtags": ["#TypeScript", "#WebDevelopment", "#SoftwareEngineering", "#NodeJS"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: casting API JSON with as User versus validating it with Zod safeParse, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://www.typescriptlang.org/docs/handbook/2/everyday-types.html", "https://zod.dev/basics"]
+}

@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-swiss">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">TypeScript</div></header>
+  <div><h1>Casting API data is <em>not</em> validating it</h1><p class="sub"><code>as</code> is erased at compile time.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Trusts the API</div>
+<pre>const user = (await res.json())
+  as User;
+
+// wrong shape? no error here</pre></div>
+    <div class="panel good"><div class="label good">✓ Checks at runtime</div>
+<pre>const r = User.safeParse(
+  await res.json());
+if (!r.success) throw r.error;
+// r.data is a real User</pre></div>
+  </main>
+  <p class="takeaway">Use <code>as</code> for what you know. Parse what you receive.</p>
+  <footer><b>alihexan.com</b><span>Source: TypeScript Handbook, Zod docs</span></footer>
+</body></html>
