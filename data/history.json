@@ -286,5 +286,15 @@
     "posted_at": "2026-10-21T14:30:42+00:00",
     "urn": "urn:li:share:7518680168954142720",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7518680168954142720/"
+  },
+  {
+    "date": "2026-10-22",
+    "slot": "2026-10-22",
+    "category": "typescript",
+    "topic": "Type assertions (as) are erased at compile time: validate API data at runtime with a schema instead of casting",
+    "theme": "swiss",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-22T15:51:37+00:00"
   }
 ]
