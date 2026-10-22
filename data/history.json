@@ -294,7 +294,9 @@
     "topic": "Type assertions (as) are erased at compile time: validate API data at runtime with a schema instead of casting",
     "theme": "swiss",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-22T15:51:37+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-22T15:51:41+00:00",
+    "urn": "urn:li:share:7519062932668948480",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7519062932668948480/"
   }
 ]
