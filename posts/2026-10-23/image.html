@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Security</div></header>
+  <div><h1>Don't escape input. <em>Parameterize</em> it</h1><p class="sub">Sort columns and table names need an allow-list.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Input becomes code</div>
+<pre>db.query(
+  `SELECT * FROM users
+   WHERE email = '${email}'`
+);</pre></div>
+    <div class="panel good"><div class="label good">✓ Input stays data</div>
+<pre>db.query(
+  "SELECT * FROM users
+   WHERE email = $1",
+  [email]
+);</pre></div>
+  </main>
+  <p class="takeaway">Values go in parameters. Identifiers come from a fixed list.</p>
+  <footer><b>alihexan.com</b><span>Source: OWASP Cheat Sheet Series</span></footer>
+</body></html>

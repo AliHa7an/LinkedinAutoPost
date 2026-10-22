@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-23",
+  "category": "security",
+  "topic": "SQL injection: parameterized queries keep code and data separate; allow-list identifiers that can't be bound (OWASP cheat sheet)",
+  "theme": "classic",
+  "scope": "broad",
+  "text": "Escaping user input is not how you stop SQL injection.\n\nThe OWASP SQL Injection Prevention Cheat Sheet lists escaping as \"strongly discouraged\" and calls it fragile compared to other defenses.\n\nThe first-choice defense is a parameterized query. The database always tells code and data apart, so input can't change what the query does.\n\nOne catch: table names, column names and sort order can't be bound as parameters. OWASP's advice there is to map the input to a fixed allow-list of names.\n\nMy checklist:\n1. Values go in parameters, never in the string.\n2. Identifiers come from an allow-list.\n3. Review any query built with a template literal.\n\nWhere do you still see string-built SQL in code reviews: reports, search filters or admin tools?",
+  "hashtags": ["#CyberSecurity", "#WebSecurity", "#SQL", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: a SQL query built with a template literal versus a parameterized query, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"]
+}
