@@ -306,7 +306,9 @@
     "topic": "SQL injection: parameterized queries keep code and data separate; allow-list identifiers that can't be bound (OWASP cheat sheet)",
     "theme": "classic",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-23T14:15:59+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-23T14:16:02+00:00",
+    "urn": "urn:li:share:7519401251135188993",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7519401251135188993/"
   }
 ]
