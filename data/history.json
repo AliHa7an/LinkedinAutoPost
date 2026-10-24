@@ -318,7 +318,9 @@
     "topic": "|| vs ??: || replaces every falsy value including 0 and empty string, ?? only replaces null and undefined (MDN)",
     "theme": "sky",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-24T12:41:50+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-24T12:41:53+00:00",
+    "urn": "urn:li:share:7519739945595432960",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7519739945595432960/"
   }
 ]
