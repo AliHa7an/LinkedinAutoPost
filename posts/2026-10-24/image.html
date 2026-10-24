@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Your default just <em>overrode</em> a valid 0</h1><p class="sub"><code>||</code> replaces any falsy value. <code>??</code> only null and undefined.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Using ||</div>
+<pre>const count = 0;
+
+count || 42;
+// 42  (0 is lost)</pre></div>
+    <div class="panel good"><div class="label good">✓ Using ??</div>
+<pre>const count = 0;
+
+count ?? 42;
+// 0  (kept)</pre></div>
+  </main>
+  <p class="takeaway">Use ?? for defaults. Reserve || for "any falsy".</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>

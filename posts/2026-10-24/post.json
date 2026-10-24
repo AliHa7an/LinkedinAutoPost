@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-24",
+  "category": "javascript",
+  "topic": "|| vs ??: || replaces every falsy value including 0 and empty string, ?? only replaces null and undefined (MDN)",
+  "theme": "sky",
+  "scope": "broad",
+  "text": "A quantity of 0 turned into 42. The bug is one operator.\n\n`||` returns the right side for any falsy left side: 0, \"\", NaN, false. MDN warns this causes surprises when those are valid values.\n\n`??` only falls back on null or undefined:\n\nconst count = 0;\ncount || 42; // 42\ncount ?? 42; // 0\n\nSettings, counters, prices and empty-string inputs are exactly where this bites. A user who sets volume to 0 gets your default instead.\n\nRule of thumb: use `??` for defaults, and `||` only when you really want every falsy value replaced.\n\nHave you ever shipped a default that overrode a valid 0 or empty string?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#SoftwareEngineering", "#TypeScript"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: count || 42 returns 42 for 0, count ?? 42 returns 0, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing"]
+}
