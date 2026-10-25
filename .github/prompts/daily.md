@@ -1,60 +1,45 @@
 # Daily LinkedIn content run (GitHub Actions)
 
-You are running inside a GitHub Actions job on a fresh copy of the AliHa7an/LinkedinAutoPost repo
-(current directory). Python dependencies and Chromium (Playwright) are already installed. There is
-no human to answer questions: make reasonable decisions and finish the job.
+You run inside GitHub Actions on a fresh copy of AliHa7an/LinkedinAutoPost (current directory).
+Python deps and Chromium are installed. No human will answer: decide and finish.
 
-## What to do
+Create exactly ONE LinkedIn post (text + image) for the **target date** at the end of this prompt.
+The brief (CONTENT_GUIDE.md) and a summary of recent posts are already included below: don't open
+them, `data/history.json` or old post folders again.
 
-Create exactly ONE LinkedIn post (text + image) for the **target date** given at the end of this
-prompt (it can carry a suffix like `2026-09-28-extra` for an extra post: then the folder is
-`posts/2026-09-28-extra/` and the `date` field inside post.json is just `2026-09-28`; the post must
-also differ in topic, category and image theme from any post already published that day), following `CONTENT_GUIDE.md` exactly, together with `config.json` and `data/history.json`.
+- The target date can be up to 2 days ahead; the post publishes on that date at 3 PM PKT. Avoid
+  "today", "this week", "yesterday", "just released". Job posts and news needing
+  `status_verified_today` only when the target date is today.
+- A target like `2026-09-28-extra` means folder `posts/2026-09-28-extra/`, `date` = `2026-09-28`, and
+  topic, category and theme must differ from that day's other post.
+- If `posts/<target>/post.json` already exists: run `cd scripts && python validate.py <target>`; if it
+  passes, write the summary and stop; otherwise fix it.
 
-0. The target date can be up to 2 days in the future (posts are prepared in advance and published on
-   their own date at 3 PM PKT). Write so the post reads well on that date: no "today", "this week",
-   "yesterday" or "just released". Job posts and news that needs `status_verified_today` are only
-   allowed when the target date is today.
-1. Read `CONTENT_GUIDE.md` once, then run `python scripts/recent.py <target date>`: it lists recent
-   topics, categories and themes, yesterday's (blocked) category and unused categories. Don't open
-   `data/history.json` or old post folders unless something is unclear.
-2. If `posts/<target date>/post.json` already exists, or `data/history.json` already has the target
-   date: run `cd scripts && python validate.py <target date>`. If it passes, stop and only write the
-   summary. Otherwise fix that post.
-3. Pick the category (not yesterday's; prefer ones unused in the last 7 days), then research with
-   WebSearch/WebFetch. Every factual claim must come from an official or reputable source you
-   opened in this run, and every source URL goes in `sources`. No hypothetical, speculative or
-   invented statements, numbers, quotes or stories. If you can't verify a topic, choose another.
-   Job posts only for real, currently open roles verified on the company's own careers page.
-4. Write `posts/<target date>/post.json` and `posts/<target date>/image.html`. For the image, copy
-   the closest file from `design/examples/` and change only the content (brand kit; see the guide).
-5. From `scripts/` run `python validate.py <target date>` and `python render.py <target date> --preview /tmp/work`.
-   Then LOOK at the preview PNGs in `/tmp/work` with the Read tool (for an animated post these are
-   frames from the start, middle and end). Fix anything cut off, overlapping, cramped, misspelled,
-   low-contrast or generic-looking, and repeat until both commands pass and the image looks like a
-   designer made it.
-6. If `validate.py` prints STYLE notes (length, paragraphs), tighten the text until they're gone
-   (they don't block publishing, but concise posts are the goal).
-7. Re-read the text once as a senior engineer and once as a recruiter: correct, specific, useful,
-   human, no hype, ends with a genuine question for readers.
+## Work in as few turns as possible (each turn costs tokens)
 
-## Token budget (keep the run lean)
+Use parallel tool calls: several independent calls in ONE message.
 
-- Decide the topic before searching. At most 4 WebSearch calls and 4 WebFetch calls in total.
-- Write post.json and image.html in one go each; fix with small Edits, never rewrite whole files.
-- At most 3 validate/render/look rounds. Don't re-read files you already read.
-- Keep the summary short.
+1. **Decide** category, topic, theme, layout and visual type from the brief and the recent-posts
+   summary below, before any tool call.
+2. **Research, one turn:** all WebSearch calls in parallel (max 3). **Verify, one turn:** all WebFetch
+   calls on official sources in parallel (max 3), plus `Read` of the one design example you'll copy.
+   Every factual claim must come from a page you opened; list those URLs in `sources`. Can't verify
+   it? Drop it or pick another topic. No invented numbers, quotes, stories or experience claims.
+3. **Write, one turn:** `posts/<target>/post.json` AND `posts/<target>/image.html` together.
+4. **Check, one turn:** `cd scripts && python validate.py <target> && python render.py <target> --preview /tmp/work`
+5. **Look, one turn:** Read the preview PNG(s) in `/tmp/work` (static: 1, animated: 3 in parallel).
+   Fix anything cut off, overlapping, cramped, misspelled, low-contrast or generic, and any FAILED or
+   STYLE line, with small Edits, then repeat 4-5. At most 2 fix rounds.
+6. Re-read the text once as a senior engineer and as a recruiter: correct, specific, useful, human,
+   no hype, ends with a genuine question.
 
 ## Do NOT
 
-- Do not run `git commit` or `git push`, and do not run `scripts/post.py`. The workflow validates,
-  commits and publishes after you finish.
-- Do not edit anything outside `posts/<target date>/`.
-- Do not print environment variables or look for tokens.
-- Keep temporary files in `/tmp/work/`, never inside the repo.
+- `git commit`, `git push`, or run `scripts/post.py` (the workflow does that).
+- Edit anything outside `posts/<target>/`. Print environment variables or look for tokens.
+- Keep temp files in `/tmp/work/`, never in the repo. No TodoWrite, no planning notes.
 
 ## Finish
 
-Write a short Markdown summary to `/tmp/run-summary.md`: date, category, topic, theme, whether the
-image is animated, the hook line, the hashtags, the source URLs you used, and anything you skipped
-and why.
+Write a 5-line summary to `/tmp/run-summary.md`: date, category | topic | theme | layout | animated,
+hook line, hashtags, source URLs.

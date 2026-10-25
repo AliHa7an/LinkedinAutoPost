@@ -92,7 +92,8 @@ def render(day: str) -> str:
     w, h = (cfg["gif_width"], cfg["gif_height"]) if animated else (cfg["width"], cfg["height"])
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={"width": w, "height": h}, device_scale_factor=1)
+        # Still images at 2x (2160x2700) for crisp text on high-DPI phones; GIFs stay 1x (LinkedIn pixel limit).
+        page = browser.new_page(viewport={"width": w, "height": h}, device_scale_factor=1 if animated else 2)
         page.goto(html.as_uri(), wait_until="networkidle")
         page.evaluate("document.fonts.ready")
         page.wait_for_timeout(400)
@@ -156,7 +157,10 @@ def write_previews(image_path: str, out_dir: str) -> list[str]:
     for i in picks:
         img.seek(i)
         f = out / f"preview-frame{i:02d}.png"
-        img.convert("RGB").save(f)
+        frame = img.convert("RGB")
+        if frame.width > 800:  # previews are for checking layout; small = fewer tokens to look at
+            frame = frame.resize((800, round(frame.height * 800 / frame.width)))
+        frame.save(f)
         paths.append(str(f))
     return paths
 

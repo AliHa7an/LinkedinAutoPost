@@ -116,6 +116,30 @@ jobs:
           echo "::add-mask::$CLEAN"
           echo "CLAUDE_TOKEN_CLEAN=$CLEAN" >> "$GITHUB_ENV"
 
+      - name: Build Claude prompt (brief + recent posts inline, saves turns and tokens)
+        id: ctx
+        if: steps.when.outputs.posted == 'false' && steps.when.outputs.have_post == 'false'
+        env:
+          DATE: ${{ steps.when.outputs.date }}
+          NOW: ${{ steps.when.outputs.now }}
+          NOTE: ${{ steps.when.outputs.note }}
+        run: |
+          {
+            echo 'text<<EOF_PROMPT_7f3a'
+            cat .github/prompts/daily.md
+            echo
+            echo "Target date: $DATE"
+            echo "Current time: $NOW (Asia/Karachi)"
+            echo "Extra note for this run: $NOTE"
+            echo
+            echo "## Recent posts (scripts/recent.py)"
+            (cd scripts && python recent.py "${DATE:0:10}")
+            echo
+            echo "## Brief: CONTENT_GUIDE.md"
+            cat CONTENT_GUIDE.md
+            echo 'EOF_PROMPT_7f3a'
+          } >> "$GITHUB_OUTPUT"
+
       - name: Claude writes the post
         id: claude
         if: steps.when.outputs.posted == 'false' && steps.when.outputs.have_post == 'false'
@@ -124,16 +148,11 @@ jobs:
           claude_code_oauth_token: ${{ env.CLAUDE_TOKEN_CLEAN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           allowed_bots: 'github-actions[bot]'
-          prompt: |
-            Read .github/prompts/daily.md and follow it exactly.
-
-            Target date: ${{ steps.when.outputs.date }}
-            Current time: ${{ steps.when.outputs.now }} (Asia/Karachi)
-            Extra note for this run: ${{ steps.when.outputs.note }}
+          prompt: ${{ steps.ctx.outputs.text }}
           claude_args: |
-            --max-turns 60
+            --max-turns 30
             --model ${{ vars.CLAUDE_MODEL || 'sonnet' }}
-            --allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,TodoWrite"
+            --allowedTools "Bash,Read,Write,Edit,WebSearch,WebFetch"
 
       - name: Report Claude usage
         if: always() && steps.claude.outputs.execution_file != ''

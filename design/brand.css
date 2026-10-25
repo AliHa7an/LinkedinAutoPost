@@ -161,3 +161,34 @@ footer b { color: var(--ink); font-weight: 700; }
 .grow .bar { animation: ah-grow 4s ease-out infinite; }
 @keyframes ah-march { to { stroke-dashoffset: -40; } }
 .flowline { stroke-dasharray: 10 10; animation: ah-march 1s linear infinite; }
+
+/* ---------- Premium layouts (mix them; not every post is two boxes) ----------
+   .hero-num      one huge verified number with context (studies, benchmarks, incidents)
+   .bento         2x2 / 3-card grid of short facts (checklists, comparisons, "4 rules")
+   .timeline      numbered vertical steps (roadmaps, request lifecycles, how-it-works)
+   .insight       a single strong statement card with a supporting line (principles, opinions) */
+.hero-num { display: flex; flex-direction: column; gap: 10px; }
+.hero-num b { font-family: var(--display); font-size: 220px; line-height: .9; font-weight: var(--title-weight);
+  letter-spacing: -0.04em; color: var(--accent); }
+body.gif .hero-num b { font-size: 160px; }
+.hero-num span { font-size: 34px; font-weight: 600; max-width: 860px; }
+.hero-num small { font-size: 22px; color: var(--muted); }
+.bento { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.bento > div { background: var(--panel); color: var(--panel-ink); border: var(--border-w) solid var(--line);
+  border-radius: var(--radius); padding: 26px 28px; display: flex; flex-direction: column; gap: 10px; }
+.bento > div.wide { grid-column: span 2; }
+.bento > div.hl { border-color: var(--accent); }
+.bento h3 { font-size: 30px; line-height: 1.15; font-weight: 800; }
+.bento p { font-size: 23px; color: var(--panel-muted); line-height: 1.35; }
+.bento .k { font: 700 18px 'JetBrains Mono', monospace; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; }
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline > div { display: grid; grid-template-columns: 72px 1fr; gap: 26px; padding-bottom: 34px; position: relative; }
+.timeline > div::before { content: ""; position: absolute; left: 35px; top: 68px; bottom: 0; width: 2.5px; background: var(--line); }
+.timeline > div:last-child::before { display: none; }
+.timeline .n { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--accent); color: var(--accent);
+  display: grid; place-items: center; font: 800 26px 'JetBrains Mono', monospace; background: var(--bg); }
+.timeline h3 { font-size: 36px; font-weight: 800; line-height: 1.2; margin-top: 12px; }
+.timeline p { font-size: 26px; color: var(--muted); margin-top: 4px; }
+.insight { border-left: 10px solid var(--accent); padding: 10px 0 10px 36px; }
+.insight b { display: block; font-family: var(--display); font-size: 68px; line-height: 1.1; font-weight: var(--title-weight); }
+.insight span { display: block; font-size: 32px; color: var(--muted); margin-top: 18px; }
