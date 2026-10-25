@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-26",
+  "category": "integrations-automation",
+  "topic": "GitHub Actions GITHUB_TOKEN: set least-privilege permissions per job; specifying any permission sets the rest to none",
+  "theme": "classic",
+  "scope": "broad",
+  "text": "Every GitHub Actions job gets a token. Does yours need to write to your repo?\n\nGitHub's docs say you should always make sure actions only have the minimum access they require. The way to do that is the permissions key on the workflow or the job.\n\nThe detail that makes it easy: if you specify any permission, every one you leave out is set to none.\n\nSo a test job can be this small:\n\njobs:\n  test:\n    permissions:\n      contents: read\n\nA job that comments on pull requests adds pull-requests: write, and only that job.\n\nMy rule of thumb: start every job at contents: read, and grant more only when a step fails for a clear reason.\n\nWhy it matters: if a third-party action or a dependency in that job is ever compromised, the token limits what it can do.\n\nHow do you review the permissions of your workflows today: by hand, in code review, or not at all?",
+  "hashtags": ["#GitHubActions", "#DevOps", "#CyberSecurity", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after: a GitHub Actions job with no permissions key versus one with contents: read only, signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": [
+    "https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication",
+    "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax"
+  ]
+}
