@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-25",
+  "category": "ai-agents",
+  "topic": "Agent evals: start with 20-50 tasks from real failures, grade the output not the path, and use pass^k for consistency (Anthropic engineering)",
+  "theme": "midnight",
+  "scope": "broad",
+  "text": "An AI agent that passes once can still fail the next run.\n\nAnthropic's engineering team says to start evals early: 20-50 simple tasks drawn from real failures is a great start.\n\nTwo habits from their guide:\n1. Grade what the agent produced, not the path it took. Rigid step-order checks punish valid solutions.\n2. Pick the metric to match the job. pass@k is the chance of at least one success in k tries. pass^k is the chance that all k succeed.\n\nFor a customer-facing agent, pass^k is the honest number, because users expect it to work every time.\n\nWhat's the first failure you'd turn into an eval case for your agent?",
+  "hashtags": ["#AIAgents", "#LLM", "#AI", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "comparison-table",
+    "alt": "Table comparing pass@k (at least one success in k tries) and pass^k (all k tries succeed), signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"]
+}
