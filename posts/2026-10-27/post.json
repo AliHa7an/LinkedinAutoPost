@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-27",
+  "category": "code-tips",
+  "topic": "Array.prototype.sort() default order compares numbers as strings: pass a compare function",
+  "theme": "terminal",
+  "scope": "broad",
+  "text": "[1, 30, 4, 21, 100000].sort() returns [1, 100000, 21, 30, 4].\n\nNo bug in the engine. Without a compare function, JavaScript converts every element to a string and compares UTF-16 code units. So \"100000\" lands before \"21\", and \"30\" before \"4\".\n\nThe fix is one argument:\n\narr.sort((a, b) => a - b)\n\nThis returns [1, 4, 21, 30, 100000]. Swap a and b for descending order.\n\nTwo more things from the MDN docs:\n- sort() mutates the array in place, so copy first (or use toSorted()).\n- The subtraction trick doesn't work if the array contains NaN.\n\nTakeaway: for anything that isn't a plain string, always pass a compare function.\n\nWhat's the sneakiest default behavior in JavaScript you've seen slip past code review?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#Programming", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "alt": "Before and after code: default sort() gives [1, 100000, 21, 30, 4], sort with a compare function gives [1, 4, 21, 30, 100000], signed Ali Hassan, alihexan.com",
+    "animated": false
+  },
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"]
+}
