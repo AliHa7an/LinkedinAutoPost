@@ -14,6 +14,10 @@ One professional post (text + image) per day on Ali Hassan's personal LinkedIn p
 
 Everything runs on GitHub: no computer needs to be on and nothing waits for approval.
 
+Posts are prepared **2 days in advance** (`config.json > schedule.days_ahead`): each "Generate content"
+run writes the first missing post among today, tomorrow and the day after, so `posts/` normally holds
+the next two days, ready to review or edit. Each post is still published on its own date.
+
 GitHub's scheduler can start runs hours late, so both workflows try many times a day:
 "Generate content" every hour 8:20 AM–8:20 PM PKT, "Daily LinkedIn post" at 2:40 PM (waits until
 3:00) and every hour 3:05–11:05 PM PKT. Every run checks `data/history.json` first and finishes in

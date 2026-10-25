@@ -7,7 +7,8 @@
   "schedule": {
     "timezone": "Asia/Karachi",
     "post_time_utc": "10:00",
-    "note": "10:00 UTC = 3:00 PM PKT. The workflow starts ~20 min early and waits, because GitHub cron is often late."
+    "note": "10:00 UTC = 3:00 PM PKT. Posts are prepared up to days_ahead days in advance; each is published on its own date.",
+    "days_ahead": 2
   },
   "linkedin": {
     "api_version": "202607",

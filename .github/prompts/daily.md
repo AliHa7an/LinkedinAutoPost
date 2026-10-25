@@ -11,6 +11,10 @@ prompt (it can carry a suffix like `2026-09-28-extra` for an extra post: then th
 `posts/2026-09-28-extra/` and the `date` field inside post.json is just `2026-09-28`; the post must
 also differ in topic, category and image theme from any post already published that day), following `CONTENT_GUIDE.md` exactly, together with `config.json` and `data/history.json`.
 
+0. The target date can be up to 2 days in the future (posts are prepared in advance and published on
+   their own date at 3 PM PKT). Write so the post reads well on that date: no "today", "this week",
+   "yesterday" or "just released". Job posts and news that needs `status_verified_today` are only
+   allowed when the target date is today.
 1. Read `CONTENT_GUIDE.md` once, then run `python scripts/recent.py <target date>`: it lists recent
    topics, categories and themes, yesterday's (blocked) category and unused categories. Don't open
    `data/history.json` or old post folders unless something is unclear.

@@ -59,14 +59,23 @@ jobs:
           IN_NOTE: ${{ inputs.note }}
         run: |
           DATE="$IN_DATE"; NOTE="$IN_NOTE"
-          [ -z "$DATE" ] && DATE=$(TZ=Asia/Karachi date +%F)
+          TODAY=$(TZ=Asia/Karachi date +%F); HM=$(TZ=Asia/Karachi date +%H%M)
+          AHEAD=$(python -c "import json;print(json.load(open('config.json'))['schedule'].get('days_ahead',2))")
+          if [ -z "$DATE" ]; then
+            # Keep a buffer: prepare the first missing post among today .. today+AHEAD (one per run).
+            for k in $(seq 0 "$AHEAD"); do
+              D=$(TZ=Asia/Karachi date -d "+$k day" +%F)
+              if ! grep -q "\"$D\"" data/history.json && [ ! -f "posts/$D/post.json" ]; then DATE="$D"; break; fi
+            done
+            [ -z "$DATE" ] && DATE="$TODAY"   # buffer full: just make sure today's post goes out after 3 PM
+          fi
           if ! echo "$DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}(-[a-z0-9]+)?$'; then echo "Bad date: $DATE"; exit 1; fi
           NOW=$(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M')
           POSTED=$(python -c "import json,sys;print('true' if any(h.get('slot',h['date'])=='$DATE' for h in json.load(open('data/history.json'))) else 'false')")
           CARRIED=false
           # Yesterday's post was prepared but never published (e.g. GitHub ran too late)? Reuse it today
           # instead of spending tokens, unless it is time-sensitive (verified-today status or a job post).
-          if [ "$POSTED" = "false" ] && [ ! -f "posts/$DATE/post.json" ] && [ "${#DATE}" = "10" ]; then
+          if [ "$POSTED" = "false" ] && [ ! -f "posts/$DATE/post.json" ] && [ "$DATE" = "$TODAY" ]; then
             Y=$(date -d "$DATE -1 day" +%F)
             if [ -f "posts/$Y/post.json" ] && ! grep -q "\"$Y\"" data/history.json && \
                python -c "import json,sys;p=json.load(open('posts/$Y/post.json'));sys.exit(0 if not p.get('status_verified_today') and p.get('category')!='jobs' else 1)"; then
@@ -78,6 +87,9 @@ jobs:
           fi
           HAVE=false
           if [ -f "posts/$DATE/post.json" ] && (cd scripts && python validate.py "$DATE" >/dev/null); then HAVE=true; fi
+          if [ "$DATE" = "$TODAY" ] && [ "$HAVE" = "true" ] && [ "$CARRIED" = "false" ] && [ "$HM" -lt 1500 ]; then
+            echo "Buffer full and it's before 3 PM: nothing to do."; POSTED=true
+          fi
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "now=$NOW" >> "$GITHUB_OUTPUT"
           echo "posted=$POSTED" >> "$GITHUB_OUTPUT"

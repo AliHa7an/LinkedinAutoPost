@@ -211,17 +211,35 @@ def validate_post(day: str, cfg: dict | None = None, history: list[dict] | None 
     if not img.get("alt") or len(img["alt"]) < 20:
         errors.append("image.alt needs a real description (20+ chars) for accessibility")
 
-    # Repetition checks against what was already published.
+    # Posts prepared in advance (days ahead) must not be published early or contain time-sensitive content.
+    if day[:10] > today_pkt() and (cat == "jobs" or post.get("status_verified_today")):
+        errors.append("job posts and 'status verified today' news can't be prepared in advance; write them on the day")
+
+    # Repetition checks against published posts AND prepared, not-yet-published posts (before or after).
     d = date.fromisoformat(day[:10])
     topic_n, theme_n = _norm(post["topic"]), _norm(post["theme"])
-    for h in history:
+    others = list(history)
+    known = {h.get("slot", h.get("date")) for h in history}
+    if POSTS_DIR.exists():
+        for f in sorted(POSTS_DIR.glob("*/post.json")):
+            slot = f.parent.name
+            if slot == day or slot in known:
+                continue
+            try:
+                p = json.loads(f.read_text(encoding="utf-8"))
+                others.append({"date": p["date"], "slot": slot, "category": p.get("category"), "topic": p.get("topic", ""),
+                               "theme": p.get("theme", ""), "pending": True})
+            except Exception:
+                continue
+    for h in others:
         if h.get("slot", h.get("date")) == day:
             continue
-        age = (d - date.fromisoformat(h["date"])).days
-        if 0 <= age <= rules["topic_repeat_days"] and _norm(h.get("topic", "")) == topic_n:
-            errors.append(f"same topic already posted on {h['date']}")
-        if rules["theme_repeat_days"] and 0 <= age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
-            errors.append(f"image theme '{post['theme']}' used on {h['date']}; pick a different look")
+        age = abs((d - date.fromisoformat(h["date"])).days)
+        when = f"{h['date']}{' (prepared)' if h.get('pending') else ''}"
+        if age <= rules["topic_repeat_days"] and _norm(h.get("topic", "")) == topic_n:
+            errors.append(f"same topic as the post on {when}")
+        if rules["theme_repeat_days"] and age <= rules["theme_repeat_days"] and _norm(h.get("theme", "")) == theme_n:
+            errors.append(f"image theme '{post['theme']}' is also used on {when}; pick a different look")
         if age == 1 and h.get("category") == cat and cat != "jobs":
-            errors.append(f"category '{cat}' was also yesterday's; rotate topics")
+            errors.append(f"category '{cat}' is also used on the neighbouring day {when}; rotate topics")
     return errors
