@@ -322,5 +322,15 @@
     "posted_at": "2026-10-24T12:41:53+00:00",
     "urn": "urn:li:share:7519739945595432960",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7519739945595432960/"
+  },
+  {
+    "date": "2026-10-25",
+    "slot": "2026-10-25",
+    "category": "ai-agents",
+    "topic": "Agent evals: start with 20-50 tasks from real failures, grade the output not the path, and use pass^k for consistency (Anthropic engineering)",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-25T13:44:02+00:00"
   }
 ]
