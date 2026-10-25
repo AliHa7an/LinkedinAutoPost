@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-28", "category": "team-management", "scope": "broad", "theme": "forest",
+  "topic": "DORA metrics: measure speed and stability together, and never turn them into targets",
+  "text": "Set a target of \"deploy more often\" and teams will hit it. Whether the product got better is another question.\n\nDORA tracks five software delivery metrics, split into two groups:\n\n• Throughput: change lead time, deployment frequency, failed deployment recovery time\n• Instability: change fail rate, deployment rework rate\n\nThe point is to read them together. Shipping faster while the change fail rate climbs isn't progress.\n\nDORA itself warns against treating them as goals: mandated targets invite gaming (Goodhart's law). It also says not to rank teams against each other or compare very different applications.\n\nMy rule of thumb: track them per service, review the trend with the team, and ask \"what's slowing us down?\" instead of \"why is the number low?\"\n\nWhich of the five would tell your team the most today?",
+  "hashtags": ["#EngineeringManagement", "#DevOps", "#SoftwareEngineering", "#DORA"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false, "duration_ms": 0,
+            "alt": "Four cards: change lead time, deployment frequency, change fail rate and failed deployment recovery time, from DORA, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://dora.dev/guides/dora-metrics/"]
+}
