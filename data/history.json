@@ -354,7 +354,9 @@
     "topic": "Array.prototype.sort() default order compares numbers as strings: pass a compare function",
     "theme": "terminal",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-26T21:44:17+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-26T21:44:21+00:00",
+    "urn": "urn:li:share:7520601235465334784",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7520601235465334784/"
   }
 ]
