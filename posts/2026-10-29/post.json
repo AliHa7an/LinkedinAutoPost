@@ -1,0 +1,23 @@
+{
+ "date": "2026-10-29",
+ "category": "prompt-writing",
+ "scope": "broad",
+ "theme": "classic-dark",
+ "topic": "Prompt rules that say why: explain the reason behind an instruction and say what to do instead of what not to do (Anthropic prompting best practices)",
+ "text": "\"NEVER use ellipses\" is a weaker prompt than you'd think.\n\nAnthropic's prompting guide gives two fixes for rules like that:\n\n1. Say what to do. Not \"Do not use markdown\", but \"Your response should be composed of smoothly flowing prose paragraphs.\"\n2. Give the reason. Their example: \"Your response will be read aloud by a text-to-speech engine, so never use ellipses since the text-to-speech engine will not know how to pronounce them.\"\n\nThe guide says Claude can generalize from the explanation. A bare rule covers one case. A reason can cover cases you didn't think of.\n\nMy rule of thumb: every \"never\" in a system prompt should get a \"because\" or a positive rewrite.\n\nWhich bare \"never\" in your prompts would you rewrite first?",
+ "hashtags": [
+  "#PromptEngineering",
+  "#AI",
+  "#LLM",
+  "#SoftwareEngineering"
+ ],
+ "image": {
+  "file": "image.html",
+  "visual_type": "code-comparison",
+  "animated": false,
+  "alt": "Before and after prompt: bare rule 'NEVER use ellipses' versus a rule that explains the text-to-speech reason, signed Ali Hassan, alihexan.com"
+ },
+ "sources": [
+  "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+ ]
+}
