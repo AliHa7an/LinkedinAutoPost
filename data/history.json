@@ -358,5 +358,15 @@
     "posted_at": "2026-10-26T21:44:21+00:00",
     "urn": "urn:li:share:7520601235465334784",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7520601235465334784/"
+  },
+  {
+    "date": "2026-10-28",
+    "slot": "2026-10-28",
+    "category": "team-management",
+    "topic": "DORA metrics: measure speed and stability together, and never turn them into targets",
+    "theme": "forest",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-27T20:36:03+00:00"
   }
 ]
