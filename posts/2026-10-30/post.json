@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-30", "category": "typescript", "scope": "broad", "theme": "paper",
+  "topic": "catch (err) is unknown, not Error: JavaScript can throw any value, so narrow before using err.message",
+  "text": "Your catch block probably assumes err.message exists. JavaScript doesn't guarantee it.\n\n`throw` accepts any expression: a string, a number, an object. MDN says you should always throw Error objects, but that's advice, not a rule. A library, a promise rejection or old code can still hand you something else.\n\nThat's why TypeScript's useUnknownInCatchVariables flag types the catch variable as unknown instead of any:\n\ntry { await save(); }\ncatch (err) {\n  if (err instanceof Error) log(err.message);\n  else log(String(err));\n}\n\nWith any, err.message compiles and then fails on a thrown string. With unknown, the compiler makes you check first.\n\nMy rule of thumb: keep the flag on, narrow once at the boundary, and always throw real Error objects in your own code.\n\nDo you handle non-Error throws in one helper, or inline in every catch?",
+  "hashtags": ["#TypeScript", "#JavaScript", "#ErrorHandling", "#WebDevelopment"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: catch variable typed any lets err.message compile, unknown forces an instanceof Error check, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://www.typescriptlang.org/tsconfig/useUnknownInCatchVariables.html", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw"]
+}
