@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">CI / CD</div></header>
+  <div><h1>CI should install the lockfile, <em>not rewrite it</em></h1><p class="sub"><code>npm ci</code> vs <code>npm install</code></p></div>
+  <main><div class="panel">
+    <table>
+      <tr><th>Behaviour</th><th><code>npm install</code></th><th><code>npm ci</code></th></tr>
+      <tr><td>Lockfile</td><td>Can update it</td><td>Never writes it</td></tr>
+      <tr><td>Mismatch</td><td>Fixes quietly</td><td>Exits with error</td></tr>
+      <tr><td>Add one package</td><td>Yes</td><td>No, whole project</td></tr>
+      <tr><td>Use in</td><td>Local dev</td><td>CI, Docker</td></tr>
+    </table></div>
+  </main>
+  <p class="takeaway">Failing on lockfile drift is the feature.</p>
+  <footer><b>alihexan.com</b><span>Source: npm docs</span></footer>
+</body></html>

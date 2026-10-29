@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-31", "category": "app-maintenance", "scope": "broad", "theme": "sky",
+  "topic": "npm ci vs npm install in CI: reproducible installs from the lockfile, and failing on drift",
+  "text": "Your CI can ship different dependencies than the ones you tested locally, and nobody notices.\n\nThe cause is often one word: `npm install` in the pipeline. Per the npm docs, it can update package-lock.json. `npm ci` never writes package.json or the lockfile.\n\nWhat npm ci does:\n• needs an existing package-lock.json\n• exits with an error if the lockfile and package.json disagree\n• deletes node_modules first, so every build starts clean\n• installs the whole project, not single packages\n\nThat error is the feature. A lockfile that drifted from package.json gets caught in the PR, not in production.\n\nMy rule of thumb: npm install on your laptop when you change dependencies, npm ci in CI and Docker builds, and commit the lockfile.\n\nDoes your pipeline fail on lockfile drift today, or does it quietly fix it?",
+  "hashtags": ["#NodeJS", "#DevOps", "#SoftwareEngineering", "#JavaScript"],
+  "image": {"file": "image.html", "visual_type": "comparison-table", "animated": false,
+            "alt": "Table comparing npm install and npm ci on lockfile, mismatch, node_modules and use case, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://docs.npmjs.com/cli/v10/commands/npm-ci", "https://docs.npmjs.com/cli/v10/commands/npm-install"]
+}
