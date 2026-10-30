@@ -402,7 +402,9 @@
     "topic": "npm ci vs npm install in CI: reproducible installs from the lockfile, and failing on drift",
     "theme": "sky",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-10-30T21:25:53+00:00"
+    "status": "posted",
+    "posted_at": "2026-10-30T21:25:59+00:00",
+    "urn": "urn:li:share:7522046165270409216",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7522046165270409216/"
   }
 ]
