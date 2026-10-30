@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-01", "category": "ai-chatbots", "scope": "broad", "theme": "midnight",
+  "topic": "Prompt caching for chatbots: put the static prefix first so repeat input tokens cost a fraction (Anthropic docs)",
+  "text": "Your chatbot re-sends the same system prompt and tool list on every single message. You're paying full price for it each time.\n\nAnthropic's prompt caching docs: a cache read costs 0.1x the base input price for most models, a 5-minute cache write costs 1.25x, and the cache refreshes for free each time it's used.\n\nWhat decides whether you get hits:\n• The cached prefix is built in this order: tools, then system, then messages\n• Put stable content first, per-user or changing content last\n• A hit needs a 100% identical prefix, so one changed tool description invalidates tools, system and messages\n• Default lifetime is 5 minutes; a 1-hour TTL costs 2x to write\n\nMy rule of thumb: never put a timestamp or user name at the top of the system prompt. It silently breaks every hit.\n\nIf you run a chatbot, do you log cache read vs cache write tokens per request?",
+  "hashtags": ["#AIChatbots", "#LLM", "#PromptEngineering", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false,
+            "alt": "Four cards on Anthropic prompt caching: cache reads cost 0.1x, prefix order tools system messages, identical prefix required, 5-minute default lifetime, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
+}
