@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-02", "category": "javascript", "scope": "broad", "theme": "terminal",
+  "topic": "map(parseInt) returns [1, NaN, NaN]: map passes the index, which parseInt reads as the radix",
+  "text": "[\"1\", \"2\", \"3\"].map(parseInt) returns [1, NaN, NaN]. Not [1, 2, 3].\n\nmap() calls its callback with three arguments: element, index, array. parseInt takes two: the string and the radix. So the index silently becomes the radix:\n\nparseInt(\"1\", 0) → 1 (radix 0 means default)\nparseInt(\"2\", 1) → NaN (radix 1 is out of range)\nparseInt(\"3\", 2) → NaN (3 isn't a binary digit)\n\nThe fix is to wrap it so only one argument gets through:\n\n[\"1\", \"2\", \"3\"].map((s) => parseInt(s, 10))\n\nMy rule of thumb: never pass a function with optional parameters straight into map, filter or forEach. Wrap it, or use Number when you want strict parsing (Number(\"12px\") is NaN, parseInt(\"12px\", 10) is 12).\n\nWhich built-in has bitten you with this \"extra argument\" behaviour?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#SoftwareEngineering", "#NodeJS"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: map(parseInt) gives 1, NaN, NaN while map with an arrow function and radix 10 gives 1, 2, 3, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt"]
+}

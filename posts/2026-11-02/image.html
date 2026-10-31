@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-terminal">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Why <em>map(parseInt)</em> returns NaN</h1><p class="sub">map passes the index. parseInt reads it as the radix.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Index becomes radix</div>
+<pre>["1","2","3"].map(parseInt);
+// [1, NaN, NaN]</pre></div>
+    <div class="panel good"><div class="label good">✓ Wrap it</div>
+<pre>["1","2","3"].map(
+  (s) =&gt; parseInt(s, 10));
+// [1, 2, 3]</pre></div>
+  </main>
+  <p class="takeaway">Don't pass functions with optional parameters straight into map.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Array.prototype.map</span></footer>
+</body></html>
