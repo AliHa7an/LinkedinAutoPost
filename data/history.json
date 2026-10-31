@@ -406,5 +406,15 @@
     "posted_at": "2026-10-30T21:25:59+00:00",
     "urn": "urn:li:share:7522046165270409216",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7522046165270409216/"
+  },
+  {
+    "date": "2026-11-01",
+    "slot": "2026-11-01",
+    "category": "ai-chatbots",
+    "topic": "Prompt caching for chatbots: put the static prefix first so repeat input tokens cost a fraction (Anthropic docs)",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-10-31T19:53:33+00:00"
   }
 ]
