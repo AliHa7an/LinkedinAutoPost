@@ -426,7 +426,9 @@
     "topic": "map(parseInt) returns [1, NaN, NaN]: map passes the index, which parseInt reads as the radix",
     "theme": "terminal",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-01T21:05:43+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-01T21:05:46+00:00",
+    "urn": "urn:li:share:7522765856183885824",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7522765856183885824/"
   }
 ]
