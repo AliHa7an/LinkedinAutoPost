@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-03", "category": "security", "scope": "broad", "theme": "classic",
+  "topic": "Webhook signature verification: HMAC on the raw body, constant-time compare, timestamp check (GitHub and Stripe docs)",
+  "text": "Your webhook URL is public. Anyone can POST a fake \"payment succeeded\" to it.\n\nWithout verification, a forged event can fulfil orders or grant access. Both GitHub and Stripe sign every delivery, so the check is cheap:\n\n1. Hash the raw request body with your secret (HMAC-SHA256)\n2. Compare to the header (X-Hub-Signature-256, Stripe-Signature) with crypto.timingSafeEqual. GitHub's docs say never use a plain ==\n3. Check the timestamp. Stripe's libraries default to a 5-minute tolerance, and 0 disables the check\n\nThe classic bug in Express: express.json() runs first, and re-serialising the parsed body changes the bytes. Stripe's docs warn that any manipulation of the raw body makes verification fail.\n\nMy rule: verify first, return 2xx fast, process from a queue. Never trust the payload before the signature passes.\n\nHow does your stack keep the raw body for verification: a route-level raw parser or a custom middleware?",
+  "hashtags": ["#CyberSecurity", "#WebSecurity", "#Webhooks", "#NodeJS"],
+  "image": {"file": "image.html", "visual_type": "roadmap", "animated": false,
+            "alt": "Four-step checklist for verifying a webhook: raw body, HMAC-SHA256, constant-time compare, timestamp check, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries", "https://docs.stripe.com/webhooks"]
+}

@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Security</div></header>
+  <div><h1>Anyone can POST to your <em>webhook URL</em></h1></div>
+  <main><div class="timeline">
+    <div><div class="n">1</div><div><h3>Keep the raw body</h3><p>Verify before JSON parsing.</p></div></div>
+    <div><div class="n">2</div><div><h3>HMAC-SHA256 with your secret</h3><p>Hex digest of the exact bytes.</p></div></div>
+    <div><div class="n">3</div><div><h3>Constant-time compare</h3><p>timingSafeEqual, never ==.</p></div></div>
+    <div><div class="n">4</div><div><h3>Check the timestamp</h3><p>Reject old, replayed deliveries.</p></div></div>
+  </div></main>
+  <footer><b>alihexan.com</b><span>Source: GitHub Docs, Stripe Docs</span></footer>
+</body></html>
