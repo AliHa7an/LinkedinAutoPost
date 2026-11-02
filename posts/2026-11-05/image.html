@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Group an array in <em>one line</em>, not five</h1><p class="sub">Object.groupBy returns a null-prototype object.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ reduce</div>
+<pre>orders.reduce((acc, o) =&gt; {
+  (acc[o.status] ||= []).push(o);
+  return acc;
+}, {});</pre></div>
+    <div class="panel good"><div class="label good">✓ groupBy</div>
+<pre>Object.groupBy(
+  orders, o =&gt; o.status
+);
+// non-string keys: Map.groupBy</pre></div>
+  </main>
+  <p class="takeaway">Groups hold the same objects, not copies.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>

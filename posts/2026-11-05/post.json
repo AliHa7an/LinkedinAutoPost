@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-05", "category": "code-tips", "scope": "broad", "theme": "sky",
+  "topic": "Object.groupBy replaces the reduce grouping boilerplate; null-prototype result, Map.groupBy for non-string keys (MDN)",
+  "text": "Still grouping arrays with reduce and a ||= [] dance? Object.groupBy does it in one line.\n\nGroup orders by status:\n\nconst byStatus = Object.groupBy(orders, o => o.status);\n// { paid: [...], pending: [...] }\n\nTwo details from MDN worth knowing:\n\n1. The result has a null prototype, so a group named \"toString\" or \"constructor\" can't collide with inherited properties like it can on a plain {}.\n2. The arrays hold the same element objects, not copies. Mutate one and the original array sees it.\n\nNeed keys that aren't strings or symbols (objects, dates, numbers you want to keep as numbers)? Use Map.groupBy instead.\n\nMy rule of thumb: Object.groupBy for string categories like status or type, Map.groupBy for anything else, and reduce only when you're computing something other than lists.\n\nWhat's the most overcomplicated reduce you've had to untangle?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#CleanCode", "#NodeJS"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Before and after code comparing a reduce grouping loop with Object.groupBy, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy"]
+}
