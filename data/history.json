@@ -438,7 +438,9 @@
     "topic": "Webhook signature verification: HMAC on the raw body, constant-time compare, timestamp check (GitHub and Stripe docs)",
     "theme": "classic",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-02T19:46:42+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-02T19:46:47+00:00",
+    "urn": "urn:li:share:7523108365317586944",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7523108365317586944/"
   }
 ]
