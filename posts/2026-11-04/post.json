@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-04",
+  "category": "architecture",
+  "scope": "broad",
+  "theme": "blueprint",
+  "topic": "Circuit breaker: failing fast on a down dependency instead of retrying it, with closed, open and half-open states (Azure Architecture Center, Martin Fowler)",
+  "text": "Retries help with a blip. Against a dependency that's really down, they just pile up blocked threads.\n\nAzure's Architecture Center describes how slow timeouts can hold memory, threads and database connections, until unrelated parts of the system run out too.\n\nA circuit breaker sits in front of the call and has three states:\n• Closed: calls pass, recent failures are counted\n• Open: calls fail immediately, the dependency gets a break\n• Half-open: a limited number of trial calls; success closes it, any failure reopens it\n\nTwo details people miss: the failure count resets on a time window, so occasional errors don't trip it. And Martin Fowler's advice is to alert when it trips, because that's a signal in itself.\n\nMy rule of thumb: add one around slow or flaky HTTP dependencies, and give callers a fallback (cached data, a degraded screen). Skip it for in-memory calls and for queue consumers that already have dead-letter queues.\n\nWhat do you return to the user while a breaker is open: cached data, a partial page, or an error?",
+  "hashtags": ["#SystemDesign", "#SoftwareArchitecture", "#Backend", "#Microservices"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "flow-diagram",
+    "animated": false,
+    "alt": "Diagram of a circuit breaker moving between closed, open and half-open states, signed Ali Hassan, alihexan.com"
+  },
+  "sources": [
+    "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+    "https://martinfowler.com/bliki/CircuitBreaker.html"
+  ]
+}
