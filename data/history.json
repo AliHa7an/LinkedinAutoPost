@@ -450,7 +450,9 @@
     "topic": "Circuit breaker: failing fast on a down dependency instead of retrying it, with closed, open and half-open states (Azure Architecture Center, Martin Fowler)",
     "theme": "blueprint",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-03T23:12:26+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-03T23:12:30+00:00",
+    "urn": "urn:li:share:7523522521858543617",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7523522521858543617/"
   }
 ]
