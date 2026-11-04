@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-paper">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Prompt writing</div></header>
+  <div><h1>Put the <em>question last</em> in long prompts</h1><p class="sub">Anthropic: up to 30% better in their tests.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Question first</div>
+<pre>Summarise the risks.
+
+&lt;50 pages of text&gt;</pre></div>
+    <div class="panel good"><div class="label good">✓ Documents first</div>
+<pre>&lt;document&gt;
+  &lt;source&gt;contract.pdf&lt;/source&gt;
+&lt;/document&gt;
+Quote relevant parts, then
+summarise the risks.</pre></div>
+  </main>
+  <p class="takeaway">Documents on top, quotes next, question at the end.</p>
+  <footer><b>alihexan.com</b><span>Source: Anthropic prompting docs</span></footer>
+</body></html>

@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-06", "category": "prompt-writing", "scope": "broad", "theme": "paper",
+  "topic": "Long-context prompts: documents first, question last, quote before answering (Anthropic docs)",
+  "text": "Pasting a 50-page document into a prompt and asking your question first? Anthropic's docs suggest flipping the order.\n\nFor inputs of 20k+ tokens, their guidance is:\n• Put the long documents at the top\n• Put your query and instructions after them\n• Wrap each document in <document> tags with a <source>\n• Ask the model to quote the relevant parts first, then answer\n\nThe docs say queries at the end can improve response quality by up to 30 percent in their tests, especially with complex, multi-document inputs.\n\nMy rule of thumb: for RAG or document Q&A, I'd build the prompt as documents, then quote-extraction step, then the question. It's a cheap change to test against your own eval set before trusting any benchmark.\n\nWhere do you put the question in your long prompts, and have you measured the difference?",
+  "hashtags": ["#PromptEngineering", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Before and after prompt layout: question first versus documents, quotes, then question last, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/long-context-tips"]
+}
