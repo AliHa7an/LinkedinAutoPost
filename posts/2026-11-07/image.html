@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic-dark">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">TypeScript</div></header>
+  <div><h1>Node strips types. It can't <em>generate</em> enums</h1><p class="sub">Use <code>erasableSyntaxOnly</code> to catch it early.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Needs generated code</div>
+<pre>enum Role {
+  Admin,
+  User,
+}
+// Node: unsupported
+// syntax</pre></div>
+    <div class="panel good"><div class="label good">✓ Erasable</div>
+<pre>const Role = {
+  Admin: "admin",
+  User: "user",
+} as const;
+type Role = typeof Role[keyof typeof Role];</pre></div>
+  </main>
+  <p class="takeaway">Also blocked: runtime namespaces and parameter properties.</p>
+  <footer><b>alihexan.com</b><span>Source: Node.js docs, TypeScript 5.8</span></footer>
+</body></html>

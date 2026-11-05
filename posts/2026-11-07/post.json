@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-07", "category": "typescript", "scope": "broad", "theme": "classic-dark",
+  "topic": "Running .ts files in Node: type stripping fails on enums, so use erasableSyntaxOnly and as const objects",
+  "text": "Node can run .ts files directly now. But an enum in that file will crash it.\n\nNode's built-in type stripping only erases types, replacing them with whitespace. It never generates JavaScript, so anything that needs generated code fails. Per the Node docs, that includes:\n\n• enum declarations\n• namespaces with runtime code (ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX)\n• constructor parameter properties\n• import aliases\n\nTypeScript 5.8 added erasableSyntaxOnly, so the compiler flags these before Node does. Node also does no type checking, so keep tsc --noEmit in CI.\n\nMy rule: new code gets an as const object plus a union type instead of an enum. Same autocomplete, nothing to generate.\n\nIf you've moved a codebase off enums, what was the hardest part to replace?",
+  "hashtags": ["#TypeScript", "#NodeJS", "#WebDevelopment", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: an enum fails under Node type stripping, an as const object with a union type runs, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://nodejs.org/api/typescript.html", "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html"]
+}
