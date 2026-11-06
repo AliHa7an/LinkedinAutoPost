@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-08", "category": "integrations-automation", "scope": "broad", "theme": "swiss",
+  "topic": "GitHub Actions schedule: UTC, delays at the top of the hour, default branch only, and auto-disable after 60 days of inactivity in public repos",
+  "text": "Your nightly GitHub Actions job can silently stop running, and nothing fails to tell you.\n\nFour facts from the GitHub docs about the schedule trigger:\n\n• Cron runs in UTC by default (you can set an IANA time zone)\n• It only runs from the default branch\n• It can be delayed under load; the start of every hour is a named high-load time\n• In public repos it's auto-disabled after 60 days with no repo activity\n\nMy rule of thumb: pick an off-peak minute like 17 instead of 0, and never let a schedule be the only alarm. If the job matters, alert when it did NOT run.\n\nHow do you know when one of your scheduled automations has quietly stopped?",
+  "hashtags": ["#GitHubActions", "#DevOps", "#Automation", "#CICD"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false,
+            "alt": "Four cards on GitHub Actions schedule gotchas: UTC, default branch only, delays at the top of the hour, auto-disable after 60 days, signed Ali Hassan, alihexan.com"},
+  "sources": [
+    "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+    "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows"
+  ]
+}
