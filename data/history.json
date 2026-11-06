@@ -486,7 +486,9 @@
     "topic": "Running .ts files in Node: type stripping fails on enums, so use erasableSyntaxOnly and as const objects",
     "theme": "classic-dark",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-06T23:08:42+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-06T23:08:45+00:00",
+    "urn": "urn:li:share:7524608745327390720",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7524608745327390720/"
   }
 ]
