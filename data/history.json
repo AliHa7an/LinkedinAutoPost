@@ -490,5 +490,15 @@
     "posted_at": "2026-11-06T23:08:45+00:00",
     "urn": "urn:li:share:7524608745327390720",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7524608745327390720/"
+  },
+  {
+    "date": "2026-11-08",
+    "slot": "2026-11-08",
+    "category": "integrations-automation",
+    "topic": "GitHub Actions schedule: UTC, delays at the top of the hour, default branch only, and auto-disable after 60 days of inactivity in public repos",
+    "theme": "swiss",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-07T20:48:10+00:00"
   }
 ]
