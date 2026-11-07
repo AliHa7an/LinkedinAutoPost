@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-09", "category": "team-management", "scope": "broad", "theme": "forest",
+  "topic": "Blameless postmortems: fix systems and action items, not people (Google SRE book)",
+  "text": "\"You can't fix people, but you can fix systems and processes.\" That line from Google's SRE book is the whole case for blameless postmortems.\n\nBlameless doesn't mean nobody is accountable. It means assuming everyone acted in good faith with the information they had, then asking what made the wrong choice look right at the time.\n\nGoogle's example postmortem has a clear shape:\n• Summary, impact, root causes, trigger\n• Detection and resolution\n• Action items with a type (mitigate, prevent, process), an owner and a tracking bug\n• Lessons: what went well, what went wrong, where we got lucky\n\nThe book also says postmortems should be expected after significant events, including any data loss or an on-call intervention like a rollback. Any stakeholder can request one.\n\nMy rule of thumb: a postmortem with no owned, tracked action items is just a story. And \"where we got lucky\" is the section I'd never skip.\n\nWhat's the one action item from a past incident that actually stopped it from happening again?",
+  "hashtags": ["#EngineeringManagement", "#SRE", "#SoftwareEngineering", "#DevOps"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false,
+            "alt": "Four-card checklist of a blameless postmortem: summary and impact, root causes, owned action items, lessons learned, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://sre.google/sre-book/postmortem-culture/", "https://sre.google/sre-book/example-postmortem/"]
+}
