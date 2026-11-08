@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-10",
+  "category": "ai-agents",
+  "scope": "broad",
+  "theme": "midnight",
+  "topic": "Writing tools for agents: consolidate tools, return high-signal fields, cap response size, make errors actionable (Anthropic engineering)",
+  "text": "Your agent keeps picking the wrong tool or drowning in output? The tool design is often the problem, not the model.\n\nAnthropic's engineering team wrote up what worked when writing tools for agents:\n\n1. Build a few tools for real workflows, not a thin wrapper per API endpoint. \"More tools don't always lead to better outcomes.\"\n2. Return names, not UUIDs. Readable fields improved retrieval precision.\n3. Cap output. Claude Code limits tool responses to 25,000 tokens by default.\n4. Add a response_format option: in their example, detailed used 206 tokens, concise 72.\n5. Make errors actionable: show a correctly formatted input, not a traceback.\n\nMy rule of thumb: describe each tool like you're briefing a new hire, and name parameters user_id, not user.\n\nWhich of your tools returns the most output the model never needed?",
+  "hashtags": ["#AIAgents", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "checklist",
+    "animated": false,
+    "alt": "Four rules for writing agent tools: fewer workflow tools, readable fields, capped output, actionable errors, signed Ali Hassan, alihexan.com"
+  },
+  "sources": ["https://www.anthropic.com/engineering/writing-tools-for-agents"]
+}
