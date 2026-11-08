@@ -502,5 +502,15 @@
     "posted_at": "2026-11-07T20:48:13+00:00",
     "urn": "urn:li:share:7524935768214036480",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7524935768214036480/"
+  },
+  {
+    "date": "2026-11-09",
+    "slot": "2026-11-09",
+    "category": "team-management",
+    "topic": "Blameless postmortems: fix systems and action items, not people (Google SRE book)",
+    "theme": "forest",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-08T21:03:43+00:00"
   }
 ]
