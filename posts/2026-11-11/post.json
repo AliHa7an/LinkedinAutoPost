@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-11", "category": "javascript", "scope": "broad", "theme": "classic-dark",
+  "topic": "async callbacks in forEach: forEach does not wait for promises, so use for...of or Promise.all (MDN)",
+  "text": "forEach(async ...) looks like it waits. It doesn't. 🧨\n\nMDN's own example sums [5, 4, 5] inside an async forEach callback. Expected 14. Actual output: 0.\n\nforEach discards the callback's return value, so the promises are never awaited. The next line runs before any of them finish, and any error becomes an unhandled rejection instead of reaching your try/catch.\n\nThe fix depends on what you need:\n\n• One after another: for (const x of items) { await work(x); }\n• All at once: await Promise.all(items.map(work));\n\nMy rule of thumb: if the callback has the word async in it, forEach is the wrong method. And if one failure shouldn't hide the rest, Promise.allSettled is the safer pair.\n\nWhere have you seen a missing await slip through code review?",
+  "hashtags": ["#JavaScript", "#NodeJS", "#WebDevelopment", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: async forEach leaves sum at 0, for...of with await gives 14, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"]
+}
