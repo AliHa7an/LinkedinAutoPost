@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Reliability</div></header>
+  <div><h1>Make retries <em>safe</em> with idempotency keys</h1></div>
+  <main><div class="timeline">
+    <div><div class="n">1</div><div><h3>Client makes a unique key</h3><p>One per user action, not per attempt.</p></div></div>
+    <div><div class="n">2</div><div><h3>Send it in a header</h3><p>Idempotency-Key on the POST request.</p></div></div>
+    <div><div class="n">3</div><div><h3>Server saves first response</h3><p>Status code and body, even a 500.</p></div></div>
+    <div><div class="n">4</div><div><h3>Retry replays the result</h3><p>No second charge, no second order.</p></div></div>
+  </div></main>
+  <footer><b>alihexan.com</b><span>Source: Stripe API docs</span></footer>
+</body></html>

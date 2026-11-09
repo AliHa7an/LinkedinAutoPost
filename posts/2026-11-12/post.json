@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-12", "category": "architecture", "scope": "broad", "theme": "sky",
+  "topic": "Idempotency keys: a retried payment request must not charge twice (Stripe API docs)",
+  "text": "A timeout doesn't tell you whether the payment went through. Retry blindly and you may charge the customer twice.\n\nStripe's fix is an Idempotency-Key header on POST requests:\n\n1. The client generates a unique key (a V4 UUID is suggested) and sends it\n2. The server saves the status code and body of the first request\n3. A retry with the same key returns the saved response, even a 500\n4. Same key with different parameters is rejected as misuse\n\nTwo details worth knowing: keys can be up to 255 characters, and on API v1 they can be pruned once they're at least 24 hours old. Retry within that window.\n\nMy rule of thumb: generate the key once per user action, not once per attempt, and store it before the first send. A new key per retry defeats the whole thing.\n\nHow do you make your own payment or order endpoints safe to retry?",
+  "hashtags": ["#SystemDesign", "#Backend", "#API", "#SoftwareArchitecture"],
+  "image": {"file": "image.html", "visual_type": "roadmap", "animated": false,
+            "alt": "Four steps of an idempotent request: generate a key, send it, server saves the first response, retries replay it. Signed Ali Hassan, alihexan.com"},
+  "sources": ["https://docs.stripe.com/api/idempotent_requests"]
+}
