@@ -534,7 +534,9 @@
     "topic": "async callbacks in forEach: forEach does not wait for promises, so use for...of or Promise.all (MDN)",
     "theme": "classic-dark",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-10T23:09:44+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-10T23:09:47+00:00",
+    "urn": "urn:li:share:7526058556643790848",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7526058556643790848/"
   }
 ]
