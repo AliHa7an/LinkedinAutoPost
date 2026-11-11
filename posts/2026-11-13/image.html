@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-terminal">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>JSON.parse can <em>change your ID</em> silently</h1><p class="sub">Numbers above 2<sup>53</sup>−1 get rounded, no error.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Number</div>
+<pre>JSON.parse(
+  '{"id":9007199254740993}'
+).id
+// 9007199254740992</pre></div>
+    <div class="panel good"><div class="label good">✓ String</div>
+<pre>const o = JSON.parse(
+  '{"id":"9007199254740993"}');
+BigInt(o.id)
+// 9007199254740993n</pre></div>
+  </main>
+  <p class="takeaway">Send 64-bit IDs as strings. Convert to BigInt only for math.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN</span></footer>
+</body></html>
