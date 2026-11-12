@@ -538,5 +538,15 @@
     "posted_at": "2026-11-10T23:09:47+00:00",
     "urn": "urn:li:share:7526058556643790848",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7526058556643790848/"
+  },
+  {
+    "date": "2026-11-12",
+    "slot": "2026-11-12",
+    "category": "architecture",
+    "topic": "Idempotency keys: a retried payment request must not charge twice (Stripe API docs)",
+    "theme": "sky",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-12T17:44:37+00:00"
   }
 ]
