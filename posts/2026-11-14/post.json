@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-14", "category": "security", "scope": "broad", "theme": "midnight",
+  "topic": "Leaked secret in git: rotate first, because rewriting history doesn't undo the exposure (GitHub docs)",
+  "text": "You pushed an API key to GitHub. Deleting the commit doesn't fix it. 🔑\n\nGitHub's own guide says it plainly: for a secret, you need to revoke and/or rotate it. Rewriting history comes second, and it may not be needed once the key is dead.\n\nWhy history rewriting isn't a cleanup:\n• Forks keep the commit, and you can't clean other people's clones\n• Old clones can push the secret back\n• Cached views and PR refs can still serve the commit after a force-push\n• Commit hashes change, which breaks tooling and signatures\n\nMy order: 1) revoke and issue a new key, 2) check the provider's logs for use of the old one, 3) only then decide on a rewrite. Then turn on push protection so it can't happen again.\n\nWhat's the first thing on your team's checklist when a key leaks?",
+  "hashtags": ["#CyberSecurity", "#GitHub", "#DevSecOps", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "roadmap", "animated": false,
+            "alt": "Four-step checklist for a leaked secret: rotate, check logs, decide on rewrite, prevent repeats, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository", "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning"]
+}
