@@ -562,5 +562,15 @@
     "posted_at": "2026-11-13T17:23:27+00:00",
     "urn": "urn:li:share:7527058562288742401",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7527058562288742401/"
+  },
+  {
+    "date": "2026-11-14",
+    "slot": "2026-11-14",
+    "category": "security",
+    "topic": "Leaked secret in git: rotate first, because rewriting history doesn't undo the exposure (GitHub docs)",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-13T23:28:06+00:00"
   }
 ]
