@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-paper">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">TypeScript</div></header>
+  <div><h1>Catch the typo, <em>keep</em> the narrow type</h1><p class="sub">TypeScript 4.9 added <code>satisfies</code>.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Annotation</div>
+<pre>const palette: Record&lt;Colors,
+  string | RGB&gt; = { ... };
+
+palette.green.toUpperCase();
+// error: not on string | RGB</pre></div>
+    <div class="panel good"><div class="label good">✓ satisfies</div>
+<pre>const palette = {
+  ...
+} satisfies Record&lt;Colors,
+  string | RGB&gt;;
+
+palette.green.toUpperCase(); // ok</pre></div>
+  </main>
+  <p class="takeaway">Check the shape. Keep the precise type.</p>
+  <footer><b>alihexan.com</b><span>Source: TypeScript 4.9 release notes</span></footer>
+</body></html>

@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-15", "category": "typescript", "scope": "broad", "theme": "paper",
+  "topic": "TypeScript satisfies: check an object against a type without widening it (TS 4.9)",
+  "text": "A type annotation can catch your typo and break your code in the same line.\n\nAnnotate a config object as Record<Colors, string | RGB> and the typo is flagged. But every property is now string | RGB, so palette.green.toUpperCase() fails: \"Property 'toUpperCase' does not exist on type 'string | RGB'\".\n\nSince TypeScript 4.9 (2022) there's a third option:\n\nconst palette = {\n  red: [255, 0, 0],\n  green: \"lime\",\n  bleu: [0, 0, 255] // error: typo caught\n} satisfies Record<Colors, string | RGB>;\n\nThe object is checked against the type, but it keeps its narrow inferred type. green is still a string.\n\nMy rule of thumb: use an annotation when you want callers to see the wide type, and satisfies for config objects, route tables and lookup maps where you want both safety and precise types.\n\nWhere do you use satisfies in your codebase: configs, routes, something else?",
+  "hashtags": ["#TypeScript", "#WebDevelopment", "#JavaScript", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: a type annotation widens properties to string | RGB, while satisfies keeps green as a string, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html"]
+}
