@@ -574,5 +574,15 @@
     "posted_at": "2026-11-13T23:28:14+00:00",
     "urn": "urn:li:share:7527150362097500160",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7527150362097500160/"
+  },
+  {
+    "date": "2026-11-15",
+    "slot": "2026-11-15",
+    "category": "typescript",
+    "topic": "TypeScript satisfies: check an object against a type without widening it (TS 4.9)",
+    "theme": "paper",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-14T21:20:13+00:00"
   }
 ]
