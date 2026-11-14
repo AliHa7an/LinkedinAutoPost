@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-16",
+  "category": "prompt-writing",
+  "scope": "broad",
+  "theme": "classic",
+  "topic": "Structuring prompts with XML tags: separating instructions, context and input so the model doesn't misread them",
+  "text": "Your prompt mixes instructions, pasted data and a question in one blob. The model has to guess where one ends and the next begins.\n\nAnthropic's prompting docs say wrapping each type of content in its own tag (<instructions>, <context>, <input>) reduces misinterpretation, especially when a prompt mixes instructions, context, examples and variable inputs.\n\nTwo rules from the same page:\n• Use consistent, descriptive tag names across your prompts.\n• Nest tags when content has a natural hierarchy, like <documents> containing <document index=\"1\">.\n\nMy rule of thumb: the moment a prompt has a variable part (a user message, a scraped page, an email), I'd put it in its own tag and keep the instructions outside it. It also makes the prompt easier to diff and review in a pull request.\n\nDo you template your prompts in code with tags like this, or keep them as free-form text?",
+  "hashtags": ["#PromptEngineering", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "animated": false,
+    "alt": "Before and after prompt: one blob of text versus instructions, context and input wrapped in XML tags, signed Ali Hassan, alihexan.com"
+  },
+  "sources": [
+    "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+  ]
+}

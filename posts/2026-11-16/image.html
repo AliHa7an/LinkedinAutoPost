@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Prompt writing</div></header>
+  <div><h1>Give every part of a prompt its own <em>tag</em></h1><p class="sub">Instructions, context and input stay separate.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ One blob</div>
+<pre>Summarize this email in
+one line. Hi team, the
+deploy moved to Friday.
+Also be polite.</pre></div>
+    <div class="panel good"><div class="label good">✓ Tagged</div>
+<pre>&lt;instructions&gt;
+Summarize in one line.
+&lt;/instructions&gt;
+&lt;input&gt;
+Hi team, the deploy...
+&lt;/input&gt;</pre></div>
+  </main>
+  <p class="takeaway">Same words, no guessing where the data starts.</p>
+  <footer><b>alihexan.com</b><span>Source: Anthropic prompting docs</span></footer>
+</body></html>
