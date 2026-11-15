@@ -594,7 +594,9 @@
     "topic": "Structuring prompts with XML tags: separating instructions, context and input so the model doesn't misread them",
     "theme": "classic",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-15T21:39:40+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-15T21:39:44+00:00",
+    "urn": "urn:li:share:7527847832872103937",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7527847832872103937/"
   }
 ]
