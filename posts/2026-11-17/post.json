@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-17", "category": "integrations-automation", "scope": "broad", "theme": "blueprint",
+  "topic": "Pin third-party GitHub Actions to a commit SHA: tags can move, as the tj-actions/changed-files compromise showed",
+  "text": "Your CI runs other people's code with access to your secrets. Do you know which version?\n\nIn March 2025, tj-actions/changed-files was compromised. CISA says affected versions used between March 12 and 15 could leak secrets like access keys, GitHub tokens and npm tokens into workflow logs.\n\nGitHub's hardening guide explains the gap: \"a tag can be moved or deleted if a bad actor gains access to the repository storing the action.\" Pinning to a commit SHA helps mitigate that.\n\n- uses: owner/action@v4 → trusts a moving label\n- uses: owner/action@<40-char SHA> (v4.1.0 in a comment) → trusts one exact commit\n\nMy rule of thumb: pin every third-party action to a SHA, keep the version in a comment, and let Dependabot bump it. Skip the pinning only for actions you own. Also check the SHA comes from the action's own repo, not a fork.\n\nDo your workflows pin third-party actions today, or are you still on tags?",
+  "hashtags": ["#GitHubActions", "#DevSecOps", "#CyberSecurity", "#DevOps"],
+  "image": {"file": "image.html", "visual_type": "roadmap", "animated": false,
+            "alt": "Four steps showing how a moved action tag can reach CI secrets and how pinning to a commit SHA stops it, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://docs.github.com/en/actions/reference/security/secure-use", "https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-github-action-cve-2025-30066"]
+}
