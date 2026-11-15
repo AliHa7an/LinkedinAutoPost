@@ -586,5 +586,15 @@
     "posted_at": "2026-11-14T21:20:16+00:00",
     "urn": "urn:li:share:7527480546327945216",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7527480546327945216/"
+  },
+  {
+    "date": "2026-11-16",
+    "slot": "2026-11-16",
+    "category": "prompt-writing",
+    "topic": "Structuring prompts with XML tags: separating instructions, context and input so the model doesn't misread them",
+    "theme": "classic",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-15T21:39:40+00:00"
   }
 ]
