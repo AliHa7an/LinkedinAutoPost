@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic-dark">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Deep copy or <em>lossy</em> copy?</h1><p class="sub">The JSON round trip rewrites your data.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ JSON round trip</div>
+<pre>const s = new Set([1]);
+JSON.stringify({ s, x: undefined });
+// '{"s":{}}'
+// cycles: TypeError</pre></div>
+    <div class="panel good"><div class="label good">✓ structuredClone</div>
+<pre>const c = structuredClone(
+  { s: new Set([1]) });
+c.s.has(1); // true
+// cycles: supported</pre></div>
+  </main>
+  <p class="takeaway">Use JSON for JSON. Use structuredClone to copy state.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN</span></footer>
+</body></html>

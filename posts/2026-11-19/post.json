@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-19", "category": "javascript", "scope": "broad", "theme": "classic-dark",
+  "topic": "structuredClone vs JSON.parse(JSON.stringify()): the JSON round trip drops undefined, turns Map and Set into {}, and throws on cycles",
+  "text": "Deep copy or lossy copy?\n\nJSON.parse(JSON.stringify(obj)) looks like a deep clone, but it quietly rewrites your data:\n\n• undefined and functions in an object disappear\n• NaN and Infinity become null\n• a Date comes back as an ISO string\n• Map and Set become {}\n• a circular reference throws \"TypeError: cyclic object value\"\n\nThe fix is one line: structuredClone(obj). It's built in and has been available across browsers since March 2022. It keeps circular references. If something can't be cloned, like a function, it throws a DataCloneError instead of silently dropping it.\n\nMy rule of thumb: structuredClone for copying state, JSON only when you actually want JSON. Class instances still lose their methods, so clone plain data.\n\nWhich bug did a JSON deep copy cause in your codebase?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#NodeJS", "#CleanCode"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: JSON round trip turns a Map into {} while structuredClone keeps it, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"]
+}
