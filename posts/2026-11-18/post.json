@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-18", "category": "ai-chatbots", "scope": "broad", "theme": "midnight",
+  "topic": "Stateless chat APIs: every turn resends the whole history, so chatbot input cost grows with conversation length",
+  "text": "Your chatbot doesn't remember the conversation. You resend it on every single turn.\n\nChat APIs like Anthropic's Messages API are stateless: you pass the prior turns in the messages parameter and the model writes the next one. OpenAI's docs say the same about chained responses: all previous input tokens in the chain are billed as input tokens.\n\nA quick illustration, assuming each turn adds about 200 tokens:\n• Turn 1 sends ~200 tokens\n• Turn 10 sends ~2,000\n• Turn 50 sends ~10,000\n\nAdd them up and a 50-turn chat has billed roughly 255,000 input tokens, not 10,000. Cost grows with the square of the length, and the history also eats the context window.\n\nMy rule of thumb: cap history, summarize older turns, and put the stable system prompt first so prompt caching can discount it.\n\nHow do you trim long chat histories in your bots: sliding window, summaries, or something else?",
+  "hashtags": ["#AIChatbots", "#LLM", "#AI", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "flow-diagram", "animated": false, "duration_ms": 0,
+            "alt": "Diagram of chatbot turns resending a growing history: turn 1 sends 200 tokens, turn 10 sends 2,000, turn 50 sends 10,000, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://platform.claude.com/docs/en/api/messages", "https://developers.openai.com/api/docs/guides/conversation-state"]
+}
