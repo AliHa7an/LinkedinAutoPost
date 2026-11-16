@@ -598,5 +598,15 @@
     "posted_at": "2026-11-15T21:39:44+00:00",
     "urn": "urn:li:share:7527847832872103937",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7527847832872103937/"
+  },
+  {
+    "date": "2026-11-17",
+    "slot": "2026-11-17",
+    "category": "integrations-automation",
+    "topic": "Pin third-party GitHub Actions to a commit SHA: tags can move, as the tj-actions/changed-files compromise showed",
+    "theme": "blueprint",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-16T19:52:19+00:00"
   }
 ]
