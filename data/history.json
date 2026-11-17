@@ -618,7 +618,9 @@
     "topic": "Stateless chat APIs: every turn resends the whole history, so chatbot input cost grows with conversation length",
     "theme": "midnight",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-17T19:05:38+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-17T19:05:41+00:00",
+    "urn": "urn:li:share:7528533842220097536",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7528533842220097536/"
   }
 ]
