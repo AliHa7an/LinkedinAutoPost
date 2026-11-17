@@ -610,5 +610,15 @@
     "posted_at": "2026-11-16T19:52:23+00:00",
     "urn": "urn:li:share:7528183201945628674",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7528183201945628674/"
+  },
+  {
+    "date": "2026-11-18",
+    "slot": "2026-11-18",
+    "category": "ai-chatbots",
+    "topic": "Stateless chat APIs: every turn resends the whole history, so chatbot input cost grows with conversation length",
+    "theme": "midnight",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-17T19:05:38+00:00"
   }
 ]
