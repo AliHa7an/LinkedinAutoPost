@@ -1,0 +1,24 @@
+{
+ "date": "2026-11-21",
+ "category": "app-maintenance",
+ "scope": "broad",
+ "theme": "swiss",
+ "topic": "Dependabot: group updates and use cooldown so dependency PRs stay reviewable",
+ "text": "One pull request per outdated dependency is Dependabot's default. Leave it on and the PR list becomes noise nobody reads.\n\nTwo options in dependabot.yml fix most of that:\n\n- groups: combine updates into one PR, matched by patterns, dependency-type or update-types (e.g. minor and patch only)\n- cooldown: delay version updates after a release. GitHub's docs say a 3-day default applies even if you configure nothing, and security updates skip it\n\nUnmatched dependencies still get their own PRs, so major bumps stay separate.\n\nMy rule of thumb: group minor and patch updates weekly, keep majors individual, and never delay security updates. Waiting a few days after a release costs little.\n\nHow do you keep dependency PRs from piling up in your repos?",
+ "hashtags": [
+  "#Dependabot",
+  "#DevOps",
+  "#SoftwareEngineering",
+  "#GitHub"
+ ],
+ "image": {
+  "file": "image.html",
+  "visual_type": "checklist",
+  "animated": false,
+  "alt": "Four Dependabot habits: group minor and patch, keep majors separate, use cooldown, never delay security updates, signed Ali Hassan, alihexan.com"
+ },
+ "sources": [
+  "https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/optimizing-pr-creation-version-updates",
+  "https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference"
+ ]
+}
