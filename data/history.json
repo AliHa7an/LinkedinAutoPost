@@ -630,7 +630,9 @@
     "topic": "structuredClone vs JSON.parse(JSON.stringify()): the JSON round trip drops undefined, turns Map and Set into {}, and throws on cycles",
     "theme": "classic-dark",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-19T11:42:41+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-19T11:42:44+00:00",
+    "urn": "urn:li:share:7529147144637931520",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7529147144637931520/"
   }
 ]
