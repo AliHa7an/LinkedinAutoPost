@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-22", "category": "security", "scope": "broad", "theme": "midnight",
+  "topic": "CORS is enforced by browsers: it doesn't stop requests reaching your API",
+  "text": "\"We have CORS configured, so other sites can't call our API.\" That's a dangerous assumption.\n\nPer MDN, browsers enforce CORS, not servers. It decides whether a page's JavaScript may read a cross-origin response.\n\nIt doesn't stop the request from being sent. MDN notes a server doesn't have to opt in to receive any request that looks like a form submission: GET, HEAD, or POST with a form-style content type skip the preflight.\n\nSo a cross-site page can still fire that POST. curl, Postman and scripts ignore CORS entirely.\n\nWhat actually protects an endpoint:\n• Authenticate and authorize every request on the server\n• Use CSRF protection (tokens or SameSite cookies) for cookie-based sessions\n• Treat CORS as a relaxing rule for browsers, not a lock\n\nMy rule of thumb: if the endpoint would be unsafe with CORS turned off, it's already unsafe.\n\nHave you ever seen a \"fixed\" CORS error cause a security gap, like Access-Control-Allow-Origin: * on an authenticated API?",
+  "hashtags": ["#CyberSecurity", "#WebSecurity", "#WebDevelopment", "#NodeJS"],
+  "image": {"file": "image.html", "visual_type": "concept-card", "animated": false,
+            "alt": "Card stating CORS is enforced by browsers, not servers, so authenticate every request; signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSMissingAllowOrigin"]
+}
