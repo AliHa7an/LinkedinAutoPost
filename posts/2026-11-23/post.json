@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-23", "category": "code-tips", "scope": "broad", "theme": "terminal",
+  "topic": "sort() mutates in place and returns the same array: use toSorted()",
+  "text": "Your list sorted fine. Then the original array changed too. 🤔\n\nArray.prototype.sort() sorts in place and returns a reference to the same array. MDN says it plainly: \"no copy is made\".\n\nconst sorted = users.sort(byName);\nsorted === users; // true\n\nIn React, that means sorting props or state quietly mutates data other components also read.\n\nThe fix is one word: toSorted() returns a new array and leaves the original alone. It's been available across browsers since July 2023.\n\nconst sorted = users.toSorted(byName);\nsorted === users; // false\n\nMy rule of thumb: in UI code, reach for toSorted() by default. Use sort() only on an array you just created yourself.\n\nHave you ever chased a bug that turned out to be a mutating array method?",
+  "hashtags": ["#JavaScript", "#React", "#WebDevelopment", "#CleanCode"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Code comparison: sort() mutates the original array, toSorted() returns a new one, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"]
+}

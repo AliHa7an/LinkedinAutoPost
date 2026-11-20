@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-terminal">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>Your sort just <em>mutated</em> the original array</h1><p class="sub">sort() works in place. toSorted() makes a copy.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ sort()</div>
+<pre>const a = [3, 1, 2];
+const b = a.sort((x, y) => x - y);
+
+a === b; // true
+a;       // [1, 2, 3] changed</pre></div>
+    <div class="panel good"><div class="label good">✓ toSorted()</div>
+<pre>const a = [3, 1, 2];
+const b = a.toSorted((x, y) => x - y);
+
+a === b; // false
+a;       // [3, 1, 2] intact</pre></div>
+  </main>
+  <p class="takeaway">In UI code, copy first. Never sort shared state in place.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>
