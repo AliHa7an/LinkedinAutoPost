@@ -646,5 +646,15 @@
     "posted_at": "2026-11-20T11:42:58+00:00",
     "urn": "urn:li:share:7529509593576714242",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7529509593576714242/"
+  },
+  {
+    "date": "2026-11-21",
+    "slot": "2026-11-21",
+    "category": "app-maintenance",
+    "topic": "Dependabot: group updates and use cooldown so dependency PRs stay reviewable",
+    "theme": "swiss",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-21T11:05:36+00:00"
   }
 ]
