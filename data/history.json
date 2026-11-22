@@ -678,7 +678,9 @@
     "topic": "sort() mutates in place and returns the same array: use toSorted()",
     "theme": "terminal",
     "scope": "broad",
-    "status": "publishing",
-    "posted_at": "2026-11-22T23:32:16+00:00"
+    "status": "posted",
+    "posted_at": "2026-11-22T23:32:19+00:00",
+    "urn": "urn:li:share:7530412882325348352",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7530412882325348352/"
   }
 ]
