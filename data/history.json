@@ -670,5 +670,15 @@
     "posted_at": "2026-11-21T23:02:20+00:00",
     "urn": "urn:li:share:7530042946595983360",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7530042946595983360/"
+  },
+  {
+    "date": "2026-11-23",
+    "slot": "2026-11-23",
+    "category": "code-tips",
+    "topic": "sort() mutates in place and returns the same array: use toSorted()",
+    "theme": "terminal",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-22T23:32:16+00:00"
   }
 ]
