@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-25", "category": "typescript", "scope": "broad", "theme": "classic-dark",
+  "topic": "noUncheckedIndexedAccess: index signatures claim every key exists, so env.NODE_ENV is typed string, not string | undefined",
+  "text": "TypeScript says process-style lookups always return a string. At runtime, a missing key returns undefined.\n\nWith an index signature, every key you read is typed as present:\n\nconst nodeEnv = env.NODE_ENV;\n// string\n\nTurn on noUncheckedIndexedAccess in tsconfig and the same line becomes:\n// string | undefined\n\nDeclared fields like env.NAME stay string. Only keys reached through the index signature get undefined added, so the compiler now makes you handle the missing case.\n\nMy rule of thumb: I'd turn it on for new projects, and accept a few extra checks as the price of catching a crash at compile time instead of in production.\n\nHas anyone turned it on in an existing codebase, and was the cleanup manageable?",
+  "hashtags": ["#TypeScript", "#WebDevelopment", "#NodeJS", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Before and after code panels: env.NODE_ENV typed string versus string | undefined with noUncheckedIndexedAccess, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html"]
+}

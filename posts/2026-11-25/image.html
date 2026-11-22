@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-classic-dark">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">TypeScript</div></header>
+  <div><h1>Index signatures say every key <em>exists</em></h1><p class="sub">One tsconfig flag adds the missing <code>undefined</code>.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Default</div>
+<pre>const nodeEnv = env.NODE_ENV;
+// string</pre></div>
+    <div class="panel good"><div class="label good">✓ noUncheckedIndexedAccess</div>
+<pre>const nodeEnv = env.NODE_ENV;
+// string | undefined</pre></div>
+  </main>
+  <p class="takeaway">Declared fields stay string. Only index-signature keys get undefined.</p>
+  <footer><b>alihexan.com</b><span>Source: TypeScript TSConfig reference</span></footer>
+</body></html>
