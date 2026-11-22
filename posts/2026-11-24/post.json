@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-24", "category": "ai-agents", "scope": "broad", "theme": "paper",
+  "topic": "Context rot: 4 ways agents keep context small on long tasks (Anthropic engineering)",
+  "text": "Your agent doesn't forget because the context window is full. It gets worse as it fills.\n\nAnthropic's engineering team calls this context rot: recall accuracy declines as tokens pile up, across all models. Their advice is to treat context as a finite resource with diminishing returns.\n\nFour techniques they describe for long tasks:\n\n1. Compaction: summarize a nearly full window, then start fresh with the summary\n2. Note-taking: write a NOTES.md or to-do list outside the window, read it back later\n3. Sub-agents: focused work in a clean window, returning only a short summary\n4. Just-in-time retrieval: keep file paths and queries, load data only when needed\n\nMy rule of thumb: clear old tool results first, it's the cheapest win. Add the fancier techniques only when a real failure shows up.\n\nWhich of these would you try first on a long-running agent, and why?",
+  "hashtags": ["#AIAgents", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false,
+            "alt": "Four cards: compaction, note-taking, sub-agents and just-in-time retrieval, for fighting context rot in AI agents, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"]
+}
