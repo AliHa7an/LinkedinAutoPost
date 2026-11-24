@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-26", "category": "team-management", "scope": "broad", "theme": "forest",
+  "topic": "Architecture decision records: write down why, and supersede instead of editing",
+  "text": "Why did we pick this database? If nobody can answer in 30 seconds, the decision was never recorded.\n\nAn architecture decision record (ADR) is a short note per significant decision. Michael Nygard's original format has five parts:\n\n1. Title\n2. Context: the forces at play\n3. Decision\n4. Status: proposed, accepted, superseded\n5. Consequences, good and bad\n\nTwo rules from Nygard and Microsoft's Azure Well-Architected guidance: keep it to one or two pages, and never edit an accepted record. If the decision changes, write a new one that supersedes the old one and link them.\n\nMicrosoft also suggests recording your confidence level. A low-confidence call is worth revisiting first.\n\nMy rule of thumb: only write an ADR for choices that are hard to reverse. Framework, database, auth model, queue. Not button colours.\n\nDoes your team keep a decision log, and where does it live?",
+  "hashtags": ["#SoftwareArchitecture", "#EngineeringLeadership", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false,
+            "alt": "Four-card checklist of what an architecture decision record contains, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://learn.microsoft.com/en-us/azure/well-architected/architect-role/architecture-decision-record", "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"]
+}
