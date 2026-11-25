@@ -706,5 +706,15 @@
     "posted_at": "2026-11-24T20:20:56+00:00",
     "urn": "urn:li:share:7531089491566944257",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7531089491566944257/"
+  },
+  {
+    "date": "2026-11-26",
+    "slot": "2026-11-26",
+    "category": "team-management",
+    "topic": "Architecture decision records: write down why, and supersede instead of editing",
+    "theme": "forest",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-25T19:35:47+00:00"
   }
 ]
