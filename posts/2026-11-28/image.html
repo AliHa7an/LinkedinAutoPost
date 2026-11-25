@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-salmon">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Prompt writing</div></header>
+  <div><h1>One sentence gives your prompt a <em>role</em></h1><p class="sub">Role in the system prompt focuses behavior and tone.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ No role</div>
+<pre>system: (empty)
+user: How do I sort a list
+      of dictionaries by key?</pre></div>
+    <div class="panel good"><div class="label good">✓ With a role</div>
+<pre>system: You are a helpful
+  coding assistant
+  specializing in Python.
+user: How do I sort a list
+      of dictionaries by key?</pre></div>
+  </main>
+  <p class="takeaway">Name the job and audience first, then add the detailed rules.</p>
+  <footer><b>alihexan.com</b><span>Source: Anthropic prompting best practices</span></footer>
+</body></html>

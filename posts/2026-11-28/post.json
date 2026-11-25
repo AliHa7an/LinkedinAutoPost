@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-28", "category": "prompt-writing", "scope": "broad", "theme": "salmon",
+  "topic": "Give the model a role: one system-prompt sentence focuses behavior and tone",
+  "text": "Same question, two system prompts, two different assistants.\n\nAnthropic's prompting guide says setting a role in the system prompt focuses the model's behavior and tone for your use case, and that even a single sentence makes a difference.\n\nTheir example:\n\nsystem: \"You are a helpful coding assistant specializing in Python.\"\nuser: \"How do I sort a list of dictionaries by key?\"\n\nWithout the role, the model has to guess who's asking and how deep to go. With it, the answer can lean on Python idioms and a developer's level.\n\nMy rule of thumb: name the job, the audience and the output you want in one line, then put the detailed rules underneath. A role sets the frame; it isn't a replacement for clear instructions.\n\nWhat's the one-line role in your production system prompt, and has changing it ever changed the output?",
+  "hashtags": ["#PromptEngineering", "#AI", "#LLM", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "code-comparison", "animated": false,
+            "alt": "Before and after system prompt: no role versus 'You are a helpful coding assistant specializing in Python', signed Ali Hassan, alihexan.com"},
+  "sources": ["https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"]
+}
