@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-27",
+  "category": "javascript",
+  "scope": "broad",
+  "theme": "sky",
+  "topic": "Promise.all rejects on the first failure and doesn't cancel the rest: use Promise.allSettled when you need every outcome",
+  "text": "One failed request shouldn't blank your whole dashboard. Promise.all() does exactly that.\n\nPromise.all() rejects immediately when any input rejects, with the first reason. The other operations aren't cancelled. They keep running and their results are thrown away (MDN).\n\nPromise.allSettled() waits for every promise and gives you one object each, in input order:\n\nconst results = await Promise.allSettled([getUser(), getOrders()]);\n// { status: \"fulfilled\", value } or { status: \"rejected\", reason }\n\nMy rule of thumb: Promise.all when the tasks depend on each other and a partial result is useless. Promise.allSettled when they're independent and you can render what succeeded. One catch: results come back by position, so don't mix up the order when you destructure.\n\nWhere do you still reach for Promise.all, and where did allSettled replace it?",
+  "hashtags": ["#JavaScript", "#WebDevelopment", "#NodeJS", "#SoftwareEngineering"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "code-comparison",
+    "animated": false,
+    "alt": "Comparison of Promise.all, which rejects on first failure, and Promise.allSettled, which returns status for every promise, signed Ali Hassan, alihexan.com"
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"
+  ]
+}

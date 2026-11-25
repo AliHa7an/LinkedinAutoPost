@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-sky">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">JavaScript</div></header>
+  <div><h1>One failure shouldn't <em>sink</em> every result</h1><p class="sub">Promise.all rejects on the first error. The rest keep running, unseen.</p></div>
+  <main>
+    <div class="panel bad"><div class="label bad">✗ Promise.all</div>
+<pre>await Promise.all([
+  getUser(),    // ok
+  getOrders(),  // fails
+]);
+// throws: user data lost</pre></div>
+    <div class="panel good"><div class="label good">✓ Promise.allSettled</div>
+<pre>await Promise.allSettled([
+  getUser(),
+  getOrders(),
+]);
+// [{status:"fulfilled",value},
+//  {status:"rejected",reason}]</pre></div>
+  </main>
+  <p class="takeaway">Dependent tasks: all. Independent tasks: allSettled.</p>
+  <footer><b>alihexan.com</b><span>Source: MDN Web Docs</span></footer>
+</body></html>
