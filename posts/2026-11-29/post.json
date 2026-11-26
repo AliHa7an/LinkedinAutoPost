@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-29",
+  "category": "integrations-automation",
+  "scope": "broad",
+  "theme": "blueprint",
+  "topic": "Webhook handlers: acknowledge fast, process in a queue",
+  "text": "GitHub gives your webhook endpoint 10 seconds. After that it closes the connection and marks the delivery as failed.\n\nThe common mistake: doing the real work inside the request. Update the database, call an API, send an email, and one slow dependency turns into failed deliveries and retries.\n\nThe pattern both GitHub and Stripe recommend:\n1. Verify the signature on the raw body\n2. Put the event on a queue\n3. Return 2xx\n4. Let a worker do the slow part\n\nStripe adds a reason: a spike (like every subscription renewing at the start of the month) can overwhelm endpoint hosts that process events synchronously. A queue lets you work at a rate you can sustain.\n\nMy rule of thumb: if the handler does more than verify, dedupe and enqueue, it's doing too much. Stripe warns the same event can arrive more than once, so the worker has to be safe to run twice.\n\nWhat's the slowest thing you've seen hiding inside a webhook handler?",
+  "hashtags": ["#Webhooks", "#Backend", "#SystemDesign", "#NodeJS"],
+  "image": {
+    "file": "image.html",
+    "visual_type": "animated-flow",
+    "animated": true,
+    "duration_ms": 4000,
+    "alt": "Animated flow: a webhook event is verified, queued, answered with 200, then processed by a worker. Signed Ali Hassan, alihexan.com"
+  },
+  "sources": [
+    "https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks",
+    "https://docs.stripe.com/webhooks"
+  ]
+}

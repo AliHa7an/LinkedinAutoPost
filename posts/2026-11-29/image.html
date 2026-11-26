@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../design/brand.css"></head>
+<body class="t-blueprint gif">
+  <header class="author"><div class="avatar">AH</div><div class="who"><b>Ali Hassan</b><span>Senior Full Stack &amp; AI Engineer</span></div><div class="tag">Webhooks</div></header>
+  <div><h1>Answer in seconds, <em>work later</em></h1><p class="sub">GitHub waits 10 seconds, then fails the delivery.</p></div>
+  <main>
+    <svg viewBox="0 0 692 520" width="692" height="520">
+      <circle class="dot" r="11"><animateMotion dur="4s" repeatCount="indefinite" keyTimes="0;1" keyPoints="0;1" calcMode="linear" path="M346 80 V430"/></circle>
+      <rect class="node" x="196" y="10" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="53" text-anchor="middle">Provider sends event</text>
+      <path class="edge" d="M346 80 V150"/>
+      <rect class="node hl" x="196" y="150" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="193" text-anchor="middle">Verify, dedupe, enqueue</text>
+      <path class="edge" d="M346 220 V290"/>
+      <rect class="node ok" x="196" y="290" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="333" text-anchor="middle">Return 200 right away</text>
+      <path class="edge" d="M346 360 V430"/>
+      <rect class="node" x="196" y="430" width="300" height="70" rx="12"/><text class="nlabel" x="346" y="473" text-anchor="middle">Worker does slow work</text>
+    </svg>
+  </main>
+  <footer><b>alihexan.com</b><span>Source: GitHub &amp; Stripe docs</span></footer>
+</body></html>
