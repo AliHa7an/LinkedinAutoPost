@@ -718,5 +718,15 @@
     "posted_at": "2026-11-25T19:35:50+00:00",
     "urn": "urn:li:share:7531440532536082432",
     "url": "https://www.linkedin.com/feed/update/urn:li:share:7531440532536082432/"
+  },
+  {
+    "date": "2026-11-28",
+    "slot": "2026-11-28",
+    "category": "prompt-writing",
+    "topic": "Give the model a role: one system-prompt sentence focuses behavior and tone",
+    "theme": "salmon",
+    "scope": "broad",
+    "status": "publishing",
+    "posted_at": "2026-11-27T19:25:27+00:00"
   }
 ]
