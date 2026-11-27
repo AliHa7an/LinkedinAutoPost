@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-30", "category": "ai-chatbots", "scope": "broad", "theme": "midnight",
+  "topic": "Prompt injection: a chatbot's system prompt isn't a security boundary, enforce permissions in code",
+  "text": "Your chatbot's system prompt is not a security boundary.\n\nOWASP ranks prompt injection as LLM01, and says no known method is fully foolproof. Instructions hidden in a web page, PDF or email the bot reads can change its behavior just like a user's message can.\n\nSo plan for impact, not perfection. The OWASP mitigations I'd start with:\n\n1. Least privilege: the bot gets only the tools and data it needs\n2. Enforce permissions in code at the tool boundary, never in the prompt\n3. Human approval for high-risk actions (refunds, deletes, sends)\n4. Mark external content as untrusted and validate output formats\n\nMy rule of thumb: if a leaked system prompt plus a hostile document could make the bot do something expensive, the tool is too powerful.\n\nWhich action would you never let a chatbot take without a human click?",
+  "hashtags": ["#AIChatbots", "#CyberSecurity", "#LLM", "#SoftwareEngineering"],
+  "image": {"file": "image.html", "visual_type": "checklist", "animated": false, "duration_ms": 0,
+            "alt": "Four checks against chatbot prompt injection: least privilege, permissions in code, human approval, untrusted content, signed Ali Hassan, alihexan.com"},
+  "sources": ["https://genai.owasp.org/llmrisk/llm01-prompt-injection/", "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"]
+}
